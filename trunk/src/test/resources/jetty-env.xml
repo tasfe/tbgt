@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE Configure PUBLIC "-//Mort Bay Consulting//DTD Configure//EN" "http://jetty.mortbay.org/configure.dtd">
+
+<Configure class="org.eclipse.jetty.webapp.WebAppContext">
+	<!--<New id="iconnectDS"-->
+		<!--class="org.eclipse.jetty.plus.jndi.Resource">-->
+		<!--<Arg>jdbc/iconnectDS</Arg>-->
+		<!--<Arg>-->
+			<!--<New class="org.apache.commons.dbcp.BasicDataSource">-->
+				<!--<Set name="Url">-->
+					<!--jdbc:sqlserver://3042_3:1433;DatabaseName=TnT_Java-->
+				<!--</Set>-->
+				<!--<Set name="DriverClassName">-->
+                    <!--com.microsoft.sqlserver.jdbc.SQLServerDriver-->
+                <!--</Set>-->
+				<!--<Set name="Username">TnTJava</Set>-->
+				<!--<Set name="Password">000000</Set>-->
+				<!--<Set name="MaxActive">30</Set>-->
+				<!--<Set name="MaxIdle">10</Set>-->
+				<!--<Set name="MinIdle">2</Set>-->
+				<!--<Set name="MaxWait">5000</Set>-->
+				<!--<Set name="MinEvictableIdleTimeMillis">25000</Set>-->
+				<!--<Set name="TimeBetweenEvictionRunsMillis">30000</Set>-->
+			<!--</New>-->
+		<!--</Arg>-->
+	<!--</New>-->
+</Configure>
