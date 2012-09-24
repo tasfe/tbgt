@@ -11,6 +11,7 @@
 
 <h2>
 	<a href="/tbgt/baobei/view.html">baobei</a>
+	<a href="/tbgt/baobei/order.html">order</a>
 </h2>
 
 </body>
