@@ -7,8 +7,8 @@ import java.util.Date;
 public class Baobei {
     private int id;
 	private String name;
+	private String taobaoId;
 	private String saleTitle;
-	private String taobaoLink;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date incomingTime;
 	public Price price;
@@ -54,10 +54,14 @@ public class Baobei {
     }
 
     public String getTaobaoLink() {
-        return taobaoLink;
+        return "http://item.taobao.com/item.htm?id="+taobaoId;
     }
 
-    public void setTaobaoLink(String taobaoLink) {
-        this.taobaoLink = taobaoLink;
+    public String getTaobaoId() {
+        return taobaoId;
+    }
+
+    public void setTaobaoId(String taobaoId) {
+        this.taobaoId = taobaoId;
     }
 }

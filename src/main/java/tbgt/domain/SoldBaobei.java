@@ -6,11 +6,10 @@ import java.util.Date;
 public class SoldBaobei {
     private int id;
     private int baobeiId;
-    private int expressId;
     private int quantity;
-    private Date soldTime;
-    private BigDecimal actualPrice;
-    public Express express;
+    private String color;
+    private String spec;
+
 
     public int getId() {
         return id;
@@ -28,14 +27,6 @@ public class SoldBaobei {
         this.baobeiId = baobeiId;
     }
 
-    public int getExpressId() {
-        return expressId;
-    }
-
-    public void setExpressId(int expressId) {
-        this.expressId = expressId;
-    }
-
     public int getQuantity() {
         return quantity;
     }
@@ -44,27 +35,19 @@ public class SoldBaobei {
         this.quantity = quantity;
     }
 
-    public Date getSoldTime() {
-        return soldTime;
+    public String getColor() {
+        return color;
     }
 
-    public void setSoldTime(Date soldTime) {
-        this.soldTime = soldTime;
+    public void setColor(String color) {
+        this.color = color;
     }
 
-    public BigDecimal getActualPrice() {
-        return actualPrice;
+    public String getSpec() {
+        return spec;
     }
 
-    public void setActualPrice(BigDecimal actualPrice) {
-        this.actualPrice = actualPrice;
-    }
-
-    public Express getExpress() {
-        return express;
-    }
-
-    public void setExpress(Express express) {
-        this.express = express;
+    public void setSpec(String spec) {
+        this.spec = spec;
     }
 }
