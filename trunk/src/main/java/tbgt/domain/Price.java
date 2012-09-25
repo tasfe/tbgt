@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 
 public class Price {
     private int id;
+    private int baobeiId;
 	private BigDecimal purchasePrice;
 	private BigDecimal recommendedPrice;
 	private BigDecimal salePrice;
@@ -14,6 +15,14 @@ public class Price {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getBaobeiId() {
+        return baobeiId;
+    }
+
+    public void setBaobeiId(int baobeiId) {
+        this.baobeiId = baobeiId;
     }
 
     public BigDecimal getPurchasePrice() {

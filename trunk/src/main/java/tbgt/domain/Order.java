@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 public class Order {
+    private int id;
     private String orderNo;
     private String detail;
     private String address;
@@ -16,6 +17,14 @@ public class Order {
     private BigDecimal actualPrice;
     private Date soldTime;
     private Date deliverTime;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getDetail() {
         return detail;
@@ -102,9 +111,5 @@ public class Order {
 
     public void setOrderNo(String orderNo) {
         this.orderNo = orderNo;
-    }
-
-    public SoldBaobei getItem(int i) {
-        return soldBaobeis.get(i);
     }
 }

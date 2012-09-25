@@ -5,14 +5,10 @@
 	<title>Home</title>
 </head>
 <body>
-<h1>
-	Hello world!  
-</h1>
 
-<h2>
-	<a href="/tbgt/baobei/view.html">baobei</a>
-	<a href="/tbgt/baobei/order.html">order</a>
-</h2>
+<script type="text/javascript">
+     window.location.href="/tbgt/baobei/view.html";
+</script>
 
 </body>
 </html>

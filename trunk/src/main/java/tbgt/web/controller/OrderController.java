@@ -28,7 +28,7 @@ public class OrderController {
         return mv;
     }
 
-    @RequestMapping(value = "/order", method = RequestMethod.GET)
+    @RequestMapping(value = "/addOrder", method = RequestMethod.GET)
     public ModelAndView order(@RequestParam String baobeiIdsStr) {
         String[] baobeiIds = baobeiIdsStr.split(",");
         ModelAndView mv = new ModelAndView("orderDetail");
