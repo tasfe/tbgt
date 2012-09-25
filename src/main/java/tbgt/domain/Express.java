@@ -5,8 +5,8 @@ import java.util.Date;
 
 public class Express {
     private int id;
+    private int orderId;
     private BigDecimal fee;
-    private long orderNo;
     private Date sendTime;
 
     public int getId() {
@@ -17,6 +17,14 @@ public class Express {
         this.id = id;
     }
 
+    public int getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
+    }
+
     public BigDecimal getFee() {
         return fee;
     }
@@ -25,13 +33,6 @@ public class Express {
         this.fee = fee;
     }
 
-    public long getOrderNo() {
-        return orderNo;
-    }
-
-    public void setOrderNo(long orderNo) {
-        this.orderNo = orderNo;
-    }
 
     public Date getSendTime() {
         return sendTime;

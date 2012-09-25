@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="tbgt.persistence.BaobeiMapper">
+
+	<resultMap id="resultBaobei" type="Baobei">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="taobaoId" column="taobaoId"/>
+        <result property="incomingTime" column="incomingTime"/>
+        <result property="saleTitle" column="saleTitle"/>
+    </resultMap>
+
+    <resultMap id="result" extends="resultBaobei" type="Baobei">
+        <association property="price" column="id" javaType="Price"
+                     select="tbgt.persistence.PriceMapper.getPrice"/>
+    </resultMap>
+
+	<select id="getAllBaobei" resultMap="result">
+		SELECT * FROM baobei;
+	</select>
+
+    <select id="getBaobeiById" resultMap="result" parameterType="int">
+		SELECT * FROM baobei where id=#{id};
+	</select>
+
+	<insert id="insertBaobei" parameterType="Baobei">
+		INSERT INTO baobei (name,taobaoId,saleTitle,incomingTime)
+    	VALUE (#{name},#{taobaoId},#{saleTitle},#{incomingTime})
+	</insert>
+
+    <select id="selectLastId" resultType="int">
+         select LAST_INSERT_ID()
+    </select>
+
+	<update id="updateBaobei" parameterType="Baobei">
+  		UPDATE baobei
+  		SET
+  			name = #{name},
+			taobaoId = #{taobaoId},
+			saleTitle = #{saleTitle},
+			incomingTime = #{incomingTime}
+  		where id = #{id}
+	</update>
+
+	<delete id="deleteBaobei" parameterType="int">
+    	DELETE FROM baobei WHERE id = #{id}
+    </delete>
+</mapper>

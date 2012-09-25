@@ -13,7 +13,6 @@
 <body>
             <div id="dialog_content">
                 <div id="box">
-                	<%--<h3 id="addBaobei">添加宝贝</h3>--%>
                     <form:form commandName="baobei" action="/tbgt/baobei/save.html" id="form">
                       <form:hidden path="id"/>
                       <div><form:errors path="*" cssStyle="color : red;"/></div>

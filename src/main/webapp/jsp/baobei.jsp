@@ -25,7 +25,7 @@
 
         <div id="topmenu">
             <ul>
-                <li><a href="/tbgt/baobei/order.html">订单管理</a></li>
+                <li><a href="/tbgt/order/view.html">订单管理</a></li>
                 <li class="current"><a href="/tbgt/baobei/view.html">宝贝管理</a></li>
                 <li><a href="#">统计</a></li>
                 <li><a href="#">设置</a></li>
@@ -74,7 +74,7 @@
                                 <td class="a-right">${baobei.price.recommendedPrice}</td>
                                 <td class="a-right">${baobei.price.salePrice}</td>
                                 <td>
-                                    <a href="#"><img src="/tbgt/img/icons/order.jpg" width="16" height="16" alt="添加订单"/></a>
+                                    <a href="#" onclick="orderBaobei('${baobei.id}');return false"><img src="/tbgt/img/icons/order.jpg" width="16" height="16" alt="添加订单"/></a>
                                     <a href="#" onclick="saveBaobei('updateBaobei','${baobei.id}');return false"><img src="/tbgt/img/icons/edit.png" width="16" height="16" alt="修改宝贝"/></a>
                                     <a href="#" onclick="deleteBaobei('${baobei.id}');return false"><img src="/tbgt/img/icons/delete.png" width="16" height="16"
                                                      alt="删除宝贝"/></a>
@@ -135,5 +135,27 @@
             form.css('display', 'none');
             form.submit()
         }
+    }
+
+    function orderBaobei(baobeiIds){
+        var dialog = $('<div style="display:none"></div>').appendTo('body');
+        // load remote content
+        var url = "/tbgt/order/addOrder.html?baobeiIdsStr="+baobeiIds;
+        dialog.load(
+                url,
+                function (responseText, textStatus, XMLHttpRequest) {
+                    dialog.dialog({
+                        title: "添加订单",
+                        modal: true,
+                        width: 800,
+                        height: 600,
+                        close: function(event, ui) {
+                            dialog.remove();
+                        }
+                    });
+                }
+        );
+        //prevent the browser to follow the link
+        return false;
     }
 </script>

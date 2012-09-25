@@ -8,6 +8,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="pragma" content="no-cache" />
 <title>易家生活坊宝贝跟踪 订单详情</title>
+<script type="text/javascript" src="/tbgt/js/EMSwitchBox.js"></script>
+<link rel="stylesheet" href="/tbgt/css/EMSwitchBox.css" type="text/css" media="screen" charset="utf-8">
 </head>
 
 <body>
@@ -15,8 +17,9 @@
                 <div id="box">
                     <form:form commandName="order" action="/tbgt/order/save.html" id="form">
                       <div><form:errors path="*" cssStyle="color : red;"/></div>
-                      <label for="newOrderRadio" >新建订单 </label><input id="newOrderRadio" type="radio" name="newOrderInd" onclick="switchOrder('new')"/>
-                      <label for="oldOrderRadio" >合并已有订单号 </label><input id="oldOrderRadio" type="radio" name="newOrderInd" onclick="switchOrder('old')"/>
+                      <div>
+                      <input type="checkbox" name="newOrderInd" value="15">
+                      </div>
                       <fieldset id="newOrder" style="display:none">
                         <legend>基本信息</legend>
                         <label for="orderNo" >订单号 </label>
@@ -38,9 +41,8 @@
 
                       </fieldset>
 
-                      <div class="ui-widget" id="existingOrder" style="display:none">
-                            <label for="existingOrderNo">已有订单 : </label>
-                            <input id="existingOrderNo">
+                      <div id="existingOrder" style="display:none">
+                            已有订单 : <input id="existingOrderNo">
                       </div>
 
                       <table width="100%">
@@ -53,12 +55,12 @@
                             </tr>
 						</thead>
 						<tbody>
-                        <c:forEach items="${soldBaobeis}" var="soldBaobei" varStatus="index">
+                        <c:forEach items="${order.soldBaobeis}" var="soldBaobei" varStatus="index">
                             <tr>
                                 <td class="a-left"><a href="#">正品U型枕 护颈枕保健颈椎枕头 午睡枕靠枕 慢回弹太空记忆枕包邮</a></td>
-                                <td><form:input path="item[${index}].color"/></td>
-                                <td><form:input path="item[${index}].spec"/></td>
-                                <td><form:input path="item[${index}].quantity"/></td>
+                                <td><form:input path="soldBaobeis[${index.index}].color"/></td>
+                                <td><form:input path="soldBaobeis[${index.index}].spec"/></td>
+                                <td><form:input path="soldBaobeis[${index.index}].quantity"/></td>
                             </tr>
                         </c:forEach>
 
@@ -76,6 +78,9 @@
 </html>
 <script type="text/javascript">
     $(function() {
+        $('input[type=checkbox]').EMSwitchBox({onLabel : '新建', offLabel : '合并'});
+        $('div.switch').click();
+
 		$(".date" ).datepicker({ dateFormat: "yy-mm-dd"});
 		$(".date").datepicker("setDate", new Date());
 
@@ -97,11 +102,11 @@
 
 	});
 
-    function switchOrder(type){
-        if(type=='new'){
+    function EMSwitchBoxCallback(checkbox){
+        if($(checkbox).attr('checked')){
           $("#existingOrder").hide();
           $("#newOrder").show();
-        }else if(type=='old'){
+        }else{
           $("#existingOrder").show();
           $("#newOrder").hide();
         }

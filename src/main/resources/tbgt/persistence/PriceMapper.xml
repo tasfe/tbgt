@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="tbgt.persistence.PriceMapper">
+
+    <select id="getPrice" resultType="Price" parameterType="int">
+      SELECT * FROM price WHERE baobeiid=#{id}
+    </select>
+    
+    <insert id="insertPrice" parameterType="Price">
+		INSERT INTO price (baobeiId,purchasePrice,recommendedPrice,salePrice)
+    	VALUE (#{baobeiId},#{purchasePrice},#{recommendedPrice},#{salePrice})
+	</insert>
+
+	<update id="updatePrice" parameterType="Price">
+  		UPDATE price
+  		SET
+  			baobeiId = #{baobeiId},
+			purchasePrice = #{purchasePrice},
+			recommendedPrice = #{recommendedPrice},
+			salePrice = #{salePrice},
+  		where id = #{id}
+	</update>
+
+	<delete id="deletePrice" parameterType="int">
+    	DELETE FROM price WHERE id = #{id}
+    </delete>
+</mapper>
