@@ -17,8 +17,34 @@
                      select="tbgt.persistence.PriceMapper.getPrice"/>
     </resultMap>
 
+    <resultMap id="pagingResult" extends="resultBaobei" type="Baobei">
+        <association property="price" column="id" javaType="Price">
+            <id property="id" column="price.id"/>
+            <result property="baobeiId" column="id"/>
+            <result property="recommendedPrice" column="recommendedPrice"/>
+            <result property="purchasePrice" column="purchasePrice"/>
+            <result property="salePrice" column="salePrice"/>
+        </association>
+    </resultMap>
+
+
+
 	<select id="getAllBaobei" resultMap="result">
-		SELECT * FROM baobei;
+		SELECT * FROM baobei
+	</select>
+
+    <select id="getBaobeiWithPaging" parameterType="java.util.Map" resultMap="pagingResult">
+		SELECT * FROM baobei join price on baobei.id=price.baobeiid
+        <trim prefix="WHERE" prefixOverrides="AND|OR">
+            <if test="sSearch != null and sSearch != ''">
+                name like CONCAT(CONCAT('%', #{sSearch}),'%')  or saleTitle like CONCAT(CONCAT('%', #{sSearch}),'%')
+            </if>
+        </trim>
+        <trim prefix="ORDER BY">
+            <if test="sSortColumn_0 != null and sSortColumn_0 != ''">
+                ${sSortColumn_0} ${sSortDir_0}
+            </if>
+        </trim>
 	</select>
 
     <select id="getBaobeiById" resultMap="result" parameterType="int">

@@ -3,7 +3,7 @@ div.switch {
 	width: 109px;
 	height: 36px;
 	text-align: center;
-	background: url(../img/switch_track.png);
+	background: url(../images/switch_track.png);
 	background-repeat: no-repeat;
 	cursor: pointer;
 	margin: 10px 0;
@@ -15,7 +15,7 @@ div.switch  div.thumb {
 	display: inline-block;
 	width: 51px;
 	height: 31px;
-	background: url(../img/switch_thumb.png);
+	background: url(../images/switch_thumb.png);
 	background-repeat: no-repeat;
 	bottom: 33px;
 	left: -27px;

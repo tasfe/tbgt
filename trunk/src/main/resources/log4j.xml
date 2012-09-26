@@ -29,6 +29,13 @@
 		<level value="INFO" />
 	</logger>
 
+    <category name="java.sql">
+        <priority value="debug" />
+    </category>
+    <category name="org.mybatis">
+        <priority value="debug" />
+    </category>
+
 	<!-- Root Logger -->
 	<root>
 		<priority value="INFO" />
