@@ -1,13 +1,17 @@
 package tbgt.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import tbgt.domain.Baobei;
 import tbgt.domain.Price;
 import tbgt.persistence.BaobeiMapper;
 import tbgt.persistence.PriceMapper;
+import tbgt.web.paging.PaginationTO;
+import tbgt.web.paging.PagingContextHolder;
+import tbgt.web.paging.PagingEnabler;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class BaoBeiServiceImpl implements BaoBeiService {
 
@@ -25,6 +29,18 @@ public class BaoBeiServiceImpl implements BaoBeiService {
 
     public List<Baobei> getAllBaobei() {
         return baobeiMapper.getAllBaobei();
+    }
+
+    public PaginationTO getBaobeiWithPaging(){
+        Map<String, String> paraMap = new HashMap<String, String>();
+        paraMap.put("sSearch", PagingContextHolder.get().getsSearch());
+        System.out.println("$$$$$$$$$ sSearch is null "  + (PagingContextHolder.get().getsSearch() == null));
+        paraMap.put("sSortColumn_0", PagingContextHolder.get().getsSortColumn_0());
+        System.out.println("$$$$$$$$$$$$sSortColumn_0" + PagingContextHolder.get().getsSortColumn_0());
+        paraMap.put("sSortDir_0", PagingContextHolder.get().getsSortDir_0());
+        System.out.println("$$$$$$$$$$$$sSortColumn_0" + PagingContextHolder.get().getsSortDir_0());
+        List<Baobei> baobeis = baobeiMapper.getBaobeiWithPaging(paraMap);
+        return  PagingEnabler.enablePaging(baobeis);
     }
 
     public void deleteBaobei(int id) {

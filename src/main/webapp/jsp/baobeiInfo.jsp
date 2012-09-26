@@ -33,6 +33,7 @@
                         <br />
                       </fieldset>
                       <fieldset id="price">
+                        <form:hidden path="price.id"/>
                         <legend>价格信息</legend>
                         <label for="purchasePrice" >采购价 </label>
                         <form:input path="price.purchasePrice" id="purchasePrice"/>

@@ -15,9 +15,23 @@
             <param-name>encoding</param-name>
             <param-value>utf-8</param-value>
         </init-param>
+        <init-param>
+            <param-name>forceEncoding</param-name>
+            <param-value>true</param-value>
+        </init-param>
     </filter>
     <filter-mapping>
         <filter-name>CharacterEncodingFilter</filter-name>
+        <url-pattern>*.html</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>PagingFilter</filter-name>
+        <filter-class>tbgt.web.paging.PagingFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>PagingFilter</filter-name>
         <url-pattern>*.html</url-pattern>
     </filter-mapping>
 

@@ -16,10 +16,9 @@
 	<update id="updatePrice" parameterType="Price">
   		UPDATE price
   		SET
-  			baobeiId = #{baobeiId},
 			purchasePrice = #{purchasePrice},
 			recommendedPrice = #{recommendedPrice},
-			salePrice = #{salePrice},
+			salePrice = #{salePrice}
   		where id = #{id}
 	</update>
 
