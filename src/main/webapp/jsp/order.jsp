@@ -44,7 +44,7 @@
                 	<table width="100%">
 						<thead>
 							<tr>
-                            	<th width="70px"><a href="#">订单号<img src="/tbgt/img/icons/arrow_down_mini.gif" width="16" height="16" align="middle" /></a></th>
+                            	<th width="70px"><a href="#">订单号<img src="/tbgt/images/icons/arrow_down_mini.gif" width="16" height="16" align="middle" /></a></th>
                             	<th><a href="#">订单详情</a></th>
 								<th width="150px"><a href="#">成交时间</a></th>
                                 <th width="100px"><a href="#">快递单号</a></th>
@@ -63,9 +63,9 @@
                                 <td class="a-right">1234567890099887</td>
                                 <td class="a-right">5.00</td>
                                 <td>
-                                    <a href="#"><img src="/tbgt/img/icons/express.png" width="16" height="16" alt="快递"/></a>
-                                    <a href="#"><img src="/tbgt/img/icons/edit.png" width="16" height="16" alt="修改宝贝"/></a>
-                                    <a href="#"><img src="/tbgt/img/icons/delete.png" width="16" height="16" alt="删除宝贝"/></a>
+                                    <a href="#"><img src="/tbgt/images/icons/express.png" width="16" height="16" alt="快递"/></a>
+                                    <a href="#"><img src="/tbgt/images/icons/edit.png" width="16" height="16" alt="修改宝贝"/></a>
+                                    <a href="#"><img src="/tbgt/images/icons/delete.png" width="16" height="16" alt="删除宝贝"/></a>
                                  </td>
                             </tr>
 
