@@ -8,8 +8,6 @@ public interface BaobeiMapper {
 
     public void insertBaobei(Baobei baobei);
 
-    public int selectLastId();
-
     public void updateBaobei(Baobei baobei);
 
     public void deleteBaobei(int id);
