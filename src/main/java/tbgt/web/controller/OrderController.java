@@ -1,6 +1,7 @@
 package tbgt.web.controller;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -8,9 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import tbgt.domain.Baobei;
 import tbgt.domain.Order;
 import tbgt.domain.Price;
 import tbgt.domain.SoldBaobei;
+import tbgt.service.BaoBeiService;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -20,6 +23,12 @@ import java.util.Random;
 @Controller
 @RequestMapping(value = "/order")
 public class OrderController {
+    private BaoBeiService baoBeiService;
+
+    @Autowired
+    public void setBaoBeiService(BaoBeiService baoBeiService) {
+        this.baoBeiService = baoBeiService;
+    }
 
     @RequestMapping(value = "/view", method = RequestMethod.GET)
     public ModelAndView viewOrder() {
@@ -34,9 +43,12 @@ public class OrderController {
         ModelAndView mv = new ModelAndView("orderDetail");
         Order order = new Order();
         List<SoldBaobei> soldBaobeis = new ArrayList<SoldBaobei>();
-        for(String baobeiId : baobeiIds){
+        for(String baobeiIdStr : baobeiIds){
             SoldBaobei soldBaobei = new SoldBaobei();
-            soldBaobei.setBaobeiId(Integer.valueOf(baobeiId));
+            Integer baobeiId = Integer.valueOf(baobeiIdStr);
+            Baobei baobei = baoBeiService.getBaobeiById(baobeiId);
+            soldBaobei.setBaobeiId(baobeiId);
+            soldBaobei.setName(baobei.getName());
             soldBaobeis.add(soldBaobei);
         }
         order.setSoldBaobeis(soldBaobeis);
