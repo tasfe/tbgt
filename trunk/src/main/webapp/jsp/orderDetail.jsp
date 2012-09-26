@@ -57,7 +57,9 @@
 						<tbody>
                         <c:forEach items="${order.soldBaobeis}" var="soldBaobei" varStatus="index">
                             <tr>
-                                <td class="a-left"><a href="#">正品U型枕 护颈枕保健颈椎枕头 午睡枕靠枕 慢回弹太空记忆枕包邮</a></td>
+                                <td class="a-left">
+                                    <form:hidden path="soldBaobeis[${index.index}].name"/>${soldBaobei.name}
+                                </td>
                                 <td><form:input path="soldBaobeis[${index.index}].color"/></td>
                                 <td><form:input path="soldBaobeis[${index.index}].spec"/></td>
                                 <td><form:input path="soldBaobeis[${index.index}].quantity"/></td>
