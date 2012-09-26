@@ -1,6 +1,8 @@
 package tbgt.domain;
 
+import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.springframework.format.annotation.DateTimeFormat;
+import tbgt.common.CustomJsonDateSerializer;
 
 import java.util.Date;
 
@@ -37,6 +39,7 @@ public class Baobei {
         this.saleTitle = saleTitle;
     }
 
+    @JsonSerialize(using = CustomJsonDateSerializer.class)
     public Date getIncomingTime() {
         return incomingTime;
     }

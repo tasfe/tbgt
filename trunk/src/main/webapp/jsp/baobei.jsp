@@ -39,8 +39,7 @@
         <div id="panel">
             <ul>
                 <li><a href="#" onclick="saveBaobei('newBaobei');return false" class="add">添加新宝贝</a></li>
-                <li><a href="#" class="delete">删除宝贝</a></li>
-                <li><a href="#" class="order">添加订单</a></li>
+                <li><a href="#" onclick="batchOrderBaobei();return false" class="order">添加订单</a></li>
             </ul>
         </div>
     </div>
@@ -63,25 +62,6 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <%--<c:forEach items="${baobeis}" var="baobei">--%>
-
-                            <%--<tr>--%>
-                                <%--<td class="a-center">${baobei.id}</td>--%>
-                                <%--<td><a href="#">${baobei.name}</a></td>--%>
-                                <%--<td>${baobei.saleTitle}</td>--%>
-                                <%--<td class="a-center"><a href="${baobei.taobaoLink}" target="_blank">点击进入</a></td>--%>
-                                <%--<td>${baobei.incomingTime}</td>--%>
-                                <%--<td class="a-right">${baobei.price.purchasePrice}</td>--%>
-                                <%--<td class="a-right">${baobei.price.recommendedPrice}</td>--%>
-                                <%--<td class="a-right">${baobei.price.salePrice}</td>--%>
-                                <%--<td>--%>
-                                    <%--<a href="#" onclick="orderBaobei('${baobei.id}');return false"><img src="/tbgt/images/icons/order.jpg" width="16" height="16" alt="添加订单"/></a>--%>
-                                    <%--<a href="#" onclick="saveBaobei('updateBaobei','${baobei.id}');return false"><img src="/tbgt/images/icons/edit.png" width="16" height="16" alt="修改宝贝"/></a>--%>
-                                    <%--<a href="#" onclick="deleteBaobei('${baobei.id}');return false"><img src="/tbgt/images/icons/delete.png" width="16" height="16"--%>
-                                                     <%--alt="删除宝贝"/></a>--%>
-                                <%--</td>--%>
-                            <%--</tr>--%>
-                        <%--</c:forEach>--%>
                           <td colspan="9" class="dataTables_empty">加载数据.....</td>
                         </tbody>
                     </table>
@@ -113,6 +93,40 @@
                 function (responseText, textStatus, XMLHttpRequest) {
                     dialog.dialog({
                         title: "宝贝详情",
+                        modal: true,
+                        width: 800,
+                        height: 600,
+                        close: function(event, ui) {
+                            dialog.remove();
+                        }
+                    });
+                }
+        );
+        //prevent the browser to follow the link
+        return false;
+    }
+
+    function batchOrderBaobei(){
+        var dialog = $('<div style="display:none"></div>').appendTo('body');
+        // load remote content
+        var  baobeiIds;
+        for(var index in gaiSelected){
+            if(baobeiIds && baobeiIds!=null){
+               baobeiIds = baobeiIds + "," + gaiSelected[index];
+            }else{
+              baobeiIds= gaiSelected[index];
+            }
+        }
+        if(baobeiIds==null){
+            alert("没有宝贝被选择");
+            return false;
+        }
+        var url = "/tbgt/order/addOrder.html?baobeiIdsStr="+baobeiIds;
+        dialog.load(
+                url,
+                function (responseText, textStatus, XMLHttpRequest) {
+                    dialog.dialog({
+                        title: "添加订单",
                         modal: true,
                         width: 800,
                         height: 600,
@@ -175,7 +189,7 @@
                 "sProcessing": "系统处理中",
                 "sLoadingRecords": "请等待，数据载入中.....",
                 "sLengthMenu": "每页显示 _MENU_ 记录",
-                "sInfo": "第 _START_ 到 _END_ 总共 _TOTAL_ 条记录",
+                "sInfo": "第 _START_ 到 _END_ 页, 总共 _TOTAL_ 条记录",
                 "sInfoFiltered": "(从 _MAX_ 条记录中过滤)",
                 "sSearch": "搜索名称或者标题 " ,
                 "sZeroRecords": "没有宝贝",
@@ -203,11 +217,11 @@
             ],
             "aoColumnDefs": [
                 { "bSortable" :true, "aTargets": [ 0 ],"sWidth": "70px"},
-                { "bSortable" :true, "aTargets": [ 1 ]},
-                { "bSortable" :true, "aTargets": [ 2 ]},
+                { "bSortable" :true, "aTargets": [ 1 ],  "sWidth": "150px"},
+                { "bSortable" :true, "aTargets": [ 2 ],  "sWidth": "260px"},
                 { "bSortable": false, "aTargets": [ 3 ],  "sWidth": "80px" },
                 { "bSortable": true, "aTargets": [ 4 ],  "sWidth": "120px" },
-                { "bSortable": true, "aTargets": [ 5 ],  "sWidth": "50px" },
+                { "bSortable": true, "aTargets": [ 5 ],  "sWidth": "70px" },
                 { "bSortable": true, "aTargets": [ 6 ],  "sWidth": "50px" },
                 { "bSortable": true, "aTargets": [ 7 ],  "sWidth": "80px" },
                 { "bSortable": false, "aTargets": [ 8 ],  "sWidth": "80px" }
@@ -223,7 +237,6 @@
         /* Click event handler */
         $('#tdata1 tbody tr').live('click', function () {
             var aData = tdata1.fnGetData(this);
-//            console.log(aData);
             var id = aData.id;
 
             if (jQuery.inArray(id, gaiSelected) == -1) {
@@ -234,7 +247,7 @@
                     return value != id;
                 });
             }
-
+            console.log(gaiSelected);
             $(this).toggleClass('row_selected');
         });
 
@@ -242,58 +255,5 @@
         $("#tdata1 tbody tr").live('dblclick', function () {
             saveBaobei('updateBaobei',tdata1.fnGetData(this).id);
         });
-//        $("#tdata1 tbody").click(function(event) {
-//            $(tdata1.fnSettings().aoData).each(function () {
-//                $(this.nTr).removeClass('row_selected');
-//            });
-//            var currentRow = $(event.target.parentNode);
-//            currentRow.addClass('row_selected');
-//
-//            menuBar.setMenuItemState(11, 'regular');
-//            menuBar.setMenuItemState(12, 'regular');
-//            menuBar.setMenuItemState(13, 'regular');
-//            if ($("#checkoutIcon", currentRow).length == 0 || getSelectedCheckOutBy() != $("#userName").text()) {
-//                menuBar.setMenuItemState(135, 'disabled');
-//                $("#checkInMenu", $(contextMenuObj['contextMenu2'])).hide();
-//            } else {
-//                menuBar.setMenuItemState(135, 'regular');
-//                $("#checkInMenu", $(contextMenuObj['contextMenu2'])).show();
-//            }
-//            currentRow.bind('contextmenu', function(e) {
-//                return showContextMenu(e, "contextMenu2");
-//            });
-//
-//            $('td:eq(0)', currentRow).editable('/rename.action', {
-//                "indicator" : 'Saving...',
-//                "tooltip"   : 'Shift+r to Rename File',
-//                "name"     : 'newDocName',
-//                "event" : "F2",
-//                "callback" : function(sValue, y) {
-//                    var aPos = tdata1.fnGetPosition(this);
-//                    tdata1.fnUpdate(sValue, aPos[0], aPos[1]);
-//                },
-//                "submitdata" : function (value, settings) {
-//                    return {
-//                        "docId":tdata1.fnGetData(this.parentNode)[ 'id' ]
-//                    };
-//                },
-//                "height": "14px"
-//            });
-//        });
-//
-//
-//        $("#searchBox").bind('keydown', 'return', function (evt) {
-//            $("#hiddenFolderId").val("");
-//            $("#fullSearchParam").val($("#searchBox").val());
-//            $("#breadcrumb").text("Search Result");
-//            menuBar.setMenuItemState(10, 'disabled');
-//            tdata1.fnDraw();
-//        });
-//        $(document).bind('keypress', 'Shift+r', function (evt) {
-//            var rowSelected = fnGetSelected(tdata1);
-//            if (rowSelected.length > 0) {
-//                $('td:eq(0)', rowSelected[0]).trigger("F2");
-//            }
-//        });
     });
 </script>
