@@ -28,11 +28,12 @@
 	<insert id="insertBaobei" parameterType="Baobei">
 		INSERT INTO baobei (name,taobaoId,saleTitle,incomingTime)
     	VALUE (#{name},#{taobaoId},#{saleTitle},#{incomingTime})
+        <selectKey keyProperty="id" resultType="int" order="AFTER">
+                   SELECT LAST_INSERT_ID();
+        </selectKey>
+
 	</insert>
 
-    <select id="selectLastId" resultType="int">
-         select LAST_INSERT_ID()
-    </select>
 
 	<update id="updateBaobei" parameterType="Baobei">
   		UPDATE baobei
