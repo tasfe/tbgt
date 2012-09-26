@@ -1,6 +1,7 @@
 package tbgt.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import tbgt.domain.Baobei;
 import tbgt.domain.Price;
 import tbgt.persistence.BaobeiMapper;
@@ -34,14 +35,16 @@ public class BaoBeiServiceImpl implements BaoBeiService {
         return baobeiMapper.getBaobeiById(id);
     }
 
+    @Transactional
     public void insertBaobei(Baobei baobei) {
         baobeiMapper.insertBaobei(baobei);
         Price price = baobei.getPrice();
-        price.setBaobeiId(baobeiMapper.selectLastId());
+        price.setBaobeiId(baobei.getId());
         priceMapper.insertPrice(price);
 
     }
 
+    @Transactional
     public void updateBaobei(Baobei baobei) {
         baobeiMapper.updateBaobei(baobei);
         Price price = baobei.getPrice();
