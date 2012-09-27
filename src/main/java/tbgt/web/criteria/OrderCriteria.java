@@ -11,7 +11,7 @@ public class OrderCriteria {
     @DateTimeFormat(pattern = DateUtil.DATE_FORMAT)
     private Date toDate;
     private String name;
-    private boolean isSent=false;
+    private String isSent;
 
     public Date getFromDate() {
         return fromDate;
@@ -37,11 +37,11 @@ public class OrderCriteria {
         this.name = name;
     }
 
-    public boolean isSent() {
+    public String getSent() {
         return isSent;
     }
 
-    public void setSent(boolean sent) {
+    public void setSent(String sent) {
         isSent = sent;
     }
 }

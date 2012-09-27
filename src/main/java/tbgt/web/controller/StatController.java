@@ -1,6 +1,7 @@
 package tbgt.web.controller;
 
 
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -36,7 +37,7 @@ public class StatController {
     @RequestMapping(value = "/profit", method = RequestMethod.GET)
     public ModelAndView viewDefaultProfit() {
         OrderCriteria orderCriteria = new OrderCriteria();
-        orderCriteria.setFromDate(new Date());
+        orderCriteria.setFromDate(new DateTime().dayOfMonth().withMinimumValue().toDate());
         orderCriteria.setToDate(new Date());
         return profit(orderCriteria);
     }
@@ -49,7 +50,7 @@ public class StatController {
     public ModelAndView profit(OrderCriteria orderCriteria) {
         ModelAndView mv = new ModelAndView("stat");
         mv.addObject("criteria", orderCriteria);
-        orderCriteria.setSent(true);
+        orderCriteria.setSent("Y");
         List<Order> orders = orderService.getOrders(orderCriteria);
         Map<String, BigDecimal> summary = getSummary(orders);
         mv.addObject("summary", summary);

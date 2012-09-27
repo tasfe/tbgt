@@ -46,8 +46,11 @@
             <if test="name != null and name != ''">
                 SOLDBAOBEI.name like CONCAT(CONCAT('%', #{name}),'%')
             </if>
-            <if test="isSent">
+            <if test="isSent == 'Y'">
                 and EXPRESS.id is not null
+            </if>
+            <if test="isSent == 'N'">
+                and EXPRESS.id is null
             </if>
             <if test="fromDate != null">
                 and ORDERS.soldTime &gt;= #{fromDate}
@@ -57,8 +60,8 @@
             </if>
         </trim>
         <trim prefix="ORDER BY">
-            <if test="sSortColumn_0 != null and sSortColumn_0 != ''">
-                ${sSortColumn_0} ${sSortDir_0}
+            <if test="sort != null and sort != ''">
+                ${sort} ${direction}
             </if>
         </trim>
     </select>

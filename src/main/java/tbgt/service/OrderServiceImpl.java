@@ -47,15 +47,17 @@ public class OrderServiceImpl implements OrderService {
     public List<Order> getOrders(OrderCriteria orderCriteria) {
         Map<String, Object> paraMap = new HashMap<String, Object>();
         PaginationTO paginationTO = PagingContextHolder.get();
+        paraMap.put("sort","soldtime");
+        paraMap.put("direction","asc");
         if (paginationTO != null) {
-            paraMap.put("sSortColumn_0", paginationTO.getsSortColumn_0());
-            paraMap.put("sSortDir_0", paginationTO.getsSortDir_0());
+            paraMap.put("sort", paginationTO.getsSortColumn_0());
+            paraMap.put("direction", paginationTO.getsSortDir_0());
         }
         if(orderCriteria!=null){
           paraMap.put("fromDate",orderCriteria.getFromDate());
           paraMap.put("toDate",orderCriteria.getToDate());
           paraMap.put("name",orderCriteria.getName());
-          paraMap.put("isSent",orderCriteria.isSent());
+          paraMap.put("isSent",orderCriteria.getSent());
         }
         return orderMapper.getOrders(paraMap);
     }
