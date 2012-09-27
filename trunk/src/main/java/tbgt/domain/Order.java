@@ -20,6 +20,7 @@ public class Order {
     private BigDecimal actualPrice;
     @DateTimeFormat(pattern = DateUtil.DATE_FORMAT)
     private Date soldTime;
+    private BigDecimal agencyFee;
 
     public int getId() {
         return id;
@@ -70,7 +71,7 @@ public class Order {
     }
 
     public BigDecimal getActualPrice() {
-        return actualPrice;
+        return actualPrice==null?BigDecimal.ZERO:actualPrice;
     }
 
     public void setActualPrice(BigDecimal actualPrice) {
@@ -109,16 +110,25 @@ public class Order {
         this.orderNo = orderNo;
     }
 
+    public BigDecimal getAgencyFee() {
+        return agencyFee==null?BigDecimal.ZERO:agencyFee;
+    }
+
+    public void setAgencyFee(BigDecimal agencyFee) {
+        this.agencyFee = agencyFee;
+    }
+
     public BigDecimal getPurchasePrice(){
         BigDecimal totalPurchasePrice = BigDecimal.ZERO;
         for(SoldBaobei soldBaobei : soldBaobeis){
             BigDecimal purchasePrice = soldBaobei.getPurchasePrice();
-            totalPurchasePrice = totalPurchasePrice.add(purchasePrice!=null?purchasePrice:BigDecimal.ZERO.multiply(new BigDecimal(soldBaobei.getQuantity())));
+            totalPurchasePrice = totalPurchasePrice.add(purchasePrice != null ? purchasePrice : BigDecimal.ZERO.multiply(new BigDecimal(soldBaobei.getQuantity())));
         }
         return totalPurchasePrice;
     }
 
     public BigDecimal getProfit(){
-        return actualPrice.subtract(getPurchasePrice());
+        return actualPrice.subtract(getPurchasePrice())
+                .subtract(getExpress().getFee()).subtract(getAgencyFee());
     }
 }
