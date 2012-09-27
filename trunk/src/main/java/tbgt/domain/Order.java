@@ -115,4 +115,12 @@ public class Order {
     public void setOrderNo(String orderNo) {
         this.orderNo = orderNo;
     }
+
+    public BigDecimal getPurchasePrice(){
+        BigDecimal totalPurchasePrice = BigDecimal.ZERO;
+        for(SoldBaobei soldBaobei : soldBaobeis){
+            totalPurchasePrice = totalPurchasePrice.add(soldBaobei.getPurchasePrice().multiply(new BigDecimal(soldBaobei.getQuantity())));
+        }
+        return totalPurchasePrice;
+    }
 }
