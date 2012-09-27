@@ -15,8 +15,11 @@
 <![endif]-->
 
 <link rel="stylesheet" type="text/css" href="/tbgt/css/custom/jquery-ui-1.8.23.custom.css"/>
+<link rel="stylesheet" href="/tbgt/css/jquery.dataTables.css" type="text/css" media="screen, projection">
+<link rel="stylesheet" href="/tbgt/css/datatable_jui.css" type="text/css" media="screen, projection">
 <script type="text/javascript" src="/tbgt/js/jquery-1.8.0.min.js"></script>
 <script type="text/javascript" src="/tbgt/js/jquery-ui-1.8.23.custom.min.js"></script>
+<script type="text/javascript" src="/tbgt/js/jquery.dataTables.min.js"></script>
 </head>
 
 <body>
@@ -90,7 +93,7 @@
                     </table>
 
                     <br/>
-                	<table width="100%">
+                	<table id="tdata1" class="display" cellspacing="0" cellpadding="0" border="0" width="100%">
 						<thead>
 							<tr>
                             	<th width="70px">订单号</th>
@@ -137,7 +140,30 @@
 </body>
 </html>
 <script type="text/javascript">
+    var tdata1;
     $(function() {
 		$(".date" ).datepicker({ dateFormat: "yy-mm-dd"});
+        tdata1 = $('#tdata1').dataTable({
+            "sPaginationType": "full_numbers",
+            "bJQueryUI": true,
+            'iDisplayLength': 50,
+            "aLengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+//            "bSort": false,
+            "oLanguage": {
+                "sLengthMenu": "每页显示 _MENU_ 记录",
+                "sInfo": "第 _START_ 到 _END_ 页, 总共 _TOTAL_ 条记录",
+                "sInfoFiltered": "(从 _MAX_ 条记录中过滤)",
+                "sSearch": "搜索名称" ,
+                "sZeroRecords": "没有宝贝",
+                "sInfoEmpty": "",
+                "oPaginate": {
+                    "sFirst": "第一页",
+                    "sLast": "最后一页",
+                    "sNext": "下一页",
+                    "sPrevious": "上一页"
+                }
+            }
+        });
+
 	});
 </script>
