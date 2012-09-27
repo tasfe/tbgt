@@ -3,6 +3,7 @@ package tbgt.domain;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.springframework.format.annotation.DateTimeFormat;
 import tbgt.common.CustomJsonDateSerializer;
+import tbgt.util.DateUtil;
 
 import java.util.Date;
 
@@ -11,7 +12,7 @@ public class Baobei {
 	private String name;
 	private String taobaoId;
 	private String saleTitle;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = DateUtil.DATE_FORMAT)
 	private Date incomingTime;
 	public Price price;
 
