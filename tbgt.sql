@@ -36,7 +36,7 @@ CREATE TABLE `express` (
 -- ----------------------------
 -- Table structure for order
 -- ----------------------------
-CREATE TABLE `order` (
+CREATE TABLE `orders` (
   `id` int(5) NOT NULL auto_increment,
   `orderNo` varchar(20) default NULL,
   `address` varchar(200) default NULL,
