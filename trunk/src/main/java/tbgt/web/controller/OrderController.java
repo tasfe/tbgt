@@ -15,6 +15,8 @@ import tbgt.service.BaoBeiService;
 import tbgt.service.OrderService;
 import tbgt.web.criteria.OrderCriteria;
 import tbgt.web.paging.PaginationTO;
+import tbgt.web.paging.PagingContextHolder;
+import tbgt.web.paging.PagingEnabler;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -44,11 +46,12 @@ public class OrderController {
     }
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public ModelAndView list() {
-        ModelAndView mv = new ModelAndView("order");
-        OrderCriteria orderCriteria = null;
-        mv.addObject("orders", orderService.getOrders(orderCriteria));
-        return mv;
+    public @ResponseBody PaginationTO list() {
+        OrderCriteria orderCriteria = new OrderCriteria();
+        orderCriteria.setName( PagingContextHolder.get().getsSearch());
+        orderCriteria.setExpressInd("N");
+        List<Order> orders = orderService.getOrders(orderCriteria);
+        return PagingEnabler.enablePaging(orders);
     }
 
     @RequestMapping(value = "/addOrder", method = RequestMethod.GET)
