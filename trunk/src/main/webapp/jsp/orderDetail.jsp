@@ -69,6 +69,7 @@
                         <td><form:input path="soldBaobeis[${index.index}].quantity" onchange="doGenActualPrice(${soldBaobei.salePrice},this.value)"/></td>
                         <form:hidden path="soldBaobeis[${index.index}].salePrice"/>
                         <form:hidden path="soldBaobeis[${index.index}].baobeiId"/>
+                        <form:hidden path="soldBaobeis[${index.index}].purchasePrice"/>
                     </tr>
                 </c:forEach>
 

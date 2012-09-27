@@ -57,6 +57,8 @@ public class OrderController {
             soldBaobei.setBaobeiId(baobeiId);
             soldBaobei.setName(baobei.getName());
             soldBaobei.setSalePrice(baobei.getPrice().getSalePrice());
+            soldBaobei.setPurchasePrice(baobei.getPrice().getPurchasePrice());
+
             soldBaobeis.add(soldBaobei);
         }
         order.setSoldBaobeis(soldBaobeis);
@@ -93,13 +95,8 @@ public class OrderController {
             } else {
                 orderService.updateOrder(order);
             }
-//            order.setOrderNo(String.valueOf(new Random(1000).nextInt()));
-//            mv.addObject("order", order);
         }
-//        List<Order> orders = new ArrayList<Order>();
-
-        mv.addObject("baobeis", baoBeiService.getAllBaobei());
-//        mv.addObject("orders", orderService.getAllOrders());
+        mv.addObject("orders", orderService.getAllOrders());
         return mv;
     }
 
