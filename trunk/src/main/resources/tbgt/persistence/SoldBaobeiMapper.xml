@@ -4,7 +4,16 @@
 
 <mapper namespace="tbgt.persistence.SoldBaobeiMapper">
 
-    <select id="getSoldBaobei" resultType="SoldBaobei" parameterType="int">
+    <select id="getSoldBaobeiByOrderNo" resultType="SoldBaobei" parameterType="int">
       SELECT * FROM soldbaobei WHERE orderid=#{id}
     </select>
+
+    <insert id="saveSoldBaoBei" parameterType="soldBaobei">
+		INSERT INTO soldBaobei (orderId,baobeiId,quantity,color,spec,name,purchasePrice,salePrice)
+    	VALUE (#{orderId},#{baobeiId},#{quantity},#{color},#{spec},#{name},#{purchasePrice},#{salePrice})
+        <selectKey keyProperty="id" resultType="int" order="AFTER">
+                   SELECT LAST_INSERT_ID();
+        </selectKey>
+	</insert>
+
 </mapper>

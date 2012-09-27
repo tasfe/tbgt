@@ -14,6 +14,7 @@ import tbgt.domain.Order;
 import tbgt.domain.Price;
 import tbgt.domain.SoldBaobei;
 import tbgt.service.BaoBeiService;
+import tbgt.service.OrderService;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -24,10 +25,16 @@ import java.util.Random;
 @RequestMapping(value = "/order")
 public class OrderController {
     private BaoBeiService baoBeiService;
+    private OrderService orderService;
 
     @Autowired
     public void setBaoBeiService(BaoBeiService baoBeiService) {
         this.baoBeiService = baoBeiService;
+    }
+
+    @Autowired
+    public void setOrderService(OrderService orderService) {
+        this.orderService = orderService;
     }
 
     @RequestMapping(value = "/view", method = RequestMethod.GET)
@@ -43,12 +50,13 @@ public class OrderController {
         ModelAndView mv = new ModelAndView("orderDetail");
         Order order = new Order();
         List<SoldBaobei> soldBaobeis = new ArrayList<SoldBaobei>();
-        for(String baobeiIdStr : baobeiIds){
+        for (String baobeiIdStr : baobeiIds) {
             SoldBaobei soldBaobei = new SoldBaobei();
             Integer baobeiId = Integer.valueOf(baobeiIdStr);
             Baobei baobei = baoBeiService.getBaobeiById(baobeiId);
             soldBaobei.setBaobeiId(baobeiId);
             soldBaobei.setName(baobei.getName());
+            soldBaobei.setSalePrice(baobei.getPrice().getSalePrice());
             soldBaobeis.add(soldBaobei);
         }
         order.setSoldBaobeis(soldBaobeis);
@@ -80,12 +88,18 @@ public class OrderController {
         ModelAndView mv = new ModelAndView("order");
         //todo..validator
         if (!result.hasErrors()) {
-            order.setOrderNo(String.valueOf(new Random(1000).nextInt()));
-            mv.addObject("order", order);
+            if (order.getId() == 0) {
+                orderService.saveOrder(order);
+            } else {
+                orderService.updateOrder(order);
+            }
+//            order.setOrderNo(String.valueOf(new Random(1000).nextInt()));
+//            mv.addObject("order", order);
         }
-        List<Order> orders = new ArrayList<Order>();
+//        List<Order> orders = new ArrayList<Order>();
 
-        mv.addObject("orders", orders);
+        mv.addObject("baobeis", baoBeiService.getAllBaobei());
+//        mv.addObject("orders", orderService.getAllOrders());
         return mv;
     }
 
