@@ -123,4 +123,8 @@ public class Order {
         }
         return totalPurchasePrice;
     }
+
+    public BigDecimal getProfit(){
+        return actualPrice.subtract(getPurchasePrice());
+    }
 }
