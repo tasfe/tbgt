@@ -13,4 +13,6 @@ public interface OrderMapper {
     public void deleteOrder(int id);
 
     public List<Order> getAllOrder();
+
+    public Order getOrderById(int id);
 }

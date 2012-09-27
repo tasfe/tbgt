@@ -3,8 +3,31 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="tbgt.persistence.OrderMapper">
+    <!--<resultMap id="result" type="Order">-->
+        <!--<id property="id" column="id"/>-->
+        <!--<result property="address" column="address"/>-->
+        <!--<result property="orderNo" column="orderNo"/>-->
+        <!--<result property="contactPerson" column="contactPerson"/>-->
+        <!--<result property="phone" column="phone"/>-->
+        <!--<result property="actualPrice" column="actualPrice"/>-->
+        <!--<result property="soldTime" column="soldTime"/>-->
+        <!--<result property="deliverTime" column="deliverTime"/>-->
+        <!--<collection property="soldBaobeis" column="id" javaType="SoldBaobei"-->
+                     <!--select="tbgt.persistence.SoldBaobeiMapper.getSoldBaobeiByOrderNo"/>-->
+        <!--<association property="express" column="id" javaType="Express"-->
+                     <!--select="tbgt.persistence.ExpressMapper.getExpressByOrderNo"/>-->
+    <!--</resultMap>-->
 
     <select id="getAllOrder" resultType="Order">
-      SELECT * FROM order
+      SELECT * FROM orders
     </select>
+
+    <insert id="saveOrder" parameterType="order">
+		INSERT INTO orders (address,orderNo,contactPerson,phone,actualPrice,soldTime)
+    	VALUE (#{address},#{orderNo},#{contactPerson},#{phone},#{actualPrice},#{soldTime})
+        <selectKey keyProperty="id" resultType="int" order="AFTER">
+                   SELECT LAST_INSERT_ID();
+        </selectKey>
+
+	</insert>
 </mapper>
