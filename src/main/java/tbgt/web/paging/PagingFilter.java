@@ -15,12 +15,12 @@ public class PagingFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         String iDisplayStartStr = httpRequest.getParameter("iDisplayStart");
+        PagingContextHolder.clear();
         if (iDisplayStartStr != null) {
             int iDisplayStart = Integer.valueOf(iDisplayStartStr);
             int iDisplayLength = Integer.valueOf(httpRequest.getParameter("iDisplayLength"));
             int sEcho = Integer.valueOf(httpRequest.getParameter("sEcho"));
             int iSortCol_0 = Integer.valueOf(httpRequest.getParameter("iSortCol_0"));
-            PagingContextHolder.clear();
             PaginationTO paginationTO = new PaginationTO();
             paginationTO.setiDisplayLength(iDisplayLength);
             paginationTO.setiDisplayStart(iDisplayStart);
