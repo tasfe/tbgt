@@ -1,6 +1,7 @@
 package tbgt.service;
 
 
+import tbgt.domain.Express;
 import tbgt.domain.Order;
 
 import java.util.List;
@@ -16,4 +17,12 @@ public interface OrderService {
     public void saveOrder(Order order);
 
     public void updateOrder(Order order);
+
+    public Express getExpressByOrderId(int orderId);
+
+    public void insertExpress(Express express);
+
+    public void updateExpress(Express express);
+
+    public void deleteExpress(int id);
 }

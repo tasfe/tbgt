@@ -100,8 +100,11 @@ public class OrderController {
     @RequestMapping(value = "/express", method = RequestMethod.GET)
     public ModelAndView express(@RequestParam int orderId) {
         ModelAndView mv = new ModelAndView("express");
-        Express express = new Express();
-        express.setOrderId(orderId);
+        Express express = orderService.getExpressByOrderId(orderId);
+        if(express==null) {
+            express = new Express();
+            express.setOrderId(orderId);
+        }
         mv.addObject("express", express);
         return mv;
     }
@@ -112,12 +115,13 @@ public class OrderController {
         //todo..validator
         if (!result.hasErrors()) {
             if (express.getId() == 0) {
-//                orderService.saveOrder(order);
+                orderService.insertExpress(express);
             } else {
-//                orderService.updateOrder(order);
+                orderService.updateExpress(express);
             }
         }
-        mv.addObject("orders", orderService.getAllOrders());
+//        mv.addObject("orders", orderService.getAllOrders());
+        mv.addObject("orders", new ArrayList());
         return mv;
     }
 

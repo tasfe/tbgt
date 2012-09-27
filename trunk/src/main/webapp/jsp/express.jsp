@@ -13,7 +13,7 @@
 <body>
 <div id="dialog_content">
     <div id="box">
-        <form:form commandName="express" action="/tbgt/order/express.html" id="form">
+        <form:form commandName="express" action="/tbgt/order/saveExpress.html" id="form" method="post">
             <form:hidden path="id"/>
             <form:hidden path="orderId"/>
             <div><form:errors path="*" cssStyle="color : red;"/></div>
