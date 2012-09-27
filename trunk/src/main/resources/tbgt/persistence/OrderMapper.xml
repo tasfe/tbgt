@@ -46,12 +46,14 @@
             <if test="name != null and name != ''">
                 SOLDBAOBEI.name like CONCAT(CONCAT('%', #{name}),'%')
             </if>
-            <if test="isSent == 'Y'">
-                and EXPRESS.id is not null
-            </if>
-            <if test="isSent == 'N'">
-                and EXPRESS.id is null
-            </if>
+            <choose>
+              <when test='expressInd == "Y"'>
+                    and EXPRESS.id is not null
+                </when>
+                <when test='expressInd == "N"'>
+                    and EXPRESS.id is null
+                </when>
+            </choose>
             <if test="fromDate != null">
                 and ORDERS.soldTime &gt;= #{fromDate}
             </if>
