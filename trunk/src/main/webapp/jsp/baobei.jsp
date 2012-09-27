@@ -30,7 +30,7 @@
             <ul>
                 <li><a href="/tbgt/order/view.html">订单管理</a></li>
                 <li class="current"><a href="/tbgt/baobei/view.html">宝贝管理</a></li>
-                <li><a href="#">统计</a></li>
+                <li><a href="/tbgt/stat/profit.html">统计</a></li>
                 <li><a href="#">设置</a></li>
             </ul>
         </div>
@@ -53,12 +53,12 @@
                             <th width="70px">序号</th>
                             <th>名称</th>
                             <th>标题</th>
-                            <th width="60px">淘宝链接</th>
-                            <th width="120px">上架时间</th>
-                            <th width="50px">采购价</th>
-                            <th width="50px">推荐价</th>
-                            <th width="60px">实际卖价</th>
-                            <th width="60px">操作</th>
+                            <th width="60px" nowrap>淘宝链接</th>
+                            <th width="120px" nowrap>上架时间</th>
+                            <th width="50px" nowrap>采购价</th>
+                            <th width="50px" nowrap>推荐价</th>
+                            <th width="60px" nowrap>实际卖价</th>
+                            <th width="60px" nowrap>操作</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -221,15 +221,17 @@
                 { "bSortable" :true, "aTargets": [ 2 ],  "sWidth": "260px"},
                 { "bSortable": false, "aTargets": [ 3 ],  "sWidth": "80px" },
                 { "bSortable": true, "aTargets": [ 4 ],  "sWidth": "120px" },
-                { "bSortable": true, "aTargets": [ 5 ],  "sWidth": "70px" },
-                { "bSortable": true, "aTargets": [ 6 ],  "sWidth": "50px" },
+                { "bSortable": true, "aTargets": [ 5 ],  "sWidth": "70px","sClass":"nowrap" },
+                { "bSortable": true, "aTargets": [ 6 ],  "sWidth": "70px","sClass":"nowrap" },
                 { "bSortable": true, "aTargets": [ 7 ],  "sWidth": "80px" },
                 { "bSortable": false, "aTargets": [ 8 ],  "sWidth": "80px" }
             ],
             "fnRowCallback": function(nRow, aData, iDisplayIndex) {
                     $('td:eq(3)', nRow).html('<a target="_blank" href="'+aData.taobaoLink+' ">点击进入</a>');
                     $('td:eq(8)', nRow).html('<a href="#" onclick="saveBaobei(\'updateBaobei\',\''+aData.id+'\');return false"><img src="/tbgt/images/icons/edit.png" width="16" height="16" alt="修改宝贝"/></a><a href="#" onclick="orderBaobei(\''+aData.id+'\');return false"><img src="/tbgt/images/icons/order.jpg" width="16" height="16" alt="添加订单"/></a> <a href="#" onclick="deleteBaobei(\''+aData.id+'\');return false"><img src="/tbgt/images/icons/delete.png" width="16" height="16" alt="删除宝贝"/></a>');
-
+                if (jQuery.inArray(aData.id, gaiSelected) !== -1) {
+                    $(nRow).addClass('row_selected');
+                }
             }
 
         });
@@ -247,7 +249,7 @@
                     return value != id;
                 });
             }
-            console.log(gaiSelected);
+//            console.log(gaiSelected);
             $(this).toggleClass('row_selected');
         });
 

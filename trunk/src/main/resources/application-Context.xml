@@ -68,4 +68,6 @@
 
     <bean id="orderService" class="tbgt.service.OrderServiceImpl" autowire="byName"/>
 
+    <bean id="statService" class="tbgt.service.StatServiceImpl" autowire="byName"/>
+
 </beans>       		
