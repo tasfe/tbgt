@@ -66,7 +66,8 @@
                         </td>
                         <td><form:input path="soldBaobeis[${index.index}].color"/></td>
                         <td><form:input path="soldBaobeis[${index.index}].spec"/></td>
-                        <td><form:input path="soldBaobeis[${index.index}].quantity" onchange="doGenActualPrice(${soldBaobei.salePrice},this.value)"/></td>
+                        <td><form:input path="soldBaobeis[${index.index}].quantity" onchange="doGenActualPrice('${soldBaobei.salePrice}',this.value,'${index.index}')"/>
+                            <input type="hidden" name="oldQuantity${index.index}" id="oldQuantity${index.index}" value="${soldBaobei.quantity}"/></td>
                         <form:hidden path="soldBaobeis[${index.index}].salePrice"/>
                         <form:hidden path="soldBaobeis[${index.index}].baobeiId"/>
                         <form:hidden path="soldBaobeis[${index.index}].purchasePrice"/>
@@ -127,7 +128,10 @@
         }
     }
 
-    function doGenActualPrice(soldPrice,quantity){
-        $("#actualPrice").attr("value",soldPrice*quantity);
+    function doGenActualPrice(soldPrice,quantity,index){
+        var currentTotal =  parseFloat($("#actualPrice").val());
+        var diffQuantity =  parseInt(quantity) - parseInt($("#oldQuantity"+index).val());
+        $("#actualPrice").val((currentTotal+parseFloat(soldPrice*diffQuantity)).toFixed(2));
+        $("#oldQuantity"+index).val(quantity);
     }
 </script>
