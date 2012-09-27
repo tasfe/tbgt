@@ -3,6 +3,7 @@ package tbgt.persistence;
 import tbgt.domain.Order;
 
 import java.util.List;
+import java.util.Map;
 
 public interface OrderMapper {
 
@@ -15,4 +16,6 @@ public interface OrderMapper {
     public List<Order> getAllOrder();
 
     public Order getOrderById(int id);
+
+    public List<Order> getOrders(Map criteria);
 }

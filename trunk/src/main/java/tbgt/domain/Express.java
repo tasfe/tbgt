@@ -1,5 +1,8 @@
 package tbgt.domain;
 
+import org.springframework.format.annotation.DateTimeFormat;
+import tbgt.util.DateUtil;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -8,6 +11,7 @@ public class Express {
     private int orderId;
     private String expressNo;
     private BigDecimal fee;
+    @DateTimeFormat(pattern = DateUtil.DATE_FORMAT)
     private Date sendTime;
 
     public int getId() {

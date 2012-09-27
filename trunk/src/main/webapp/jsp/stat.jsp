@@ -68,23 +68,23 @@
                     <table width="100%">
                         <tr>
                             <td width="200px" class="f_name">总销售额</td>
-                            <td>318</td>
+                            <td>${summary.totalSale}</td>
                         </tr>
                         <tr>
                             <td width="200px" class="f_name">总成本</td>
-                            <td>248</td>
+                            <td>${summary.totalPurchase}</td>
                         </tr>
                         <tr>
                             <td width="200px" class="f_name">总快递费</td>
-                            <td>5</td>
+                            <td>${summary.totalExpress}</td>
                         </tr>
                         <tr>
                             <td width="200px" class="f_name">总代理费</td>
-                            <td>10</td>
+                            <td>${summary.totalAgencyFee}</td>
                         </tr>
                         <tr>
                             <td width="70px" class="f_name">总利润</td>
-                            <td>58</td>
+                            <td>${summary.totalProfit}</td>
                         </tr>
 
                     </table>
@@ -104,19 +104,22 @@
                             </tr>
 						</thead>
 						<tbody>
+                        <c:forEach items="${orders}" var="order" varStatus="index">
 							<tr>
-                            	<td class="a-center"><a href="#">232</a></td>
+                            	<td class="a-center"><a href="#">${order.id}</a></td>
                             	<td>
-                                   1个枕头
+                                  <c:forEach items="${order.soldBaobeis}" var="soldBaobei">
+                                    ${soldBaobei.quantity} 个 ${soldBaobei.name} <br/>
+                                  </c:forEach>
                                 </td>
-								<td>2012-09-08 09:09:19</td>
-                                <td class="a-right">318</td>
-                                <td class="a-right">248</td>
-                                <td class="a-right">5</td>
-                                <td class="a-right">10</td>
-                                <td class="a-right">58</td>
+								<td>${order.soldTime}</td>
+                                <td class="a-right">${order.actualPrice}</td>
+                                <td class="a-right">${order.purchasePrice}</td>
+                                <td class="a-right">${order.express.fee}</td>
+                                <td class="a-right">${order.profit}</td>
+                                <td class="a-right">${order.profit}</td>
                             </tr>
-
+                        </c:forEach>
 						</tbody>
 					</table>
 

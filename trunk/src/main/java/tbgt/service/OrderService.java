@@ -3,6 +3,7 @@ package tbgt.service;
 
 import tbgt.domain.Express;
 import tbgt.domain.Order;
+import tbgt.web.criteria.OrderCriteria;
 
 import java.util.List;
 
@@ -25,4 +26,6 @@ public interface OrderService {
     public void updateExpress(Express express);
 
     public void deleteExpress(int id);
+
+    public List<Order> getOrders(OrderCriteria orderCriteria);
 }

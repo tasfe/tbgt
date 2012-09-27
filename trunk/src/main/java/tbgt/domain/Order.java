@@ -112,7 +112,8 @@ public class Order {
     public BigDecimal getPurchasePrice(){
         BigDecimal totalPurchasePrice = BigDecimal.ZERO;
         for(SoldBaobei soldBaobei : soldBaobeis){
-            totalPurchasePrice = totalPurchasePrice.add(soldBaobei.getPurchasePrice().multiply(new BigDecimal(soldBaobei.getQuantity())));
+            BigDecimal purchasePrice = soldBaobei.getPurchasePrice();
+            totalPurchasePrice = totalPurchasePrice.add(purchasePrice!=null?purchasePrice:BigDecimal.ZERO.multiply(new BigDecimal(soldBaobei.getQuantity())));
         }
         return totalPurchasePrice;
     }
