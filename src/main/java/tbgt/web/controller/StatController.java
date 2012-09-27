@@ -49,6 +49,7 @@ public class StatController {
     public ModelAndView profit(OrderCriteria orderCriteria) {
         ModelAndView mv = new ModelAndView("stat");
         mv.addObject("criteria", orderCriteria);
+        orderCriteria.setSent(true);
         List<Order> orders = orderService.getOrders(orderCriteria);
         Map<String, BigDecimal> summary = getSummary(orders);
         mv.addObject("summary", summary);
@@ -67,9 +68,9 @@ public class StatController {
             totalSaled = totalSaled.add(order.getActualPrice());
             totalPurchase = totalPurchase.add(order.getPurchasePrice());
             Express express = order.getExpress();
-            BigDecimal expressFee = express != null && express.getFee()!=null  ? express.getFee() : BigDecimal.ZERO;
+            BigDecimal expressFee = express != null   ? express.getFee() : BigDecimal.ZERO;
             totalExpress = totalExpress.add(expressFee);
-            totalAgencyFee = totalAgencyFee.add(order.getProfit());
+            totalAgencyFee = totalAgencyFee.add(order.getAgencyFee());
             totalProfit = totalProfit.add(order.getProfit());
         }
         summary.put("totalSale",totalSaled);

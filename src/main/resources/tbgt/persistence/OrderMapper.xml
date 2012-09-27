@@ -12,7 +12,7 @@
         <result property="phone" column="phone"/>
         <result property="actualPrice" column="actualPrice"/>
         <result property="soldTime" column="soldTime"/>
-        <result property="deliverTime" column="deliverTime"/>
+        <result property="agencyFee" column="agencyFee"/>
         <association property="express" column="id" javaType="Express">
             <id property="id" column="express.id"/>
             <result property="orderId" column="id"/>
@@ -33,8 +33,8 @@
         </collection>
     </resultMap>
 
-    <sql id="orderColumns"> ORDERS.id,address,orderNo,contactPerson,phone,actualPrice,soldTime,
- deliverTime,express.id ,expressNo,
+    <sql id="orderColumns"> ORDERS.id,address,orderNo,contactPerson,phone,actualPrice,soldTime,agencyFee,
+ express.id ,expressNo,
  fee,sendTime,SoldBaobei.id,baobeiId,quantity,color,
  spec,name,purchasePrice,salePrice </sql>
 
@@ -45,6 +45,9 @@
         <trim prefix="WHERE" prefixOverrides="AND|OR">
             <if test="name != null and name != ''">
                 SOLDBAOBEI.name like CONCAT(CONCAT('%', #{name}),'%')
+            </if>
+            <if test="isSent">
+                and EXPRESS.id is not null
             </if>
             <if test="fromDate != null">
                 and ORDERS.soldTime &gt;= #{fromDate}

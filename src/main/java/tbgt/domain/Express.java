@@ -31,7 +31,7 @@ public class Express {
     }
 
     public BigDecimal getFee() {
-        return fee;
+        return fee==null?BigDecimal.ZERO:fee;
     }
 
     public void setFee(BigDecimal fee) {
