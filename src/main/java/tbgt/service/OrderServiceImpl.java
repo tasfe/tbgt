@@ -1,7 +1,10 @@
 package tbgt.service;
 
+import org.springframework.transaction.annotation.Transactional;
+import tbgt.domain.Express;
 import tbgt.domain.Order;
 import tbgt.domain.SoldBaobei;
+import tbgt.persistence.ExpressMapper;
 import tbgt.persistence.OrderMapper;
 import tbgt.persistence.SoldBaobeiMapper;
 
@@ -10,7 +13,19 @@ import java.util.List;
 public class OrderServiceImpl implements OrderService {
     private OrderMapper orderMapper;
     private SoldBaobeiMapper soldBaobeiMapper;
+    private ExpressMapper expressMapper;
 
+    public void setOrderMapper(OrderMapper orderMapper) {
+        this.orderMapper = orderMapper;
+    }
+
+    public void setSoldBaobeiMapper(SoldBaobeiMapper soldBaobeiMapper) {
+        this.soldBaobeiMapper = soldBaobeiMapper;
+    }
+
+    public void setExpressMapper(ExpressMapper expressMapper) {
+        this.expressMapper = expressMapper;
+    }
 
     public List<Order> getAllOrders() {
         return orderMapper.getAllOrder();
@@ -37,19 +52,24 @@ public class OrderServiceImpl implements OrderService {
         orderMapper.updateOrder(order);
     }
 
-    public OrderMapper getOrderMapper() {
-        return orderMapper;
+    public Express getExpressByOrderId(int orderId){
+        return expressMapper.getExpressByOrderId(orderId);
     }
 
-    public void setOrderMapper(OrderMapper orderMapper) {
-        this.orderMapper = orderMapper;
+    @Override
+    @Transactional
+    public void insertExpress(Express express) {
+        expressMapper.insertExpress(express);
     }
 
-    public SoldBaobeiMapper getSoldBaobeiMapper() {
-        return soldBaobeiMapper;
+    @Override
+    @Transactional
+    public void updateExpress(Express express) {
+        expressMapper.updateExpress(express);
     }
 
-    public void setSoldBaobeiMapper(SoldBaobeiMapper soldBaobeiMapper) {
-        this.soldBaobeiMapper = soldBaobeiMapper;
+    @Override
+    public void deleteExpress(int id) {
+        expressMapper.deleteExpress(id);
     }
 }

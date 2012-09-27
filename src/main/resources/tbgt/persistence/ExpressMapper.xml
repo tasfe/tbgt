@@ -4,7 +4,25 @@
 
 <mapper namespace="tbgt.persistence.ExpressMapper">
 
-    <select id="getExpressByOrderNo" resultType="Express" parameterType="int">
+    <select id="getExpressByOrderId" resultType="Express" parameterType="int">
       SELECT * FROM express WHERE orderid=#{id}
     </select>
+
+    <insert id="insertExpress" parameterType="Express">
+		INSERT INTO express (orderId,expressNo,fee,sendTime)
+    	VALUE (#{orderId},#{expressNo},#{fee},#{sendTime})
+	</insert>
+
+	<update id="updateExpress" parameterType="Price">
+  		UPDATE express
+  		SET
+			fee = #{fee},
+			expressNo = #{expressNo},
+			sendTime = #{sendTime}
+  		where id = #{id}
+	</update>
+
+	<delete id="deleteExpress" parameterType="int">
+    	DELETE FROM express WHERE id = #{id}
+    </delete>
 </mapper>
