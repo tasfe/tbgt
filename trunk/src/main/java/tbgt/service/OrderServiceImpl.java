@@ -36,7 +36,16 @@ public class OrderServiceImpl implements OrderService {
         return orderMapper.getAllOrder();
     }
 
+    @Transactional
     public void deleteOrder(int id) {
+        Order order = getOrderById(id);
+        List<SoldBaobei> soldBaobeis = order.getSoldBaobeis();
+        for (SoldBaobei soldBaobei : soldBaobeis) {
+            soldBaobeiMapper.deleteSoldBaobei(soldBaobei.getId());
+        }
+        Express express = order.getExpress();
+        expressMapper.deleteExpress(express.getId());
+
         orderMapper.deleteOrder(id);
     }
 
