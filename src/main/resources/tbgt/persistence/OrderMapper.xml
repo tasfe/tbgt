@@ -68,7 +68,7 @@
         </trim>
     </select>
 
-    <insert id="saveOrder" parameterType="order">
+    <insert id="saveOrder" parameterType="Order">
 		INSERT INTO orders (address,orderNo,contactPerson,phone,actualPrice,soldTime)
     	VALUE (#{address},#{orderNo},#{contactPerson},#{phone},#{actualPrice},#{soldTime})
         <selectKey keyProperty="id" resultType="int" order="AFTER">
@@ -76,4 +76,16 @@
         </selectKey>
 
 	</insert>
+
+    <update id="updateOrder" parameterType="Order">
+  		UPDATE orders
+  		SET
+  			address = #{address},
+			orderNo = #{orderNo},
+			contactPerson = #{contactPerson},
+			phone = #{phone},
+			actualPrice = #{actualPrice},
+			soldTime = #{soldTime}
+  		where id = #{id}
+	</update>
 </mapper>

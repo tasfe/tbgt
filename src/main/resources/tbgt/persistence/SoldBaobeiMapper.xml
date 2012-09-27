@@ -16,4 +16,21 @@
         </selectKey>
 	</insert>
 
+    <delete id="deleteSoldBaobei" parameterType="int">
+    	DELETE FROM soldbaobei WHERE id = #{id}
+    </delete>
+
+    <update id="updateSoldBaobei" parameterType="soldBaobei">
+  		UPDATE soldbaobei
+  		SET
+  			orderId = #{orderId},
+			baobeiId = #{baobeiId},
+			quantity = #{quantity},
+			color = #{color},
+			spec = #{spec},
+			name = #{name},
+			purchasePrice = #{purchasePrice},
+			salePrice = #{salePrice}
+  		where id = #{id}
+	</update>
 </mapper>

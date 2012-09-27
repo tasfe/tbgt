@@ -54,27 +54,30 @@
 								<th width="150px"><a href="#">成交时间</a></th>
                                 <th width="100px"><a href="#">快递单号</a></th>
                                 <th width="100px"><a href="#">快递费用</a></th>
-                                <th width="100px"></th>
+                                <th width="100px">操作</th>
                             </tr>
 						</thead>
-						<tbody>
-							<tr>
-                            	<td class="a-center"><a href="#">232</a></td>
-                            	<td>
-                                   收货地址 ：黄伟 ，13913149392 ，0512-62886969-7032 ，江苏省 苏州市 园区 苏州工业园区星湖街328号科技园五期B11栋 ，8楼801室 ，215021
-                                   <a href="#">订单详情</a>
-                                </td>
-								<td>2012-09-08 09:09:19</td>
-                                <td class="a-right">1234567890099887</td>
-                                <td class="a-right">5.00</td>
-                                <td>
+						<%--<tbody>--%>
+							<%--<tr>--%>
+                            	<%--<td class="a-center"><a href="#">232</a></td>--%>
+                            	<%--<td>--%>
+                                   <%--收货地址 ：黄伟 ，13913149392 ，0512-62886969-7032 ，江苏省 苏州市 园区 苏州工业园区星湖街328号科技园五期B11栋 ，8楼801室 ，215021--%>
+                                   <%--<a href="#">订单详情</a>--%>
+                                <%--</td>--%>
+								<%--<td>2012-09-08 09:09:19</td>--%>
+                                <%--<td class="a-right">1234567890099887</td>--%>
+                                <%--<td class="a-right">5.00</td>--%>
+                                <%--<td>--%>
                                     <a href="#" onclick="express('1');return false"><img src="/tbgt/images/icons/express.png" width="16" height="16" alt="快递"/></a>
                                     <a href="#"><img src="/tbgt/images/icons/edit.png" width="16" height="16" alt="修改宝贝"/></a>
                                     <a href="#"><img src="/tbgt/images/icons/delete.png" width="16" height="16" alt="删除宝贝"/></a>
-                                 </td>
-                            </tr>
+                                 <%--</td>--%>
+                            <%--</tr>--%>
 
-						</tbody>
+						<%--</tbody>--%>
+                        <tbody>
+                          <td colspan="9" class="dataTables_empty">加载数据.....</td>
+                        </tbody>
 					</table>
 
                 </div>
@@ -113,4 +116,116 @@
         //prevent the browser to follow the link
         return false;
     }
+
+    function updateOrder(action,orderNo) {
+        var dialog = $('<div style="display:none"></div>').appendTo('body');
+        // load remote content
+        var url = "/tbgt/order/"+action+".html";
+        if(orderNo){
+            url= url+"?id="+orderNo;
+        }
+        dialog.load(
+                url,
+                function (responseText, textStatus, XMLHttpRequest) {
+                    dialog.dialog({
+                        title: "订单详情",
+                        modal: true,
+                        width: 800,
+                        height: 600,
+                        close: function(event, ui) {
+                            dialog.remove();
+                        }
+                    });
+                }
+        );
+        //prevent the browser to follow the link
+        return false;
+    }
+
+    function deleteOrder(orderNo){
+        if(confirm("确认要删除该订单吗?")){
+            var form = $("<form></form>");
+            form.attr('action', "/tbgt/order/deleteOrder.html?id=" + orderNo);
+            form.attr('method', 'post');
+            form.appendTo("body");
+            form.css('display', 'none');
+            form.submit()
+        }
+    }
+
+    var tdata1;
+    var gaiSelected = [];
+    $(document).ready(function() {
+        tdata1 = $('#tdata1').dataTable({
+            "sPaginationType": "full_numbers",
+            "bJQueryUI": true,
+            'iDisplayLength': 10,
+            "aLengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+            "bStateSave": true,
+            "oLanguage": {
+                "sProcessing": "系统处理中",
+                "sLoadingRecords": "请等待，数据载入中.....",
+                "sLengthMenu": "每页显示 _MENU_ 记录",
+                "sInfo": "第 _START_ 到 _END_ 页, 总共 _TOTAL_ 条记录",
+                "sInfoFiltered": "(从 _MAX_ 条记录中过滤)",
+                "sSearch": "搜索名称或者标题 " ,
+                "sZeroRecords": "没有宝贝",
+                "sInfoEmpty": "没有宝贝",
+                "oPaginate": {
+                    "sFirst": "第一页",
+                    "sLast": "最后一页",
+                    "sNext": "下一页",
+                    "sPrevious": "上一页"
+                }
+            },
+            "bProcessing": true,
+            "bServerSide": true,
+            "sAjaxSource": "/tbgt/order/list.html",
+            "aoColumns": [
+                { "mData": "orderNo" },
+                { "mData": "address" },
+                { "mData": "soldTime" },
+                { "mData": "express.expressNo" },
+                { "mData": "express.fee" },
+                { "mData": null }
+            ],
+            "aoColumnDefs": [
+                { "bSortable" :true, "aTargets": [ 0 ],"sWidth": "70px"},
+                { "bSortable" :true, "aTargets": [ 1 ],  "sWidth": "150px","sClass":"nowrap"},
+                { "bSortable" :true, "aTargets": [ 2 ],  "sWidth": "260px"},
+                { "bSortable": false, "aTargets": [ 3 ],  "sWidth": "80px" },
+                { "bSortable": true, "aTargets": [ 4 ],  "sWidth": "120px" },
+                { "bSortable": false, "aTargets": [ 5 ],  "sWidth": "80px" }
+            ],
+            "fnRowCallback": function(nRow, aData, iDisplayIndex) {
+                    $('td:eq(5)', nRow).html('<a href="#" onclick="express(\''+aData.id+'\');return false"><img src="/tbgt/images/icons/express.png" width="16" height="16" alt="快递"/></a><a href="#" onclick="updateOrder(\'updateOrder\',\''+aData.id+'\');return false"><img src="/tbgt/images/icons/edit.jpg" width="16" height="16" alt="修改订单"/></a> <a href="#" onclick="deleteOrder(\''+aData.id+'\');return false"><img src="/tbgt/images/icons/delete.png" width="16" height="16" alt="删除订单"/></a>');
+                if (jQuery.inArray(aData.id, gaiSelected) !== -1) {
+                    $(nRow).addClass('row_selected');
+                }
+            }
+
+        });
+
+        /* Click event handler */
+        $('#tdata1 tbody tr').live('click', function () {
+            var aData = tdata1.fnGetData(this);
+            var id = aData.id;
+
+            if (jQuery.inArray(id, gaiSelected) == -1) {
+                gaiSelected[gaiSelected.length++] = id;
+            }
+            else {
+                gaiSelected = jQuery.grep(gaiSelected, function(value) {
+                    return value != id;
+                });
+            }
+//            console.log(gaiSelected);
+            $(this).toggleClass('row_selected');
+        });
+
+
+        $("#tdata1 tbody tr").live('dblclick', function () {
+            saveBaobei('updateOrder',tdata1.fnGetData(this).id);
+        });
+    });
 </script>

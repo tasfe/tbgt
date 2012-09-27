@@ -8,10 +8,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import tbgt.domain.*;
 import tbgt.service.BaoBeiService;
 import tbgt.service.OrderService;
+import tbgt.web.criteria.OrderCriteria;
+import tbgt.web.paging.PaginationTO;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -37,7 +40,14 @@ public class OrderController {
     @RequestMapping(value = "/view", method = RequestMethod.GET)
     public ModelAndView viewOrder() {
         ModelAndView mv = new ModelAndView("order");
-        mv.addObject("order", new Order());
+        return mv;
+    }
+
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    public ModelAndView list() {
+        ModelAndView mv = new ModelAndView("order");
+        OrderCriteria orderCriteria = null;
+        mv.addObject("orders", orderService.getOrders(orderCriteria));
         return mv;
     }
 
@@ -66,18 +76,15 @@ public class OrderController {
     @RequestMapping(value = "/updateOrder", method = RequestMethod.GET)
     public ModelAndView updateOrder(@RequestParam String id) {
         ModelAndView mv = new ModelAndView("orderDetail");
-
-        mv.addObject("order", new Order());
+        mv.addObject("order", orderService.getOrderById(Integer.parseInt(id)));
         return mv;
     }
 
     @RequestMapping(value = "/deleteOrder", method = RequestMethod.POST)
     public ModelAndView deleteOrder(@RequestParam String id) {
         ModelAndView mv = new ModelAndView("order");
-        System.out.println("delete order = " + id);
-        List<Order> orders = new ArrayList<Order>();
-
-        mv.addObject("orders", orders);
+        orderService.deleteOrder(Integer.parseInt(id));
+        mv.addObject("orders", orderService.getAllOrders());
         return mv;
     }
 
