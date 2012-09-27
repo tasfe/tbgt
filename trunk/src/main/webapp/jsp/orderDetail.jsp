@@ -28,12 +28,12 @@
                 <label for="address">地址 </label>
                 <form:input path="address" id="address"/>
                 <br/>
-                <label for="contactPerson">收货人 </label>
-                <form:input path="contactPerson" id="contactPerson"/>
-                <br/>
-                <label for="phone">联系方式 </label>
-                <form:input path="phone" id="phone"/>
-                <br/>
+                <%--<label for="contactPerson">收货人 </label>--%>
+                <%--<form:input path="contactPerson" id="contactPerson"/>--%>
+                <%--<br/>--%>
+                <%--<label for="phone">联系方式 </label>--%>
+                <%--<form:input path="phone" id="phone"/>--%>
+                <%--<br/>--%>
 
                 <label for="actualPrice">卖出价格 </label>
                 <form:input path="actualPrice" id="actualPrice"/>

@@ -9,10 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import tbgt.domain.Baobei;
-import tbgt.domain.Order;
-import tbgt.domain.Price;
-import tbgt.domain.SoldBaobei;
+import tbgt.domain.*;
 import tbgt.service.BaoBeiService;
 import tbgt.service.OrderService;
 
@@ -94,6 +91,30 @@ public class OrderController {
                 orderService.saveOrder(order);
             } else {
                 orderService.updateOrder(order);
+            }
+        }
+        mv.addObject("orders", orderService.getAllOrders());
+        return mv;
+    }
+
+    @RequestMapping(value = "/express", method = RequestMethod.GET)
+    public ModelAndView express(@RequestParam int orderId) {
+        ModelAndView mv = new ModelAndView("express");
+        Express express = new Express();
+        express.setOrderId(orderId);
+        mv.addObject("express", express);
+        return mv;
+    }
+
+    @RequestMapping(value = "/saveExpress", method = RequestMethod.POST)
+    public ModelAndView saveExpress(@ModelAttribute(value = "express") Express express, BindingResult result) {
+        ModelAndView mv = new ModelAndView("order");
+        //todo..validator
+        if (!result.hasErrors()) {
+            if (express.getId() == 0) {
+//                orderService.saveOrder(order);
+            } else {
+//                orderService.updateOrder(order);
             }
         }
         mv.addObject("orders", orderService.getAllOrders());

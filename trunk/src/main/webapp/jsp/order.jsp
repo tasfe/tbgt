@@ -13,6 +13,12 @@
 <!--[if IE]>
 <link rel="stylesheet" type="text/css" href="/tbgt/css/ie-sucks.css" />
 <![endif]-->
+<link rel="stylesheet" type="text/css" href="/tbgt/css/custom/jquery-ui-1.8.23.custom.css"/>
+<link rel="stylesheet" href="/tbgt/css/jquery.dataTables.css" type="text/css" media="screen, projection">
+<link rel="stylesheet" href="/tbgt/css/datatable_jui.css" type="text/css" media="screen, projection">
+<script type="text/javascript" src="/tbgt/js/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="/tbgt/js/jquery-ui-1.8.23.custom.min.js"></script>
+<script type="text/javascript" src="/tbgt/js/jquery.dataTables.min.js"></script>
 </head>
 
 <body>
@@ -31,9 +37,8 @@
         <div id="top-panel">
             <div id="panel">
                 <ul>
-                    <li><a href="#" class="edit">修改订单</a></li>
-            		<li><a href="#" class="delete">删除订单</a></li>
-                    <li><a href="#" class="express">快递</a></li>
+            		<%--<li><a href="#" class="delete">删除订单</a></li>--%>
+                    <li><a href="#" class="express">批量快递</a></li>
                 </ul>
             </div>
       </div>
@@ -63,7 +68,7 @@
                                 <td class="a-right">1234567890099887</td>
                                 <td class="a-right">5.00</td>
                                 <td>
-                                    <a href="#"><img src="/tbgt/images/icons/express.png" width="16" height="16" alt="快递"/></a>
+                                    <a href="#" onclick="express('1');return false"><img src="/tbgt/images/icons/express.png" width="16" height="16" alt="快递"/></a>
                                     <a href="#"><img src="/tbgt/images/icons/edit.png" width="16" height="16" alt="修改宝贝"/></a>
                                     <a href="#"><img src="/tbgt/images/icons/delete.png" width="16" height="16" alt="删除宝贝"/></a>
                                  </td>
@@ -79,9 +84,33 @@
       </div>
         <div id="footer">
            <div id="credits">
-   		        版权所有2012
+   		        版权所有 © 2012-2014, 易家生活坊, All Rights Reserved.
            </div>
         </div>
 </div>
 </body>
 </html>
+
+<script type="text/javascript">
+    function express(orderId) {
+        var dialog = $('<div style="display:none"></div>').appendTo('body');
+        // load remote content
+        var url = "/tbgt/order/express.html?orderId="+orderId;
+        dialog.load(
+                url,
+                function (responseText, textStatus, XMLHttpRequest) {
+                    dialog.dialog({
+                        title: "快递详情",
+                        modal: true,
+                        width: 800,
+                        height: 600,
+                        close: function(event, ui) {
+                            dialog.remove();
+                        }
+                    });
+                }
+        );
+        //prevent the browser to follow the link
+        return false;
+    }
+</script>

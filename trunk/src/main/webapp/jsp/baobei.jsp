@@ -73,7 +73,7 @@
     </div>
     <div id="footer">
         <div id="credits">
-            版权所有2012
+            版权所有 © 2012-2014, 易家生活坊, All Rights Reserved.
         </div>
     </div>
 </div>
@@ -107,8 +107,6 @@
     }
 
     function batchOrderBaobei(){
-        var dialog = $('<div style="display:none"></div>').appendTo('body');
-        // load remote content
         var  baobeiIds;
         for(var index in gaiSelected){
             if(baobeiIds && baobeiIds!=null){
@@ -121,23 +119,7 @@
             alert("没有宝贝被选择");
             return false;
         }
-        var url = "/tbgt/order/addOrder.html?baobeiIdsStr="+baobeiIds;
-        dialog.load(
-                url,
-                function (responseText, textStatus, XMLHttpRequest) {
-                    dialog.dialog({
-                        title: "添加订单",
-                        modal: true,
-                        width: 800,
-                        height: 600,
-                        close: function(event, ui) {
-                            dialog.remove();
-                        }
-                    });
-                }
-        );
-        //prevent the browser to follow the link
-        return false;
+        return orderBaobei(baobeiIds);
     }
 
 

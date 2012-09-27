@@ -20,7 +20,6 @@ public class Order {
     private BigDecimal actualPrice;
     @DateTimeFormat(pattern = DateUtil.DATE_FORMAT)
     private Date soldTime;
-    private Date deliverTime;
 
     public int getId() {
         return id;
@@ -90,13 +89,6 @@ public class Order {
         return soldBaobeis;
     }
 
-    public Date getDeliverTime() {
-        return deliverTime;
-    }
-
-    public void setDeliverTime(Date deliverTime) {
-        this.deliverTime = deliverTime;
-    }
 
     public void setSoldBaobeis(List<SoldBaobei> soldBaobeis) {
         this.soldBaobeis = soldBaobeis;

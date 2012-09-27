@@ -1,24 +1,21 @@
 package tbgt.web.controller;
 
 
+import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import tbgt.domain.Baobei;
-import tbgt.domain.Order;
-import tbgt.domain.SoldBaobei;
-import tbgt.service.BaoBeiService;
+import tbgt.common.CustomJsonDateSerializer;
 import tbgt.service.StatService;
+import tbgt.util.DateUtil;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Random;
+import java.io.Serializable;
+import java.util.*;
 
 @Controller
 @RequestMapping(value = "/stat")
@@ -35,20 +32,53 @@ public class StatController {
 
     @RequestMapping(value = "/profit", method = RequestMethod.GET)
     public ModelAndView viewDefaultProfit() {
-
-        return profit(new Date(),new Date());
+        Criteria criteria = new Criteria();
+        criteria.setFromDate(new Date());
+        criteria.setToDate(new Date());
+        return profit(criteria);
     }
 
     @RequestMapping(value = "/profit", method = RequestMethod.POST)
-    public ModelAndView viewProfit(@RequestParam Date fromDate,@RequestParam Date toDate) {
-        return profit(fromDate,toDate);
+    public ModelAndView viewProfit(@ModelAttribute (value = "criteria") Criteria criteria, BindingResult result) {
+        return profit(criteria);
     }
 
-    public ModelAndView profit(Date fromDate, Date toDate) {
+    public ModelAndView profit(Criteria criteria) {
         ModelAndView mv = new ModelAndView("stat");
-        mv.addObject("fromDate",fromDate);
-        mv.addObject("toDate",toDate);
+        mv.addObject("criteria",criteria);
         return mv;
+    }
+
+    class Criteria{
+        @DateTimeFormat(pattern = DateUtil.DATE_FORMAT)
+        private Date fromDate;
+        @DateTimeFormat(pattern = DateUtil.DATE_FORMAT)
+        private Date toDate;
+        private String name;
+
+        public Date getFromDate() {
+            return fromDate;
+        }
+
+        public void setFromDate(Date fromDate) {
+            this.fromDate = fromDate;
+        }
+
+        public Date getToDate() {
+            return toDate;
+        }
+
+        public void setToDate(Date toDate) {
+            this.toDate = toDate;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
     }
 
 

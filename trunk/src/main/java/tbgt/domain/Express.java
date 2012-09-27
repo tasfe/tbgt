@@ -6,6 +6,7 @@ import java.util.Date;
 public class Express {
     private int id;
     private int orderId;
+    private String expressNo;
     private BigDecimal fee;
     private Date sendTime;
 
@@ -40,5 +41,13 @@ public class Express {
 
     public void setSendTime(Date sendTime) {
         this.sendTime = sendTime;
+    }
+
+    public String getExpressNo() {
+        return expressNo;
+    }
+
+    public void setExpressNo(String expressNo) {
+        this.expressNo = expressNo;
     }
 }
