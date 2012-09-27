@@ -50,7 +50,7 @@ public class StatController {
     public ModelAndView profit(OrderCriteria orderCriteria) {
         ModelAndView mv = new ModelAndView("stat");
         mv.addObject("criteria", orderCriteria);
-        orderCriteria.setExpressInd("N");
+        orderCriteria.setExpressInd("Y");
         List<Order> orders = orderService.getOrders(orderCriteria);
         Map<String, BigDecimal> summary = getSummary(orders);
         mv.addObject("summary", summary);
