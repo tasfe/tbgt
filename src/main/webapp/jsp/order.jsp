@@ -34,17 +34,16 @@
               </ul>
       </div>
       </div>
-        <%--<div id="top-panel">--%>
-            <%--<div id="panel">--%>
-                <%--<ul>--%>
-            		<%--&lt;%&ndash;<li><a href="#" class="delete">删除订单</a></li>&ndash;%&gt;--%>
-                    <%--&lt;%&ndash;<li><a href="#" class="express">批量快递</a></li>&ndash;%&gt;--%>
-                <%--</ul>--%>
-            <%--</div>--%>
-      <%--</div>--%>
+        <div id="top-panel">
+            <div id="panel">
+                <ul>
+            		<li><a href="#" class="delete">未发货</a></li>
+                    <li><a href="#" class="express">已发货</a></li>
+                </ul>
+            </div>
+      </div>
         <div id="wrapper">
             <div id="content">
-                <div id="box">
                     <h3>订单列表（未发货）</h3>
                 	<table id="tdata1" class="display" cellspacing="0" cellpadding="0" border="0" width="100%">
                         <thead>
@@ -58,24 +57,7 @@
                                 <th width="100px">操作</th>
                             </tr>
 						</thead>
-						<%--<tbody>--%>
-							<%--<tr>--%>
-                            	<%--<td class="a-center"><a href="#">232</a></td>--%>
-                            	<%--<td>--%>
-                                   <%--收货地址 ：黄伟 ，13913149392 ，0512-62886969-7032 ，江苏省 苏州市 园区 苏州工业园区星湖街328号科技园五期B11栋 ，8楼801室 ，215021--%>
-                                   <%--<a href="#">订单详情</a>--%>
-                                <%--</td>--%>
-								<%--<td>2012-09-08 09:09:19</td>--%>
-                                <%--<td class="a-right">1234567890099887</td>--%>
-                                <%--<td class="a-right">5.00</td>--%>
-                                <%--<td>--%>
-                                    <%--<a href="#" onclick="express('6');return false"><img src="/tbgt/images/icons/express.png" width="16" height="16" alt="快递"/></a>--%>
-                                    <%--<a href="#"><img src="/tbgt/images/icons/edit.png" width="16" height="16" alt="修改宝贝"/></a>--%>
-                                    <%--<a href="#"><img src="/tbgt/images/icons/delete.png" width="16" height="16" alt="删除宝贝"/></a>--%>
-                                 <%--</td>--%>
-                            <%--</tr>--%>
-
-						<%--</tbody>--%>
+						
                         <tbody>
                           <td colspan="9" class="dataTables_empty">加载数据.....</td>
                         </tbody>
