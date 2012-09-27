@@ -34,11 +34,8 @@ public class BaoBeiServiceImpl implements BaoBeiService {
     public PaginationTO getBaobeiWithPaging(){
         Map<String, String> paraMap = new HashMap<String, String>();
         paraMap.put("sSearch", PagingContextHolder.get().getsSearch());
-        System.out.println("$$$$$$$$$ sSearch is null "  + (PagingContextHolder.get().getsSearch() == null));
         paraMap.put("sSortColumn_0", PagingContextHolder.get().getsSortColumn_0());
-        System.out.println("$$$$$$$$$$$$sSortColumn_0" + PagingContextHolder.get().getsSortColumn_0());
         paraMap.put("sSortDir_0", PagingContextHolder.get().getsSortDir_0());
-        System.out.println("$$$$$$$$$$$$sSortColumn_0" + PagingContextHolder.get().getsSortDir_0());
         List<Baobei> baobeis = baobeiMapper.getBaobeiWithPaging(paraMap);
         return  PagingEnabler.enablePaging(baobeis);
     }

@@ -7,8 +7,13 @@ import tbgt.domain.SoldBaobei;
 import tbgt.persistence.ExpressMapper;
 import tbgt.persistence.OrderMapper;
 import tbgt.persistence.SoldBaobeiMapper;
+import tbgt.web.criteria.OrderCriteria;
+import tbgt.web.paging.PaginationTO;
+import tbgt.web.paging.PagingContextHolder;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class OrderServiceImpl implements OrderService {
     private OrderMapper orderMapper;
@@ -37,6 +42,21 @@ public class OrderServiceImpl implements OrderService {
 
     public Order getOrderById(int id) {
         return orderMapper.getOrderById(id);
+    }
+
+    public List<Order> getOrders(OrderCriteria orderCriteria) {
+        Map<String, Object> paraMap = new HashMap<String, Object>();
+        PaginationTO paginationTO = PagingContextHolder.get();
+        if (paginationTO != null) {
+            paraMap.put("sSortColumn_0", paginationTO.getsSortColumn_0());
+            paraMap.put("sSortDir_0", paginationTO.getsSortDir_0());
+        }
+        if(orderCriteria!=null){
+          paraMap.put("fromDate",orderCriteria.getFromDate());
+          paraMap.put("toDate",orderCriteria.getToDate());
+          paraMap.put("name",orderCriteria.getName());
+        }
+        return orderMapper.getOrders(paraMap);
     }
 
     public void saveOrder(Order order) {

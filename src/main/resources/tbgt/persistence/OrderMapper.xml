@@ -3,23 +3,61 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="tbgt.persistence.OrderMapper">
-    <!--<resultMap id="result" type="Order">-->
-        <!--<id property="id" column="id"/>-->
-        <!--<result property="address" column="address"/>-->
-        <!--<result property="orderNo" column="orderNo"/>-->
-        <!--<result property="contactPerson" column="contactPerson"/>-->
-        <!--<result property="phone" column="phone"/>-->
-        <!--<result property="actualPrice" column="actualPrice"/>-->
-        <!--<result property="soldTime" column="soldTime"/>-->
-        <!--<result property="deliverTime" column="deliverTime"/>-->
-        <!--<collection property="soldBaobeis" column="id" javaType="SoldBaobei"-->
-                     <!--select="tbgt.persistence.SoldBaobeiMapper.getSoldBaobeiByOrderNo"/>-->
-        <!--<association property="express" column="id" javaType="Express"-->
-                     <!--select="tbgt.persistence.ExpressMapper.getExpressByOrderNo"/>-->
-    <!--</resultMap>-->
 
-    <select id="getAllOrder" resultType="Order">
-      SELECT * FROM orders
+    <resultMap id="result" type="Order">
+        <id property="id" column="id"/>
+        <result property="address" column="address"/>
+        <result property="orderNo" column="orderNo"/>
+        <result property="contactPerson" column="contactPerson"/>
+        <result property="phone" column="phone"/>
+        <result property="actualPrice" column="actualPrice"/>
+        <result property="soldTime" column="soldTime"/>
+        <result property="deliverTime" column="deliverTime"/>
+        <association property="express" column="id" javaType="Express">
+            <id property="id" column="express.id"/>
+            <result property="orderId" column="id"/>
+            <result property="expressNo" column="expressNo"/>
+            <result property="fee" column="fee"/>
+            <result property="sendTime" column="sendTime"/>
+        </association>
+        <collection property="soldBaobeis" column="id" javaType="java.util.ArrayList" ofType="SoldBaobei">
+            <id property="id" column="SoldBaobei.id"/>
+            <result property="orderId" column="id"/>
+            <result property="baobeiId" column="baobeiId"/>
+            <result property="quantity" column="quantity"/>
+            <result property="color" column="color"/>
+            <result property="spec" column="spec"/>
+            <result property="name" column="name"/>
+            <result property="purchasePrice" column="purchasePrice"/>
+            <result property="salePrice" column="salePrice"/>
+        </collection>
+    </resultMap>
+
+    <sql id="orderColumns"> ORDERS.id,address,orderNo,contactPerson,phone,actualPrice,soldTime,
+ deliverTime,express.id ,expressNo,
+ fee,sendTime,SoldBaobei.id,baobeiId,quantity,color,
+ spec,name,purchasePrice,salePrice </sql>
+
+    <select id="getOrders" parameterType="java.util.Map" resultMap="result">
+      SELECT <include refid="orderColumns"/> FROM ORDERS
+        LEFT JOIN EXPRESS ON ORDERS.ID = EXPRESS.ORDERID
+        LEFT JOIN SOLDBAOBEI ON ORDERS.ID = SOLDBAOBEI.ORDERID
+        <trim prefix="WHERE" prefixOverrides="AND|OR">
+            <if test="name != null and name != ''">
+                SOLDBAOBEI.name like CONCAT(CONCAT('%', #{name}),'%')
+            </if>
+            <if test="fromDate != null">
+                and ORDERS.soldTime &gt;= #{fromDate}
+            </if>
+            <if test="toDate != null">
+                and ORDERS.soldTime &lt;= #{toDate}
+            </if>
+        </trim>
+        <trim prefix="ORDER BY">
+            <if test="sSortColumn_0 != null and sSortColumn_0 != ''">
+                ${sSortColumn_0} ${sSortDir_0}
+            </if>
+        </trim>
     </select>
 
     <insert id="saveOrder" parameterType="order">
