@@ -7,7 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="pragma" content="no-cache" />
-<title>易家生活坊宝贝跟踪 宝贝管理</title>
+<title>易家生活坊宝贝跟踪 订单管理</title>
 <link rel="stylesheet" type="text/css" href="/tbgt/css/theme.css" />
 <link rel="stylesheet" type="text/css" href="/tbgt/css/style.css" />
 <!--[if IE]>
@@ -21,9 +21,9 @@
         	<h2>易家生活坊宝贝跟踪</h2>
      <div id="topmenu">
             	<ul>
-                    <li class="current"><a href="/tbgt/baobei/order.html">订单管理</a></li>
+                    <li class="current"><a href="/tbgt/order/view.html">订单管理</a></li>
                 	<li ><a href="/tbgt/baobei/view.html">宝贝管理</a></li>
-                    <li><a href="#">统计</a></li>
+                    <li><a href="/tbgt/stat/profit.html">统计</a></li>
                     <li><a href="#">设置</a></li>
               </ul>
       </div>
@@ -40,9 +40,9 @@
         <div id="wrapper">
             <div id="content">
                 <div id="box">
-                	<h3>订单列表</h3>
+                    <h3>订单列表</h3>
                 	<table width="100%">
-						<thead>
+                        <thead>
 							<tr>
                             	<th width="70px"><a href="#">订单号<img src="/tbgt/images/icons/arrow_down_mini.gif" width="16" height="16" align="middle" /></a></th>
                             	<th><a href="#">订单详情</a></th>

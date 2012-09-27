@@ -381,6 +381,8 @@ form#form #button1:hover, form#form #button2:hover {
 .modules_manage{background:transparent url(../images/icons/bricks_gear.png) no-repeat left;}
 .order{background:transparent url(../images/icons/order.jpg) no-repeat left;}
 .express{background:transparent url(../images/icons/express.png) no-repeat left;}
+.profit{background:transparent url(../images/icons/profit.png) no-repeat left;}
+.volume{background:transparent url(../images/icons/volume.png) no-repeat left;}
 
 /*********************
 	Dialog
@@ -392,4 +394,19 @@ form#form #button1:hover, form#form #button2:hover {
 	padding:10px;
     min-height: 500px;
     background:#FFF;
+}
+
+.nowarp{
+    white-space: nowrap;
+}
+
+.f_name{
+    background: #F3F9FF;
+}
+
+.button {
+padding: 3px;
+margin-bottom: 5px;
+border: 1px solid #D9E6F0;
+background: white url(../images/form_blue.gif) repeat-x top left;
 }

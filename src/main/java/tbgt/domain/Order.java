@@ -1,6 +1,7 @@
 package tbgt.domain;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import tbgt.util.DateUtil;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -17,7 +18,7 @@ public class Order {
     private Express express;
     private List<SoldBaobei> soldBaobeis;
     private BigDecimal actualPrice;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = DateUtil.DATE_FORMAT)
     private Date soldTime;
     private Date deliverTime;
 
