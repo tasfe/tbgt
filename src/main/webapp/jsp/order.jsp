@@ -34,26 +34,27 @@
               </ul>
       </div>
       </div>
-        <div id="top-panel">
-            <div id="panel">
-                <ul>
-            		<%--<li><a href="#" class="delete">删除订单</a></li>--%>
-                    <li><a href="#" class="express">批量快递</a></li>
-                </ul>
-            </div>
-      </div>
+        <%--<div id="top-panel">--%>
+            <%--<div id="panel">--%>
+                <%--<ul>--%>
+            		<%--&lt;%&ndash;<li><a href="#" class="delete">删除订单</a></li>&ndash;%&gt;--%>
+                    <%--&lt;%&ndash;<li><a href="#" class="express">批量快递</a></li>&ndash;%&gt;--%>
+                <%--</ul>--%>
+            <%--</div>--%>
+      <%--</div>--%>
         <div id="wrapper">
             <div id="content">
                 <div id="box">
-                    <h3>订单列表</h3>
-                	<table width="100%">
+                    <h3>订单列表（未发货）</h3>
+                	<table id="tdata1" class="display" cellspacing="0" cellpadding="0" border="0" width="100%">
                         <thead>
 							<tr>
-                            	<th width="70px"><a href="#">订单号<img src="/tbgt/images/icons/arrow_down_mini.gif" width="16" height="16" align="middle" /></a></th>
-                            	<th><a href="#">订单详情</a></th>
-								<th width="150px"><a href="#">成交时间</a></th>
-                                <th width="100px"><a href="#">快递单号</a></th>
-                                <th width="100px"><a href="#">快递费用</a></th>
+                            	<th width="70px">序号</th>
+                            	<th width="70px">订单号</th>
+                            	<th>订单详情</th>
+								<th width="150px">成交时间</th>
+                                <th width="100px">快递单号</th>
+                                <th width="100px">快递费用</th>
                                 <th width="100px">操作</th>
                             </tr>
 						</thead>
@@ -68,9 +69,9 @@
                                 <%--<td class="a-right">1234567890099887</td>--%>
                                 <%--<td class="a-right">5.00</td>--%>
                                 <%--<td>--%>
-                                    <a href="#" onclick="express('1');return false"><img src="/tbgt/images/icons/express.png" width="16" height="16" alt="快递"/></a>
-                                    <a href="#"><img src="/tbgt/images/icons/edit.png" width="16" height="16" alt="修改宝贝"/></a>
-                                    <a href="#"><img src="/tbgt/images/icons/delete.png" width="16" height="16" alt="删除宝贝"/></a>
+                                    <%--<a href="#" onclick="express('6');return false"><img src="/tbgt/images/icons/express.png" width="16" height="16" alt="快递"/></a>--%>
+                                    <%--<a href="#"><img src="/tbgt/images/icons/edit.png" width="16" height="16" alt="修改宝贝"/></a>--%>
+                                    <%--<a href="#"><img src="/tbgt/images/icons/delete.png" width="16" height="16" alt="删除宝贝"/></a>--%>
                                  <%--</td>--%>
                             <%--</tr>--%>
 
@@ -162,15 +163,16 @@
             'iDisplayLength': 10,
             "aLengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
             "bStateSave": true,
+            "bSort": false,
             "oLanguage": {
                 "sProcessing": "系统处理中",
                 "sLoadingRecords": "请等待，数据载入中.....",
                 "sLengthMenu": "每页显示 _MENU_ 记录",
                 "sInfo": "第 _START_ 到 _END_ 页, 总共 _TOTAL_ 条记录",
                 "sInfoFiltered": "(从 _MAX_ 条记录中过滤)",
-                "sSearch": "搜索名称或者标题 " ,
+                "sSearch": "搜索名称" ,
                 "sZeroRecords": "没有宝贝",
-                "sInfoEmpty": "没有宝贝",
+                "sInfoEmpty": "",
                 "oPaginate": {
                     "sFirst": "第一页",
                     "sLast": "最后一页",
@@ -182,6 +184,7 @@
             "bServerSide": true,
             "sAjaxSource": "/tbgt/order/list.html",
             "aoColumns": [
+                { "mData": "id" },
                 { "mData": "orderNo" },
                 { "mData": "address" },
                 { "mData": "soldTime" },
@@ -190,15 +193,16 @@
                 { "mData": null }
             ],
             "aoColumnDefs": [
-                { "bSortable" :true, "aTargets": [ 0 ],"sWidth": "70px"},
-                { "bSortable" :true, "aTargets": [ 1 ],  "sWidth": "150px","sClass":"nowrap"},
-                { "bSortable" :true, "aTargets": [ 2 ],  "sWidth": "260px"},
-                { "bSortable": false, "aTargets": [ 3 ],  "sWidth": "80px" },
-                { "bSortable": true, "aTargets": [ 4 ],  "sWidth": "120px" },
-                { "bSortable": false, "aTargets": [ 5 ],  "sWidth": "80px" }
+                { "bVisible" :false, "bSearchable": false, "aTargets": [ 0 ]},
+                { "bSortable" :true, "aTargets": [ 1 ],"sWidth": "70px"},
+                { "bSortable" :false, "aTargets": [ 2 ],  "sClass":"nowrap"},
+                { "bSortable" :true, "aTargets": [ 3 ],  "sWidth": "100px"},
+                { "bSortable": true, "aTargets": [ 4 ],  "sWidth": "80px" },
+                { "bSortable": true, "aTargets": [ 5 ],  "sWidth": "80px" },
+                { "bSortable": false, "aTargets": [ 6 ],  "sWidth": "80px" }
             ],
             "fnRowCallback": function(nRow, aData, iDisplayIndex) {
-                    $('td:eq(5)', nRow).html('<a href="#" onclick="express(\''+aData.id+'\');return false"><img src="/tbgt/images/icons/express.png" width="16" height="16" alt="快递"/></a><a href="#" onclick="updateOrder(\'updateOrder\',\''+aData.id+'\');return false"><img src="/tbgt/images/icons/edit.jpg" width="16" height="16" alt="修改订单"/></a> <a href="#" onclick="deleteOrder(\''+aData.id+'\');return false"><img src="/tbgt/images/icons/delete.png" width="16" height="16" alt="删除订单"/></a>');
+                    $('td:eq(5)', nRow).html('<a href="#" onclick="express(\''+aData.id+'\');return false"><img src="/tbgt/images/icons/express.png" width="16" height="16" alt="快递"/></a><a href="#" onclick="updateOrder(\'updateOrder\',\''+aData.id+'\');return false"><img src="/tbgt/images/icons/edit.png" width="16" height="16" alt="修改订单"/></a> <a href="#" onclick="deleteOrder(\''+aData.id+'\');return false"><img src="/tbgt/images/icons/delete.png" width="16" height="16" alt="删除订单"/></a>');
                 if (jQuery.inArray(aData.id, gaiSelected) !== -1) {
                     $(nRow).addClass('row_selected');
                 }

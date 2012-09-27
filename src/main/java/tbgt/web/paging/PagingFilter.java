@@ -20,15 +20,20 @@ public class PagingFilter implements Filter {
             int iDisplayStart = Integer.valueOf(iDisplayStartStr);
             int iDisplayLength = Integer.valueOf(httpRequest.getParameter("iDisplayLength"));
             int sEcho = Integer.valueOf(httpRequest.getParameter("sEcho"));
-            int iSortCol_0 = Integer.valueOf(httpRequest.getParameter("iSortCol_0"));
+
             PaginationTO paginationTO = new PaginationTO();
             paginationTO.setiDisplayLength(iDisplayLength);
             paginationTO.setiDisplayStart(iDisplayStart);
             paginationTO.setsEcho(sEcho);
             paginationTO.setsSearch(httpRequest.getParameter("sSearch"));
-            paginationTO.setiSortCol_0(iSortCol_0);
-            paginationTO.setsSortDir_0(httpRequest.getParameter("sSortDir_0"));
-            paginationTO.setsSortColumn_0(httpRequest.getParameter("mDataProp_"+iSortCol_0));
+            String iSortCol_01 = httpRequest.getParameter("iSortCol_0");
+            if (iSortCol_01 != null) {
+                int iSortCol_0 = Integer.valueOf(iSortCol_01);
+                paginationTO.setiSortCol_0(iSortCol_0);
+                paginationTO.setsSortDir_0(httpRequest.getParameter("sSortDir_0"));
+                paginationTO.setsSortColumn_0(httpRequest.getParameter("mDataProp_" + iSortCol_0));
+            }
+
             PagingContextHolder.set(paginationTO);
         }
         chain.doFilter(request, response);
