@@ -10,6 +10,7 @@
         <result property="taobaoId" column="taobaoId"/>
         <result property="incomingTime" column="incomingTime"/>
         <result property="saleTitle" column="saleTitle"/>
+        <result property="weight" column="weight"/>
     </resultMap>
 
     <resultMap id="result" extends="resultBaobei" type="Baobei">

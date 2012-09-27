@@ -25,7 +25,7 @@
         	<h2>易家生活坊宝贝跟踪</h2>
      <div id="topmenu">
             	<ul>
-                    <li ><a href="/tbgt/baobei/order.html">订单管理</a></li>
+                    <li ><a href="/tbgt/order/view.html">订单管理</a></li>
                 	<li ><a href="/tbgt/baobei/view.html">宝贝管理</a></li>
                     <li class="current"><a href="/tbgt/stat/profit.html">统计</a></li>
                     <li><a href="#">设置</a></li>
@@ -45,24 +45,24 @@
                 <div id="box">
                 	<h3>利润</h3>
 
-                    <%--<form action="/tbgt/stat/profit.html" id="form">--%>
+                    <form:form action="/tbgt/stat/profit.html" commandName="criteria" id="form">
                         <table width="100%">
                             <tr>
                                 <th class="a-left">
                                     从&nbsp;
-                                    <input name="fromDate" id="fromDate" class="date"/>
+                                    <form:input path="fromDate" id="fromDate" class="date"/>
                                     &nbsp;到&nbsp;
-                                    <input name="toDate" id="toDate" class="date"/>
+                                    <form:input path="toDate" id="toDate" class="date"/>
                                     &nbsp;
                                     宝贝名
-                                    <input name="name" id="name"/>
+                                    <form:input path="name" id="name"/>
                                     &nbsp;
                                     <input id="saveBtn" type="submit" value="搜索" class="button"/>
                                 </th>
                             </tr>
 
                         </table>
-                    <%--</form>--%>
+                    </form:form>
                        <br/>
 
                     <table width="100%">
@@ -127,7 +127,7 @@
       </div>
         <div id="footer">
            <div id="credits">
-   		        版权所有2012
+   		        版权所有 © 2012-2014, 易家生活坊, All Rights Reserved.
            </div>
         </div>
 </div>

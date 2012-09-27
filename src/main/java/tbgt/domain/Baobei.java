@@ -5,6 +5,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import tbgt.common.CustomJsonDateSerializer;
 import tbgt.util.DateUtil;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class Baobei {
@@ -15,6 +16,7 @@ public class Baobei {
     @DateTimeFormat(pattern = DateUtil.DATE_FORMAT)
 	private Date incomingTime;
 	public Price price;
+	public BigDecimal weight;
 
     public int getId() {
         return id;
@@ -67,5 +69,13 @@ public class Baobei {
 
     public void setTaobaoId(String taobaoId) {
         this.taobaoId = taobaoId;
+    }
+
+    public BigDecimal getWeight() {
+        return weight;
+    }
+
+    public void setWeight(BigDecimal weight) {
+        this.weight = weight;
     }
 }
