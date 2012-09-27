@@ -116,7 +116,7 @@
                                 <td class="a-right">${order.actualPrice}</td>
                                 <td class="a-right">${order.purchasePrice}</td>
                                 <td class="a-right">${order.express.fee}</td>
-                                <td class="a-right">${order.profit}</td>
+                                <td class="a-right">${order.agencyFee}</td>
                                 <td class="a-right">${order.profit}</td>
                             </tr>
                         </c:forEach>
