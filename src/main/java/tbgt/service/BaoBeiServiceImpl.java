@@ -41,6 +41,8 @@ public class BaoBeiServiceImpl implements BaoBeiService {
     }
 
     public void deleteBaobei(int id) {
+        Price price = priceMapper.getPrice(id);
+        priceMapper.deletePrice(price.getId());
         baobeiMapper.deleteBaobei(id);
     }
 

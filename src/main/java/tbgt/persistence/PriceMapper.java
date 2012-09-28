@@ -12,4 +12,6 @@ public interface PriceMapper {
 
     public void deletePrice(int id);
 
+    public Price getPrice(int id);
+
 }
