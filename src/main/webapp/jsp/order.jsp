@@ -98,13 +98,10 @@
         return false;
     }
 
-    function updateOrder(action,orderNo) {
+    function updateOrder(action,id) {
         var dialog = $('<div style="display:none"></div>').appendTo('body');
         // load remote content
-        var url = "/tbgt/order/"+action+".html";
-        if(orderNo){
-            url= url+"?id="+orderNo;
-        }
+        var url = "/tbgt/order/"+action+".html?id="+id;
         dialog.load(
                 url,
                 function (responseText, textStatus, XMLHttpRequest) {
@@ -219,7 +216,7 @@
 
 
         $("#tdata1 tbody tr").live('dblclick', function () {
-            saveBaobei('updateOrder',tdata1.fnGetData(this).id);
+            updateOrder('updateOrder',tdata1.fnGetData(this).id);
         });
 
     });

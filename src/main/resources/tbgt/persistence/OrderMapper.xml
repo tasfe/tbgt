@@ -89,4 +89,8 @@
 			agencyFee =#{agencyFee}
   		where id = #{id}
 	</update>
+
+    <select id="getOrderById" resultMap="result" parameterType="int">
+		SELECT * FROM orders where id=#{id};
+	</select>
 </mapper>

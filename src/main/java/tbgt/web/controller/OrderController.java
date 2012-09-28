@@ -77,17 +77,16 @@ public class OrderController {
     }
 
     @RequestMapping(value = "/updateOrder", method = RequestMethod.GET)
-    public ModelAndView updateOrder(@RequestParam String id) {
+    public ModelAndView updateOrder(@RequestParam int id) {
         ModelAndView mv = new ModelAndView("orderDetail");
-        mv.addObject("order", orderService.getOrderById(Integer.parseInt(id)));
+        mv.addObject("order", orderService.getOrderById(id));
         return mv;
     }
 
     @RequestMapping(value = "/deleteOrder", method = RequestMethod.POST)
-    public ModelAndView deleteOrder(@RequestParam String id) {
+    public ModelAndView deleteOrder(@RequestParam int id) {
         ModelAndView mv = new ModelAndView("order");
-        orderService.deleteOrder(Integer.parseInt(id));
-        mv.addObject("orders", orderService.getAllOrders());
+        orderService.deleteOrder(id);
         return mv;
     }
 
