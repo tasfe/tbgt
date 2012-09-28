@@ -60,7 +60,7 @@
                             <th width="70px">序号</th>
                             <th>名称</th>
                             <th>标题</th>
-                            <th width="60px" nowrap>淘宝链接</th>
+                            <th width="60px" nowrap>重量</th>
                             <th width="120px" nowrap>上架时间</th>
                             <th width="50px" nowrap>采购价</th>
                             <th width="50px" nowrap>推荐价</th>
@@ -210,7 +210,7 @@
                 { "mData": "price.baobeiId" },
                 { "mData": "name" },
                 { "mData": "saleTitle" },
-                { "mData": "taobaoLink" },
+                { "mData": "weight" },
                 { "mData": "incomingTime" },
                 { "mData": "price.purchasePrice" },
                 { "mData": "price.recommendedPrice" },
@@ -221,15 +221,15 @@
                 { "bSortable" :true, "aTargets": [ 0 ],"sWidth": "70px"},
                 { "bSortable" :true, "aTargets": [ 1 ],  "sWidth": "150px"},
                 { "bSortable" :true, "aTargets": [ 2 ],  "sWidth": "260px"},
-                { "bSortable": false, "aTargets": [ 3 ],  "sWidth": "80px" },
+                { "bSortable": false, "aTargets": [ 3 ],  "sWidth": "80px" ,"sClass":"nowrap  a-right"},
                 { "bSortable": true, "aTargets": [ 4 ],  "sWidth": "120px" },
-                { "bSortable": true, "aTargets": [ 5 ],  "sWidth": "70px","sClass":"nowrap" },
-                { "bSortable": true, "aTargets": [ 6 ],  "sWidth": "70px","sClass":"nowrap" },
-                { "bSortable": true, "aTargets": [ 7 ],  "sWidth": "80px" },
+                { "bSortable": true, "aTargets": [ 5 ],  "sWidth": "70px","sClass":"nowrap a-right" },
+                { "bSortable": true, "aTargets": [ 6 ],  "sWidth": "70px","sClass":"nowrap  a-right" },
+                { "bSortable": true, "aTargets": [ 7 ],  "sWidth": "80px ,","sClass":"nowrap  a-right" },
                 { "bSortable": false, "aTargets": [ 8 ],  "sWidth": "80px" }
             ],
             "fnRowCallback": function(nRow, aData, iDisplayIndex) {
-                    $('td:eq(3)', nRow).html('<a target="_blank" href="'+aData.taobaoLink+' ">点击进入</a>');
+                    $('td:eq(2)', nRow).html('<a target="_blank" href="'+aData.taobaoLink+' ">'+aData.saleTitle+'</a>');
                     $('td:eq(8)', nRow).html('<a href="#" onclick="saveBaobei(\'updateBaobei\',\''+aData.id+'\');return false"><img src="/tbgt/images/icons/edit.png" width="16" height="16" alt="修改宝贝"/></a><a href="#" onclick="orderBaobei(\''+aData.id+'\');return false"><img src="/tbgt/images/icons/order.jpg" width="16" height="16" alt="添加订单"/></a> <a href="#" onclick="deleteBaobei(\''+aData.id+'\');return false"><img src="/tbgt/images/icons/delete.png" width="16" height="16" alt="删除宝贝"/></a>');
                 if (jQuery.inArray(aData.id, gaiSelected) !== -1) {
                     $(nRow).addClass('row_selected');
