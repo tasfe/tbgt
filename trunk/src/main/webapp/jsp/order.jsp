@@ -16,9 +16,15 @@
 <link rel="stylesheet" type="text/css" href="/tbgt/css/custom/jquery-ui-1.8.23.custom.css"/>
 <link rel="stylesheet" href="/tbgt/css/jquery.dataTables.css" type="text/css" media="screen, projection">
 <link rel="stylesheet" href="/tbgt/css/datatable_jui.css" type="text/css" media="screen, projection">
+<link rel="stylesheet" href="/tbgt/css/EMSwitchBox.css" type="text/css" media="screen" charset="utf-8">
+<link rel="stylesheet" href="/tbgt/css/jNotify.jquery.css" type="text/css" media="screen" charset="utf-8">
+
 <script type="text/javascript" src="/tbgt/js/jquery-1.8.0.min.js"></script>
 <script type="text/javascript" src="/tbgt/js/jquery-ui-1.8.23.custom.min.js"></script>
 <script type="text/javascript" src="/tbgt/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="/tbgt/js/jquery.form.js"></script>
+<script type="text/javascript" src="/tbgt/js/EMSwitchBox.js"></script>
+<script type="text/javascript" src="/tbgt/js/jNotify.jquery.js"></script>
 </head>
 
 <body>

@@ -4,7 +4,7 @@
 
 <mapper namespace="tbgt.persistence.OrderMapper">
 
-    <resultMap id="result" type="Order">
+    <resultMap id="resultBase" type="Order">
         <id property="id" column="id"/>
         <result property="address" column="address"/>
         <result property="orderNo" column="orderNo"/>
@@ -13,6 +13,9 @@
         <result property="actualPrice" column="actualPrice"/>
         <result property="soldTime" column="soldTime"/>
         <result property="agencyFee" column="agencyFee"/>
+    </resultMap>
+
+    <resultMap id="resultOrders" type="Order" extends="resultBase">
         <association property="express" column="id" javaType="Express">
             <id property="id" column="express.id"/>
             <result property="orderId" column="id"/>
@@ -33,12 +36,20 @@
         </collection>
     </resultMap>
 
+    <resultMap id="resultOrderById" type="Order" extends="resultBase">
+        <collection property="soldBaobeis" column="id" javaType="java.util.ArrayList" ofType="SoldBaobei" select="tbgt.persistence.SoldBaobeiMapper.getSoldBaobeiByOrderNo">
+
+        </collection>
+    </resultMap>
+
+
+
     <sql id="orderColumns"> ORDERS.id,address,orderNo,contactPerson,phone,actualPrice,soldTime,agencyFee,
  express.id ,expressNo,
  fee,sendTime,SoldBaobei.id,baobeiId,quantity,color,
  spec,name,purchasePrice,salePrice </sql>
 
-    <select id="getOrders" parameterType="java.util.Map" resultMap="result">
+    <select id="getOrders" parameterType="java.util.Map" resultMap="resultOrders">
       SELECT <include refid="orderColumns"/> FROM ORDERS
         LEFT JOIN EXPRESS ON ORDERS.ID = EXPRESS.ORDERID
         LEFT JOIN SOLDBAOBEI ON ORDERS.ID = SOLDBAOBEI.ORDERID
@@ -90,7 +101,7 @@
   		where id = #{id}
 	</update>
 
-    <select id="getOrderById" resultMap="result" parameterType="int">
+    <select id="getOrderById" resultMap="resultOrderById" parameterType="int">
 		SELECT * FROM orders where id=#{id};
 	</select>
 </mapper>
