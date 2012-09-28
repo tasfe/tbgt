@@ -24,6 +24,9 @@
                         <label for="saleTitle" >标题 </label>
                         <form:input path="saleTitle" id="saleTitle"/>
                         <br />
+                        <label for="weight" >重量 </label>
+                        <form:input path="weight" id="weight"/>
+                        <br />
                         <label for="taobaoId">淘宝ID </label>
                         <form:input path="taobaoId" id="taobaoId"/>
                         <br />

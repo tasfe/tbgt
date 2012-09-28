@@ -53,8 +53,8 @@
 	</select>
 
 	<insert id="insertBaobei" parameterType="Baobei">
-		INSERT INTO baobei (name,taobaoId,saleTitle,incomingTime)
-    	VALUE (#{name},#{taobaoId},#{saleTitle},#{incomingTime})
+		INSERT INTO baobei (name,taobaoId,weight,saleTitle,incomingTime)
+    	VALUE (#{name},#{taobaoId},#{weight},#{saleTitle},#{incomingTime})
         <selectKey keyProperty="id" resultType="int" order="AFTER">
                    SELECT LAST_INSERT_ID();
         </selectKey>
@@ -68,6 +68,7 @@
   			name = #{name},
 			taobaoId = #{taobaoId},
 			saleTitle = #{saleTitle},
+			weight = #{weight},
 			incomingTime = #{incomingTime}
   		where id = #{id}
 	</update>
