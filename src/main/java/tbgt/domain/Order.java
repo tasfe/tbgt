@@ -1,6 +1,8 @@
 package tbgt.domain;
 
+import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.springframework.format.annotation.DateTimeFormat;
+import tbgt.common.CustomJsonDateSerializer;
 import tbgt.util.DateUtil;
 
 import java.math.BigDecimal;
@@ -77,7 +79,7 @@ public class Order {
     public void setActualPrice(BigDecimal actualPrice) {
         this.actualPrice = actualPrice;
     }
-
+    @JsonSerialize(using = CustomJsonDateSerializer.class)
     public Date getSoldTime() {
         return soldTime;
     }
