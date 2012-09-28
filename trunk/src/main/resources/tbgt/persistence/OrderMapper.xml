@@ -69,8 +69,8 @@
     </select>
 
     <insert id="saveOrder" parameterType="Order">
-		INSERT INTO orders (address,orderNo,contactPerson,phone,actualPrice,soldTime)
-    	VALUE (#{address},#{orderNo},#{contactPerson},#{phone},#{actualPrice},#{soldTime})
+		INSERT INTO orders (address,orderNo,contactPerson,phone,actualPrice,soldTime,agencyFee)
+    	VALUE (#{address},#{orderNo},#{contactPerson},#{phone},#{actualPrice},#{soldTime},#{agencyFee})
         <selectKey keyProperty="id" resultType="int" order="AFTER">
                    SELECT LAST_INSERT_ID();
         </selectKey>
@@ -85,7 +85,8 @@
 			contactPerson = #{contactPerson},
 			phone = #{phone},
 			actualPrice = #{actualPrice},
-			soldTime = #{soldTime}
+			soldTime = #{soldTime},
+			agencyFee =#{agencyFee}
   		where id = #{id}
 	</update>
 </mapper>
