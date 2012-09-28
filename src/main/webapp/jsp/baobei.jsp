@@ -19,6 +19,7 @@
     <script type="text/javascript" src="/tbgt/js/jquery-1.8.0.min.js"></script>
     <script type="text/javascript" src="/tbgt/js/jquery-ui-1.8.23.custom.min.js"></script>
     <script type="text/javascript" src="/tbgt/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="/tbgt/js/jquery.form.js"></script>
 </head>
 
 <body>
@@ -46,6 +47,7 @@
     <div id="wrapper">
         <div id="content">
             <div id="box">
+                <div><span id="message"></span></div>
                 <h3>宝贝列表</h3> <br/>
                     <table id="tdata1" class="display" cellspacing="0" cellpadding="0" border="0" width="100%">
                         <thead>
@@ -133,21 +135,21 @@
             form.submit()
         }
     }
-
+     var orderDialog = $('<div style="display:none"></div>').appendTo('body');
     function orderBaobei(baobeiIds){
-        var dialog = $('<div style="display:none"></div>').appendTo('body');
+
         // load remote content
         var url = "/tbgt/order/addOrder.html?baobeiIdsStr="+baobeiIds;
-        dialog.load(
+        orderDialog.load(
                 url,
                 function (responseText, textStatus, XMLHttpRequest) {
-                    dialog.dialog({
+                    orderDialog.dialog({
                         title: "添加订单",
                         modal: true,
                         width: 800,
                         height: 600,
                         close: function(event, ui) {
-                            dialog.remove();
+                            orderDialog.remove();
                         }
                     });
                 }
