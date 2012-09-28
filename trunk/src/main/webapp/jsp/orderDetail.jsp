@@ -14,6 +14,7 @@
 <div id="dialog_content">
     <div id="box">
         <form:form commandName="order" action="/tbgt/order/save.html" id="form">
+            <form:hidden path="id"/>
             <div><form:errors path="*" cssStyle="color : red;"/></div>
             <div>
                 <input type="checkbox" name="newOrderInd" value="15">
