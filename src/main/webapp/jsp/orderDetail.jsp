@@ -38,6 +38,9 @@
                 <label for="actualPrice">卖出价格 </label>
                 <form:input path="actualPrice" id="actualPrice"/>
                 <br/>
+                <label for="actualPrice">代理费 </label>
+                <form:input path="agencyFee" id="agencyFee"/>
+                <br/>
 
                 <label for="soldTime">成交时间 </label>
                 <form:input path="soldTime" id="soldTime" class="date"/>
@@ -111,11 +114,14 @@
 
                 });
 
+        //set default value for actualPrice & agencyFee
         var actualPrice = 0;
         <c:forEach items="${order.soldBaobeis}" var="soldBaobei" varStatus="index">
                 actualPrice=actualPrice+${soldBaobei.salePrice} * ${soldBaobei.quantity}
         </c:forEach>
         $("#actualPrice").attr("value",actualPrice);
+
+        $("#agencyFee").attr("value",5.0);
     });
 
     function EMSwitchBoxCallback(checkbox) {
