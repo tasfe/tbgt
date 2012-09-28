@@ -8,8 +8,6 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta http-equiv="pragma" content="no-cache"/>
     <title>易家生活坊宝贝跟踪 订单详情</title>
-    <script type="text/javascript" src="/tbgt/js/EMSwitchBox.js"></script>
-    <link rel="stylesheet" href="/tbgt/css/EMSwitchBox.css" type="text/css" media="screen" charset="utf-8">
 </head>
 
 <body>
@@ -123,21 +121,22 @@
 
         $("#agencyFee").attr("value",5.0);
 
-        $('#form').submit(function() {
-            var options = {
-                target:'#message',
-                url:'/tbgt/order/save.html',
-                type:'POST',
-                success: function() {
-                   $(orderDialog).dialog('close');
-                }
-            };
 
-            $(this).ajaxSubmit(options);
-            return false;
-        });
     });
 
+    $('#form').submit(function() {
+        var options = {
+            target:'#message',
+            url:'/tbgt/order/save.html',
+            type:'POST',
+            success: function() {
+                $(orderDialog).dialog('close');
+            }
+        };
+
+        $(this).ajaxSubmit(options);
+        return false;
+    });
     function EMSwitchBoxCallback(checkbox) {
         if ($(checkbox).attr('checked')) {
             $("#existingOrder").hide();
