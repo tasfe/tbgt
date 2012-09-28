@@ -48,7 +48,6 @@
                 	<table id="tdata1" class="display" cellspacing="0" cellpadding="0" border="0" width="100%">
                         <thead>
 							<tr>
-                            	<th width="70px">序号</th>
                             	<th width="70px">订单号</th>
                             	<th>订单详情</th>
 								<th width="150px">成交时间</th>
@@ -145,7 +144,6 @@
             'iDisplayLength': 10,
             "aLengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
             "bStateSave": true,
-            "bSort": false,
             "oLanguage": {
                 "sProcessing": "系统处理中",
                 "sLoadingRecords": "请等待，数据载入中.....",
@@ -169,7 +167,6 @@
                 aoData.push({ "name": "expressInd", "value": expressInd });
             },
             "aoColumns": [
-                { "mData": "id" },
                 { "mData": "orderNo" },
                 { "mData": "address" },
                 { "mData": "soldTime" },
@@ -178,19 +175,30 @@
                 { "mData": null }
             ],
             "aoColumnDefs": [
-                { "bVisible" :false, "bSearchable": false, "aTargets": [ 0 ]},
-                { "bSortable" :true, "aTargets": [ 1 ],"sWidth": "70px"},
-                { "bSortable" :false, "aTargets": [ 2 ],  "sClass":"nowrap"},
-                { "bSortable" :true, "aTargets": [ 3 ],  "sWidth": "100px"},
+                { "bSortable" :true, "aTargets": [ 0 ],"sWidth": "70px"},
+                { "bSortable" :false, "aTargets": [ 1 ],  "sClass":"nowrap"},
+                { "bSortable" :true, "aTargets": [ 2 ],  "sWidth": "100px"},
+                { "bSortable": true, "aTargets": [ 3 ],  "sWidth": "80px" },
                 { "bSortable": true, "aTargets": [ 4 ],  "sWidth": "80px" },
-                { "bSortable": true, "aTargets": [ 5 ],  "sWidth": "80px" },
-                { "bSortable": false, "aTargets": [ 6 ],  "sWidth": "80px" }
+                { "bSortable": false, "aTargets": [ 5 ],  "sWidth": "80px" }
             ],
             "fnRowCallback": function(nRow, aData, iDisplayIndex) {
                     $('td:eq(5)', nRow).html('<a href="#" onclick="express(\''+aData.id+'\');return false"><img src="/tbgt/images/icons/express.png" width="16" height="16" alt="快递"/></a><a href="#" onclick="updateOrder(\'updateOrder\',\''+aData.id+'\');return false"><img src="/tbgt/images/icons/edit.png" width="16" height="16" alt="修改订单"/></a> <a href="#" onclick="deleteOrder(\''+aData.id+'\');return false"><img src="/tbgt/images/icons/delete.png" width="16" height="16" alt="删除订单"/></a>');
-                if (jQuery.inArray(aData.id, gaiSelected) !== -1) {
-                    $(nRow).addClass('row_selected');
-                }
+                    if (jQuery.inArray(aData.id, gaiSelected) !== -1) {
+                        $(nRow).addClass('row_selected');
+                    }
+                    $('td:eq(1)', nRow).html(function(){
+                         var detail = "<span class='title'>地址 : </span><br/>" + aData.address + "<br/><br/><span class='title'>商品详情 : </span>";
+//                         console.log(aData.soldBaobeis);
+                         for(var i = 0 ;  i <  aData.soldBaobeis.length ; i ++){
+                             var soldbaobei = aData.soldBaobeis[i];
+                             console.log(soldbaobei);
+                             console.log(soldbaobei.quantity);
+                             console.log(soldbaobei.name);
+                             detail = detail + "<br/>" + soldbaobei.quantity + "个" + soldbaobei.name + "， " + soldbaobei.color + "，" + soldbaobei.spec;
+                         }
+                         return detail;
+                    });
             }
 
         });
