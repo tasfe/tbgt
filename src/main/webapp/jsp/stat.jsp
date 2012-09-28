@@ -73,25 +73,18 @@
                         <tr>
                             <td width="200px" class="f_name">总销售额</td>
                             <td>${summary.totalSale}</td>
-                        </tr>
-                        <tr>
-                            <td width="200px" class="f_name">总成本</td>
-                            <td>${summary.totalPurchase}</td>
-                        </tr>
-                        <tr>
-                            <td width="200px" class="f_name">总快递费</td>
-                            <td>${summary.totalExpress}</td>
-                        </tr>
-                        <tr>
                             <td width="200px" class="f_name">总代理费</td>
                             <td>${summary.totalAgencyFee}</td>
                         </tr>
                         <tr>
+                            <td width="200px" class="f_name">总成本</td>
+                            <td>${summary.totalPurchase}</td>
+                            <td width="200px" class="f_name">总快递费</td>
+                            <td>${summary.totalExpress}</td>
+                        </tr>
+                        <tr>
                             <td width="70px" class="f_name">总利润</td>
                             <td>${summary.totalProfit}</td>
-                        </tr>
-
-                        <tr>
                             <td width="70px" class="f_name">总应付款</td>
                             <td>${summary.totalPaid}</td>
                         </tr>
