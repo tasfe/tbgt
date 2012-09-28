@@ -192,9 +192,6 @@
 //                         console.log(aData.soldBaobeis);
                          for(var i = 0 ;  i <  aData.soldBaobeis.length ; i ++){
                              var soldbaobei = aData.soldBaobeis[i];
-                             console.log(soldbaobei);
-                             console.log(soldbaobei.quantity);
-                             console.log(soldbaobei.name);
                              detail = detail + "<br/>" + soldbaobei.quantity + "个" + soldbaobei.name + "， " + soldbaobei.color + "，" + soldbaobei.spec;
                          }
                          return detail;
