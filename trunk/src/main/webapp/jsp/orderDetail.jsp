@@ -126,11 +126,33 @@
 
     $('#form').submit(function() {
         var options = {
-            target:'#message',
+//            target:'#message',
             url:'/tbgt/order/save.html',
             type:'POST',
             success: function() {
                 $(orderDialog).dialog('close');
+                jSuccess(
+                    '订单添加成功',
+                    {
+                        autoHide : true, // added in v2.0
+                        clickOverlay : false, // added in v2.0
+                        MinWidth : 400,
+                        TimeShown : 2000,
+                        ShowTimeEffect : 200,
+                        HideTimeEffect : 200,
+                        LongTrip :20,
+                        HorizontalPosition : 'center',
+                        VerticalPosition : 'top',
+                        ShowOverlay : false,
+                        ColorOverlay : '#000',
+                        OpacityOverlay : 0.3,
+                        onClosed : function() { // added in v2.0
+
+                        },
+                        onCompleted : function() { // added in v2.0
+
+                        }
+                    });
             }
         };
 

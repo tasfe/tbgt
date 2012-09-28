@@ -17,12 +17,14 @@
     <link rel="stylesheet" href="/tbgt/css/jquery.dataTables.css" type="text/css" media="screen, projection">
     <link rel="stylesheet" href="/tbgt/css/datatable_jui.css" type="text/css" media="screen, projection">
     <link rel="stylesheet" href="/tbgt/css/EMSwitchBox.css" type="text/css" media="screen" charset="utf-8">
+    <link rel="stylesheet" href="/tbgt/css/jNotify.jquery.css" type="text/css" media="screen" charset="utf-8">
 
     <script type="text/javascript" src="/tbgt/js/jquery-1.8.0.min.js"></script>
     <script type="text/javascript" src="/tbgt/js/jquery-ui-1.8.23.custom.min.js"></script>
     <script type="text/javascript" src="/tbgt/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="/tbgt/js/jquery.form.js"></script>
     <script type="text/javascript" src="/tbgt/js/EMSwitchBox.js"></script>
+    <script type="text/javascript" src="/tbgt/js/jNotify.jquery.js"></script>
 
 </head>
 
@@ -51,7 +53,6 @@
     <div id="wrapper">
         <div id="content">
             <div id="box">
-                <div><span id="message"></span></div>
                 <h3>宝贝列表</h3> <br/>
                     <table id="tdata1" class="display" cellspacing="0" cellpadding="0" border="0" width="100%">
                         <thead>
@@ -140,7 +141,20 @@
         }
     }
      var orderDialog;
-    function orderBaobei(baobeiIds){
+    function orderBaobei(baobeiId){
+        if (jQuery.inArray(baobeiId, gaiSelected) == -1) {
+            gaiSelected[gaiSelected.length++] = baobeiId;
+        }
+        else {
+            gaiSelected = jQuery.grep(gaiSelected, function(value) {
+                return value != baobeiId;
+            });
+        }
+        $(this).toggleClass('row_selected');
+        return orderBaobeiDialog(baobeiId);
+    }
+
+    function orderBaobeiDialog(baobeiIds){
         orderDialog = $('<div style="display:none"></div>').appendTo('body');
         // load remote content
         var url = "/tbgt/order/addOrder.html?baobeiIdsStr="+baobeiIds;
@@ -245,5 +259,7 @@
         $("#tdata1 tbody tr").live('dblclick', function () {
             saveBaobei('updateBaobei',tdata1.fnGetData(this).id);
         });
+
+
     });
 </script>
