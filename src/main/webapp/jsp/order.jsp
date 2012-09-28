@@ -37,14 +37,14 @@
         <div id="top-panel">
             <div id="panel">
                 <ul>
-            		<li><a href="#" class="delete">未发货</a></li>
-                    <li><a href="#" class="express">已发货</a></li>
+            		<li><a href="#" onclick="showOrders('N');return false" class="pending">未发货</a></li>
+                    <li><a href="#" onclick="showOrders('Y');return false" class="express">已发货</a></li>
                 </ul>
             </div>
       </div>
         <div id="wrapper">
             <div id="content">
-                    <h3>订单列表（未发货）</h3>
+                    <h3>订单列表（<span id='expressStat'>未发货</span>）</h3>
                 	<table id="tdata1" class="display" cellspacing="0" cellpadding="0" border="0" width="100%">
                         <thead>
 							<tr>
@@ -67,7 +67,6 @@
                 <br />
             </div>
 
-      </div>
         <div id="footer">
            <div id="credits">
    		        版权所有 © 2012-2014, 易家生活坊, All Rights Reserved.
@@ -137,6 +136,7 @@
     }
 
     var tdata1;
+    var expressInd="N";
     var gaiSelected = [];
     $(document).ready(function() {
         tdata1 = $('#tdata1').dataTable({
@@ -165,6 +165,9 @@
             "bProcessing": true,
             "bServerSide": true,
             "sAjaxSource": "/tbgt/order/list.html",
+            "fnServerParams": function (aoData) {
+                aoData.push({ "name": "expressInd", "value": expressInd });
+            },
             "aoColumns": [
                 { "mData": "id" },
                 { "mData": "orderNo" },
@@ -213,5 +216,11 @@
         $("#tdata1 tbody tr").live('dblclick', function () {
             saveBaobei('updateOrder',tdata1.fnGetData(this).id);
         });
+
     });
+    function showOrders(ind){
+        expressInd = ind;
+        $('#expressStat').html(ind=='Y'?"已发货":"未发货");
+        tdata1.fnDraw();
+    }
 </script>

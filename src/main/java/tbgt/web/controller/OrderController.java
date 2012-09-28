@@ -46,10 +46,10 @@ public class OrderController {
     }
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public @ResponseBody PaginationTO list() {
+    public @ResponseBody PaginationTO list(@RequestParam String expressInd) {
         OrderCriteria orderCriteria = new OrderCriteria();
         orderCriteria.setName( PagingContextHolder.get().getsSearch());
-        orderCriteria.setExpressInd("N");
+        orderCriteria.setExpressInd(expressInd);
         List<Order> orders = orderService.getOrders(orderCriteria);
         return PagingEnabler.enablePaging(orders);
     }
