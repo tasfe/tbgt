@@ -60,7 +60,7 @@
                             <th width="70px">序号</th>
                             <th>名称</th>
                             <th>标题</th>
-                            <th width="60px" nowrap>重量</th>
+                            <th width="60px" nowrap>重量(公斤)</th>
                             <th width="120px" nowrap>上架时间</th>
                             <th width="50px" nowrap>采购价</th>
                             <th width="50px" nowrap>推荐价</th>
