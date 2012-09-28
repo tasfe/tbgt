@@ -153,12 +153,37 @@
 
                         }
                     });
+            },
+            error:function(){
+                jError(
+                    '订单添加失败,请联系管理员',
+                    {
+                        autoHide : true, // added in v2.0
+                        clickOverlay : false, // added in v2.0
+                        MinWidth : 400,
+                        TimeShown : 10000,
+                        ShowTimeEffect : 200,
+                        HideTimeEffect : 200,
+                        LongTrip :20,
+                        HorizontalPosition : 'center',
+                        VerticalPosition : 'top',
+                        ShowOverlay : false,
+                        ColorOverlay : '#000',
+                        OpacityOverlay : 0.3,
+                        onClosed : function() { // added in v2.0
+
+                        },
+                        onCompleted : function() { // added in v2.0
+
+                        }
+                    });
             }
         };
 
         $(this).ajaxSubmit(options);
         return false;
     });
+
     function EMSwitchBoxCallback(checkbox) {
         if ($(checkbox).attr('checked')) {
             $("#existingOrder").hide();
