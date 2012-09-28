@@ -148,7 +148,7 @@
                 "sProcessing": "系统处理中",
                 "sLoadingRecords": "请等待，数据载入中.....",
                 "sLengthMenu": "每页显示 _MENU_ 记录",
-                "sInfo": "第 _START_ 到 _END_ 页, 总共 _TOTAL_ 条记录",
+                "sInfo": "第 _START_ 到 _END_ 条, 总共 _TOTAL_ 条记录",
                 "sInfoFiltered": "(从 _MAX_ 条记录中过滤)",
                 "sSearch": "搜索名称" ,
                 "sZeroRecords": "没有宝贝",
