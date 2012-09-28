@@ -1,6 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ page contentType="text/html;charset=UTF-8"%>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -90,6 +91,11 @@
                             <td>${summary.totalProfit}</td>
                         </tr>
 
+                        <tr>
+                            <td width="70px" class="f_name">总应付款</td>
+                            <td>${summary.totalPaid}</td>
+                        </tr>
+
                     </table>
 
                     <br/>
@@ -98,8 +104,8 @@
 							<tr>
                             	<th width="70px">订单号</th>
                             	<th>订单详情</th>
-								<th width="150px">成交时间</th>
-								<th width="150px">成交价</th>
+								<th width="100px">成交时间</th>
+								<th width="100px">成交价</th>
                                 <th width="100px">成本</th>
                                 <th width="100px">快递费用</th>
                                 <th width="100px">代理费</th>
@@ -115,7 +121,7 @@
                                     ${soldBaobei.quantity} 个 ${soldBaobei.name} <br/>
                                   </c:forEach>
                                 </td>
-								<td>${order.soldTime}</td>
+								<td class="a-center"><fmt:formatDate value="${order.soldTime}" type="date" pattern="yyyy-MM-dd"/></td>
                                 <td class="a-right">${order.actualPrice}</td>
                                 <td class="a-right">${order.purchasePrice}</td>
                                 <td class="a-right">${order.express.fee}</td>

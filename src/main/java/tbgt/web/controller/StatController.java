@@ -65,6 +65,7 @@ public class StatController {
         BigDecimal totalExpress = BigDecimal.ZERO;
         BigDecimal totalAgencyFee = BigDecimal.ZERO;
         BigDecimal totalProfit = BigDecimal.ZERO;
+        BigDecimal totalPaid = BigDecimal.ZERO;
         for(Order order: orders){
             totalSaled = totalSaled.add(order.getActualPrice());
             totalPurchase = totalPurchase.add(order.getPurchasePrice());
@@ -74,11 +75,14 @@ public class StatController {
             totalAgencyFee = totalAgencyFee.add(order.getAgencyFee());
             totalProfit = totalProfit.add(order.getProfit());
         }
+        totalPaid = totalPurchase.add(totalExpress);
+        totalPaid = totalPaid.add(totalAgencyFee);
         summary.put("totalSale",totalSaled);
         summary.put("totalPurchase",totalPurchase);
         summary.put("totalExpress",totalExpress);
         summary.put("totalAgencyFee",totalAgencyFee);
         summary.put("totalProfit",totalProfit);
+        summary.put("totalPaid",totalPaid);
         return summary;
     }
 
