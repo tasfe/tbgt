@@ -221,7 +221,7 @@
                 { "bSortable" :true, "aTargets": [ 0 ],"sWidth": "70px"},
                 { "bSortable" :true, "aTargets": [ 1 ],  "sWidth": "150px"},
                 { "bSortable" :true, "aTargets": [ 2 ],  "sWidth": "260px"},
-                { "bSortable": false, "aTargets": [ 3 ],  "sWidth": "80px" ,"sClass":"nowrap  a-right"},
+                { "bSortable": false, "aTargets": [ 3 ],  "sWidth": "100px" ,"sClass":"nowrap  a-right"},
                 { "bSortable": true, "aTargets": [ 4 ],  "sWidth": "120px" },
                 { "bSortable": true, "aTargets": [ 5 ],  "sWidth": "70px","sClass":"nowrap a-right" },
                 { "bSortable": true, "aTargets": [ 6 ],  "sWidth": "70px","sClass":"nowrap  a-right" },
