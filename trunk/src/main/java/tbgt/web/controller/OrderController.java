@@ -93,8 +93,7 @@ public class OrderController {
 
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public ModelAndView saveOrder(@ModelAttribute(value = "order") Order order, BindingResult result) {
-        ModelAndView mv = new ModelAndView("order");
+    public @ResponseBody String saveOrder(@ModelAttribute(value = "order") Order order, BindingResult result) {
         //todo..validator
         if (!result.hasErrors()) {
             if (order.getId() == 0) {
@@ -103,8 +102,7 @@ public class OrderController {
                 orderService.updateOrder(order);
             }
         }
-        mv.addObject("orders", orderService.getAllOrders());
-        return mv;
+        return "Success";
     }
 
     @RequestMapping(value = "/express", method = RequestMethod.GET)

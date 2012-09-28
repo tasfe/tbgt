@@ -122,6 +122,20 @@
         $("#actualPrice").attr("value",actualPrice);
 
         $("#agencyFee").attr("value",5.0);
+
+        $('#form').submit(function() {
+            var options = {
+                target:'#message',
+                url:'/tbgt/order/save.html',
+                type:'POST',
+                success: function() {
+                   $(orderDialog).dialog('close');
+                }
+            };
+
+            $(this).ajaxSubmit(options);
+            return false;
+        });
     });
 
     function EMSwitchBoxCallback(checkbox) {
