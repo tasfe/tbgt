@@ -37,9 +37,12 @@
     </resultMap>
 
     <resultMap id="resultOrderById" type="Order" extends="resultBase">
+        <association property="express" column="id" javaType="Express"
+                     select="tbgt.persistence.ExpressMapper.getExpressByOrderId"/>
         <collection property="soldBaobeis" column="id" javaType="java.util.ArrayList" ofType="SoldBaobei" select="tbgt.persistence.SoldBaobeiMapper.getSoldBaobeiByOrderNo">
 
         </collection>
+
     </resultMap>
 
 
@@ -100,7 +103,6 @@
 			agencyFee =#{agencyFee}
   		where id = #{id}
 	</update>
-
     <select id="getOrderById" resultMap="resultOrderById" parameterType="int">
 		SELECT * FROM orders where id=#{id};
 	</select>
