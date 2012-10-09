@@ -3,6 +3,7 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="/WEB-INF/tld/tbgt.tld" prefix="tbgt" %>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -13,7 +14,8 @@
 <body>
             <div id="dialog_content">
                 <div id="box">
-                    <form:form commandName="baobei" action="/tbgt/baobei/save.html" id="form">
+                    <tbgt:constant name='ContextPath' var="ContextPath"/>
+                    <form:form commandName="baobei" action="${ContextPath}/baobei/save.html" id="form">
                       <form:hidden path="id"/>
                       <div><form:errors path="*" cssStyle="color : red;"/></div>
                       <fieldset id="info">

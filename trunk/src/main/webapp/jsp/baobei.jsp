@@ -3,28 +3,29 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="/WEB-INF/tld/tbgt.tld" prefix="tbgt" %>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta http-equiv="pragma" content="no-cache" />
     <title>易家生活坊宝贝跟踪 宝贝管理</title>
-    <link rel="stylesheet" type="text/css" href="/tbgt/css/theme.css"/>
-    <link rel="stylesheet" type="text/css" href="/tbgt/css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="<tbgt:constant name="ContextPath"/>/css/theme.css"/>
+    <link rel="stylesheet" type="text/css" href="<tbgt:constant name="ContextPath"/>/css/style.css"/>
     <!--[if IE]>
-    <link rel="stylesheet" type="text/css" href="/tbgt/css/ie-sucks.css"/>
+    <link rel="stylesheet" type="text/css" href="<tbgt:constant name="ContextPath"/>/css/ie-sucks.css"/>
     <![endif]-->
-    <link rel="stylesheet" type="text/css" href="/tbgt/css/custom/jquery-ui-1.8.23.custom.css"/>
-    <link rel="stylesheet" href="/tbgt/css/jquery.dataTables.css" type="text/css" media="screen, projection">
-    <link rel="stylesheet" href="/tbgt/css/datatable_jui.css" type="text/css" media="screen, projection">
-    <link rel="stylesheet" href="/tbgt/css/EMSwitchBox.css" type="text/css" media="screen" charset="utf-8">
-    <link rel="stylesheet" href="/tbgt/css/jNotify.jquery.css" type="text/css" media="screen" charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="<tbgt:constant name="ContextPath"/>/css/custom/jquery-ui-1.8.23.custom.css"/>
+    <link rel="stylesheet" href="<tbgt:constant name="ContextPath"/>/css/jquery.dataTables.css" type="text/css" media="screen, projection">
+    <link rel="stylesheet" href="<tbgt:constant name="ContextPath"/>/css/datatable_jui.css" type="text/css" media="screen, projection">
+    <link rel="stylesheet" href="<tbgt:constant name="ContextPath"/>/css/EMSwitchBox.css" type="text/css" media="screen" charset="utf-8">
+    <link rel="stylesheet" href="<tbgt:constant name="ContextPath"/>/css/jNotify.jquery.css" type="text/css" media="screen" charset="utf-8">
 
-    <script type="text/javascript" src="/tbgt/js/jquery-1.8.0.min.js"></script>
-    <script type="text/javascript" src="/tbgt/js/jquery-ui-1.8.23.custom.min.js"></script>
-    <script type="text/javascript" src="/tbgt/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="/tbgt/js/jquery.form.js"></script>
-    <script type="text/javascript" src="/tbgt/js/EMSwitchBox.js"></script>
-    <script type="text/javascript" src="/tbgt/js/jNotify.jquery.js"></script>
+    <script type="text/javascript" src="<tbgt:constant name="ContextPath"/>/js/jquery-1.8.0.min.js"></script>
+    <script type="text/javascript" src="<tbgt:constant name="ContextPath"/>/js/jquery-ui-1.8.23.custom.min.js"></script>
+    <script type="text/javascript" src="<tbgt:constant name="ContextPath"/>/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="<tbgt:constant name="ContextPath"/>/js/jquery.form.js"></script>
+    <script type="text/javascript" src="<tbgt:constant name="ContextPath"/>/js/EMSwitchBox.js"></script>
+    <script type="text/javascript" src="<tbgt:constant name="ContextPath"/>/js/jNotify.jquery.js"></script>
 
 </head>
 
@@ -35,9 +36,9 @@
 
         <div id="topmenu">
             <ul>
-                <li><a href="/tbgt/order/view.html">订单管理</a></li>
-                <li class="current"><a href="/tbgt/baobei/view.html">宝贝管理</a></li>
-                <li><a href="/tbgt/stat/profit.html">统计</a></li>
+                <li><a href="<tbgt:constant name="ContextPath"/>/order/view.html">订单管理</a></li>
+                <li class="current"><a href="<tbgt:constant name="ContextPath"/>/baobei/view.html">宝贝管理</a></li>
+                <li><a href="<tbgt:constant name="ContextPath"/>/stat/profit.html">统计</a></li>
                 <li><a href="#">设置</a></li>
             </ul>
         </div>
@@ -91,7 +92,7 @@
     function saveBaobei(action,baobeiId) {
         var dialog = $('<div style="display:none"></div>').appendTo('body');
         // load remote content
-        var url = "/tbgt/baobei/"+action+".html";
+        var url = "<tbgt:constant name="ContextPath"/>/baobei/"+action+".html";
         if(baobeiId){
             url= url+"?id="+baobeiId;
         }
@@ -133,7 +134,7 @@
     function deleteBaobei(baobeiId){
         if(confirm("确认要删除该宝贝吗?")){
             var form = $("<form></form>");
-            form.attr('action', "/tbgt/baobei/deleteBaobei.html?id=" + baobeiId);
+            form.attr('action', "<tbgt:constant name="ContextPath"/>/baobei/deleteBaobei.html?id=" + baobeiId);
             form.attr('method', 'post');
             form.appendTo("body");
             form.css('display', 'none');
@@ -157,7 +158,7 @@
     function orderBaobeiDialog(baobeiIds){
         orderDialog = $('<div style="display:none"></div>').appendTo('body');
         // load remote content
-        var url = "/tbgt/order/addOrder.html?baobeiIdsStr="+baobeiIds;
+        var url = "<tbgt:constant name="ContextPath"/>/order/addOrder.html?baobeiIdsStr="+baobeiIds;
         orderDialog.load(
                 url,
                 function (responseText, textStatus, XMLHttpRequest) {
@@ -205,7 +206,7 @@
             },
             "bProcessing": true,
             "bServerSide": true,
-            "sAjaxSource": "/tbgt/baobei/list.html",
+            "sAjaxSource": "<tbgt:constant name="ContextPath"/>/baobei/list.html",
             "aoColumns": [
                 { "mData": "price.baobeiId" },
                 { "mData": "name" },
@@ -230,7 +231,7 @@
             ],
             "fnRowCallback": function(nRow, aData, iDisplayIndex) {
                     $('td:eq(2)', nRow).html('<a target="_blank" href="'+aData.taobaoLink+' ">'+aData.saleTitle+'</a>');
-                    $('td:eq(8)', nRow).html('<a href="#" onclick="saveBaobei(\'updateBaobei\',\''+aData.id+'\');return false"><img src="/tbgt/images/icons/edit.png" width="16" height="16" alt="修改宝贝"/></a><a href="#" onclick="orderBaobei(\''+aData.id+'\');return false"><img src="/tbgt/images/icons/order.jpg" width="16" height="16" alt="添加订单"/></a> <a href="#" onclick="deleteBaobei(\''+aData.id+'\');return false"><img src="/tbgt/images/icons/delete.png" width="16" height="16" alt="删除宝贝"/></a>');
+                    $('td:eq(8)', nRow).html('<a href="#" onclick="saveBaobei(\'updateBaobei\',\''+aData.id+'\');return false"><img src="<tbgt:constant name="ContextPath"/>/images/icons/edit.png" width="16" height="16" alt="修改宝贝"/></a><a href="#" onclick="orderBaobei(\''+aData.id+'\');return false"><img src="<tbgt:constant name="ContextPath"/>/images/icons/order.jpg" width="16" height="16" alt="添加订单"/></a> <a href="#" onclick="deleteBaobei(\''+aData.id+'\');return false"><img src="<tbgt:constant name="ContextPath"/>/images/icons/delete.png" width="16" height="16" alt="删除宝贝"/></a>');
                 if (jQuery.inArray(aData.id, gaiSelected) !== -1) {
                     $(nRow).addClass('row_selected');
                 }
