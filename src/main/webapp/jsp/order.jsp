@@ -103,21 +103,21 @@
         //prevent the browser to follow the link
         return false;
     }
-
+    var orderDialog;
     function updateOrder(action,id) {
-        var dialog = $('<div style="display:none"></div>').appendTo('body');
+        orderDialog = $('<div style="display:none"></div>').appendTo('body');
         // load remote content
         var url = "/tbgt/order/"+action+".html?id="+id;
-        dialog.load(
+        orderDialog.load(
                 url,
                 function (responseText, textStatus, XMLHttpRequest) {
-                    dialog.dialog({
+                    orderDialog.dialog({
                         title: "订单详情",
                         modal: true,
                         width: 800,
                         height: 600,
                         close: function(event, ui) {
-                            dialog.remove();
+                            orderDialog.remove();
                         }
                     });
                 }
