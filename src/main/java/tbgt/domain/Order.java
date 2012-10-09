@@ -135,4 +135,14 @@ public class Order {
         return actualPrice.subtract(getPurchasePrice())
                 .subtract(getExpress().getFee()).subtract(getAgencyFee());
     }
+
+    public BigDecimal getTotalWeight(){
+         BigDecimal totalTotalWeight = BigDecimal.ZERO;
+        for(SoldBaobei soldBaobei : soldBaobeis){
+            BigDecimal weight = soldBaobei.getWeight();
+            weight = weight != null ? weight : BigDecimal.ZERO;
+            totalTotalWeight = totalTotalWeight.add(weight);
+        }
+        return totalTotalWeight;
+    }
 }

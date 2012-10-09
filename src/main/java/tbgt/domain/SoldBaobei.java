@@ -13,7 +13,7 @@ public class SoldBaobei {
     private String name;
     private BigDecimal purchasePrice;
 	private BigDecimal salePrice;
-
+    public BigDecimal weight;
 
     public int getId() {
         return id;
@@ -85,5 +85,13 @@ public class SoldBaobei {
 
     public void setOrderId(int orderId) {
         this.orderId = orderId;
+    }
+
+    public BigDecimal getWeight() {
+        return weight;
+    }
+
+    public void setWeight(BigDecimal weight) {
+        this.weight = weight;
     }
 }
