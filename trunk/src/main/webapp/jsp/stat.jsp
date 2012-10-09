@@ -49,8 +49,8 @@
             <div id="content">
                 <div id="box">
                 	<h3>利润</h3>
-
-                    <form:form action="<tbgt:constant name='ContextPath'/>/stat/profit.html" commandName="criteria" id="form">
+                     <tbgt:constant name='ContextPath' var="ContextPath"/>
+                    <form:form action="${ContextPath}/stat/profit.html" commandName="criteria" id="form">
                         <table width="100%">
                             <tr>
                                 <th class="a-left">
@@ -99,18 +99,19 @@
                             	<th width="70px">订单号</th>
                             	<th>订单详情</th>
 								<th width="100px">成交时间</th>
-								<th width="100px">成交价</th>
-                                <th width="100px">成本</th>
-                                <th width="100px">快递费用</th>
-                                <th width="100px">代理费</th>
-                                <th width="100px">利润</th>
+								<th width="60px">成交价</th>
+                                <th width="60px">成本</th>
+                                <th width="80px">快递费用</th>
+                                <th width="60px">代理费</th>
+                                <th width="60px">利润</th>
                             </tr>
 						</thead>
 						<tbody>
                         <c:forEach items="${orders}" var="order" varStatus="index">
 							<tr>
-                            	<td class="a-center"><a href="#">${order.id}</a></td>
+                            	<td class="a-center">${order.id}</td>
                             	<td>
+                                  ${order.address}<br/>
                                   <c:forEach items="${order.soldBaobeis}" var="soldBaobei">
                                     ${soldBaobei.quantity} 个 ${soldBaobei.name} <br/>
                                   </c:forEach>
@@ -168,7 +169,7 @@
                 "sLengthMenu": "每页显示 _MENU_ 记录",
                 "sInfo": "第 _START_ 到 _END_ 条, 总共 _TOTAL_ 条记录",
                 "sInfoFiltered": "(从 _MAX_ 条记录中过滤)",
-                "sSearch": "搜索名称" ,
+                "sSearch": "全局搜索" ,
                 "sZeroRecords": "没有宝贝",
                 "sInfoEmpty": "",
                 "oPaginate": {
@@ -178,9 +179,7 @@
                     "sPrevious": "上一页"
                 }
             },
-            "aoColumnDefs": [
-                { "sType": "num-html", "aTargets": [ 0 ] }
-            ]
+            "aaSorting": [[ 2, "desc" ]]
         });
 
 	});

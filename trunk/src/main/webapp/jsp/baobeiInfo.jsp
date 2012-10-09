@@ -52,6 +52,7 @@
                       <div align="center">
                       <input id="saveBtn" type="submit" value="提交" />
                       <input id="resetBtn" type="reset" value="重置"/>
+                      <input id="saveNewBtn" type="button" onclick="saveAsNew()" value="另存为新宝贝" />
                       </div>
                     </form:form>
 
@@ -67,4 +68,8 @@
             $("#agencyFee").attr("value",5.0);
         </c:if>
 	});
+    function saveAsNew(){
+        $('#id').val("");
+        $('#form').submit();
+    }
 </script>
