@@ -58,7 +58,7 @@
         LEFT JOIN SOLDBAOBEI ON ORDERS.ID = SOLDBAOBEI.ORDERID
         <trim prefix="WHERE" prefixOverrides="AND|OR">
             <if test="name != null and name != ''">
-                SOLDBAOBEI.name like CONCAT(CONCAT('%', #{name}),'%')
+                SOLDBAOBEI.name like CONCAT(CONCAT('%', #{name}),'%') or ORDERS.orderNo like CONCAT(CONCAT('%', #{name}),'%')
             </if>
             <choose>
               <when test='expressInd == "Y"'>
