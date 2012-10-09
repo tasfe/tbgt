@@ -60,6 +60,9 @@
 <script type="text/javascript">
     $(function() {
 		$(".date" ).datepicker({ dateFormat: "yy-mm-dd"});
-		$(".date").datepicker("setDate", new Date());
+        <c:if test="${baobei.incomingTime ==null}">
+            $(".date").datepicker("setDate", new Date());
+            $("#agencyFee").attr("value",5.0);
+        </c:if>
 	});
 </script>

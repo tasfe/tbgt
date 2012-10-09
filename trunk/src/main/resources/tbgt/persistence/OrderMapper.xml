@@ -104,4 +104,8 @@
     <select id="getOrderById" resultMap="resultOrderById" parameterType="int">
 		SELECT * FROM orders where id=#{id};
 	</select>
+
+    <delete id="deleteOrder" parameterType="int">
+		DELETE FROM orders where id=#{id};
+	</delete>
 </mapper>

@@ -44,7 +44,9 @@ public class OrderServiceImpl implements OrderService {
             soldBaobeiMapper.deleteSoldBaobei(soldBaobei.getId());
         }
         Express express = order.getExpress();
-        expressMapper.deleteExpress(express.getId());
+        if (express != null) {
+          expressMapper.deleteExpress(express.getId());
+        }
 
         orderMapper.deleteOrder(id);
     }

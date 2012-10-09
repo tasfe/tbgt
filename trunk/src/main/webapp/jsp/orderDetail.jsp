@@ -94,7 +94,6 @@
         $('div.switch').click();
 
         $(".date").datepicker({ dateFormat: "yy-mm-dd"});
-        $(".date").datepicker("setDate", new Date());
 
         var availableOrders = [
             "张三",
@@ -110,19 +109,21 @@
         ];
         $("#existingOrderNo").autocomplete({
                     source: availableOrders
-
                 });
 
-        //set default value for actualPrice & agencyFee
-        var actualPrice = 0;
-        <c:forEach items="${order.soldBaobeis}" var="soldBaobei" varStatus="index">
+        //set default value for add order
+        <c:if test="${order.orderNo==null}">
+        //sold time
+             $(".date").datepicker("setDate", new Date());
+        //actual price
+             var actualPrice = 0;
+             <c:forEach items="${order.soldBaobeis}" var="soldBaobei" varStatus="index">
                 actualPrice=actualPrice+${soldBaobei.salePrice} * ${soldBaobei.quantity}
-        </c:forEach>
-        $("#actualPrice").attr("value",actualPrice);
-
-        $("#agencyFee").attr("value",5.0);
-
-
+              </c:forEach>
+             $("#actualPrice").attr("value",actualPrice);
+        //agency fee
+             $("#agencyFee").attr("value",5.0);
+        </c:if>
     });
 
     $('#form').submit(function() {
@@ -131,53 +132,54 @@
             url:'/tbgt/order/save.html',
             type:'POST',
             success: function() {
+                tdata1.fnDraw();
                 $(orderDialog).dialog('close');
                 jSuccess(
-                    '订单添加成功',
-                    {
-                        autoHide : true, // added in v2.0
-                        clickOverlay : false, // added in v2.0
-                        MinWidth : 400,
-                        TimeShown : 2000,
-                        ShowTimeEffect : 200,
-                        HideTimeEffect : 200,
-                        LongTrip :20,
-                        HorizontalPosition : 'center',
-                        VerticalPosition : 'top',
-                        ShowOverlay : false,
-                        ColorOverlay : '#000',
-                        OpacityOverlay : 0.3,
-                        onClosed : function() { // added in v2.0
+                        '订单保存成功',
+                        {
+                            autoHide : true, // added in v2.0
+                            clickOverlay : false, // added in v2.0
+                            MinWidth : 400,
+                            TimeShown : 2000,
+                            ShowTimeEffect : 200,
+                            HideTimeEffect : 200,
+                            LongTrip :20,
+                            HorizontalPosition : 'center',
+                            VerticalPosition : 'top',
+                            ShowOverlay : false,
+                            ColorOverlay : '#000',
+                            OpacityOverlay : 0.3,
+                            onClosed : function() { // added in v2.0
 
-                        },
-                        onCompleted : function() { // added in v2.0
+                            },
+                            onCompleted : function() { // added in v2.0
 
-                        }
-                    });
+                            }
+                        });
             },
-            error:function(){
+            error:function() {
                 jError(
-                    '订单添加失败,请联系管理员',
-                    {
-                        autoHide : true, // added in v2.0
-                        clickOverlay : false, // added in v2.0
-                        MinWidth : 400,
-                        TimeShown : 10000,
-                        ShowTimeEffect : 200,
-                        HideTimeEffect : 200,
-                        LongTrip :20,
-                        HorizontalPosition : 'center',
-                        VerticalPosition : 'top',
-                        ShowOverlay : false,
-                        ColorOverlay : '#000',
-                        OpacityOverlay : 0.3,
-                        onClosed : function() { // added in v2.0
+                        '订单保存失败,请联系管理员',
+                        {
+                            autoHide : true, // added in v2.0
+                            clickOverlay : false, // added in v2.0
+                            MinWidth : 400,
+                            TimeShown : 10000,
+                            ShowTimeEffect : 200,
+                            HideTimeEffect : 200,
+                            LongTrip :20,
+                            HorizontalPosition : 'center',
+                            VerticalPosition : 'top',
+                            ShowOverlay : false,
+                            ColorOverlay : '#000',
+                            OpacityOverlay : 0.3,
+                            onClosed : function() { // added in v2.0
 
-                        },
-                        onCompleted : function() { // added in v2.0
+                            },
+                            onCompleted : function() { // added in v2.0
 
-                        }
-                    });
+                            }
+                        });
             }
         };
 
