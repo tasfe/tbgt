@@ -3,6 +3,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="/WEB-INF/tld/tbgt.tld" prefix="tbgt" %>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
@@ -13,7 +14,8 @@
 <body>
 <div id="dialog_content">
     <div id="box">
-        <form:form commandName="express" action="/tbgt/order/saveExpress.html" id="form" method="post">
+        <tbgt:constant name='ContextPath' var="ContextPath"/>
+        <form:form commandName="express" action="${ContextPath}/order/saveExpress.html" id="form" method="post">
             <form:hidden path="id"/>
             <form:hidden path="orderId"/>
             <div><form:errors path="*" cssStyle="color : red;"/></div>

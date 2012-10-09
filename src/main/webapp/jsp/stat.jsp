@@ -2,6 +2,7 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="/WEB-INF/tld/tbgt.tld" prefix="tbgt" %>
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ page contentType="text/html;charset=UTF-8"%>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -9,18 +10,18 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="pragma" content="no-cache" />
 <title>易家生活坊宝贝跟踪 统计</title>
-<link rel="stylesheet" type="text/css" href="/tbgt/css/theme.css" />
-<link rel="stylesheet" type="text/css" href="/tbgt/css/style.css" />
+<link rel="stylesheet" type="text/css" href="<tbgt:constant name="ContextPath"/>/css/theme.css" />
+<link rel="stylesheet" type="text/css" href="<tbgt:constant name="ContextPath"/>/css/style.css" />
 <!--[if IE]>
-<link rel="stylesheet" type="text/css" href="/tbgt/css/ie-sucks.css" />
+<link rel="stylesheet" type="text/css" href="<tbgt:constant name="ContextPath"/>/css/ie-sucks.css" />
 <![endif]-->
 
-<link rel="stylesheet" type="text/css" href="/tbgt/css/custom/jquery-ui-1.8.23.custom.css"/>
-<link rel="stylesheet" href="/tbgt/css/jquery.dataTables.css" type="text/css" media="screen, projection">
-<link rel="stylesheet" href="/tbgt/css/datatable_jui.css" type="text/css" media="screen, projection">
-<script type="text/javascript" src="/tbgt/js/jquery-1.8.0.min.js"></script>
-<script type="text/javascript" src="/tbgt/js/jquery-ui-1.8.23.custom.min.js"></script>
-<script type="text/javascript" src="/tbgt/js/jquery.dataTables.min.js"></script>
+<link rel="stylesheet" type="text/css" href="<tbgt:constant name="ContextPath"/>/css/custom/jquery-ui-1.8.23.custom.css"/>
+<link rel="stylesheet" href="<tbgt:constant name="ContextPath"/>/css/jquery.dataTables.css" type="text/css" media="screen, projection">
+<link rel="stylesheet" href="<tbgt:constant name="ContextPath"/>/css/datatable_jui.css" type="text/css" media="screen, projection">
+<script type="text/javascript" src="<tbgt:constant name="ContextPath"/>/js/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="<tbgt:constant name="ContextPath"/>/js/jquery-ui-1.8.23.custom.min.js"></script>
+<script type="text/javascript" src="<tbgt:constant name="ContextPath"/>/js/jquery.dataTables.min.js"></script>
 </head>
 
 <body>
@@ -29,9 +30,9 @@
         	<h2>易家生活坊宝贝跟踪</h2>
      <div id="topmenu">
             	<ul>
-                    <li ><a href="/tbgt/order/view.html">订单管理</a></li>
-                	<li ><a href="/tbgt/baobei/view.html">宝贝管理</a></li>
-                    <li class="current"><a href="/tbgt/stat/profit.html">统计</a></li>
+                    <li ><a href="<tbgt:constant name="ContextPath"/>/order/view.html">订单管理</a></li>
+                	<li ><a href="<tbgt:constant name="ContextPath"/>/baobei/view.html">宝贝管理</a></li>
+                    <li class="current"><a href="<tbgt:constant name="ContextPath"/>/stat/profit.html">统计</a></li>
                     <li><a href="#">设置</a></li>
               </ul>
       </div>
@@ -49,7 +50,7 @@
                 <div id="box">
                 	<h3>利润</h3>
 
-                    <form:form action="/tbgt/stat/profit.html" commandName="criteria" id="form">
+                    <form:form action="<tbgt:constant name='ContextPath'/>/stat/profit.html" commandName="criteria" id="form">
                         <table width="100%">
                             <tr>
                                 <th class="a-left">
