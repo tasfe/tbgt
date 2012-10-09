@@ -8,7 +8,21 @@
     <name>tbgt</name>
     <packaging>war</packaging>
     <version>1.0</version>
-
+    <profiles>
+        <profile>
+            <id>product</id>
+            <properties>
+                <package.environment>prod</package.environment>
+            </properties>
+        </profile>
+        <profile>
+            <id>dev</id>
+            <activation><activeByDefault>true</activeByDefault></activation>
+            <properties>
+                <package.environment>dev</package.environment>
+            </properties>
+        </profile>
+    </profiles>
     <properties>
         <org.springframework-version>3.1.1.RELEASE</org.springframework-version>
         <org.slf4j.version>1.6.1</org.slf4j.version>
@@ -211,6 +225,24 @@
                         <jettyEnvXml>${basedir}/src/test/resources/jetty-env.xml</jettyEnvXml>
                         <defaultsDescriptor>webdefault.xml</defaultsDescriptor>
                     </webAppConfig>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <addMavenDescriptor>false</addMavenDescriptor>
+                    </archive>
+                    <webResources>
+                        <resource>
+                            <!-- this is relative to the pom.xml directory -->
+                            <directory>src/main/conf/${package.environment}</directory>
+                            <targetPath>WEB-INF/classes</targetPath>
+                            <filtering>true</filtering>
+                        </resource>
+                    </webResources>
                 </configuration>
             </plugin>
         </plugins>
