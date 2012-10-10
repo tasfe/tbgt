@@ -17,6 +17,7 @@
         <typeAlias alias="Express" type="tbgt.domain.Express"/>
         <typeAlias alias="Order" type="tbgt.domain.Order"/>
         <typeAlias alias="SoldBaobei" type="tbgt.domain.SoldBaobei"/>
+        <typeAlias alias="ExpressCode" type="tbgt.domain.ExpressCode"/>
     </typeAliases>
 
 
