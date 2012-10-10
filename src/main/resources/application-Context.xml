@@ -75,4 +75,6 @@
 
     <bean id="statService" class="tbgt.service.StatServiceImpl" autowire="byName"/>
 
+    <bean id="expressCodeService" class="tbgt.service.ExpressCodeServiceImpl" autowire="byName"/>
+
 </beans>       		

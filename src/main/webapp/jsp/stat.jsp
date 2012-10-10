@@ -34,7 +34,7 @@
                     <li ><a href="<tbgt:constant name="ContextPath"/>/order/view.html">订单管理</a></li>
                 	<li ><a href="<tbgt:constant name="ContextPath"/>/baobei/view.html">宝贝管理</a></li>
                     <li class="current"><a href="<tbgt:constant name="ContextPath"/>/stat/profit.html">统计</a></li>
-                    <li><a href="#">设置</a></li>
+                    <li><a href="<tbgt:constant name="ContextPath"/>/tools/express.html">工具</a></li>
               </ul>
       </div>
       </div>
