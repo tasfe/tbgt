@@ -10,6 +10,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="pragma" content="no-cache" />
 <title>易家生活坊宝贝跟踪 统计</title>
+<link rel="shortcut icon" href="<tbgt:constant name="ContextPath"/>/favicon.ico" type="image/x-icon">
 <link rel="stylesheet" type="text/css" href="<tbgt:constant name="ContextPath"/>/css/theme.css" />
 <link rel="stylesheet" type="text/css" href="<tbgt:constant name="ContextPath"/>/css/style.css" />
 <!--[if IE]>
