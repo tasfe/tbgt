@@ -13,6 +13,15 @@
         form#form fieldset label {
             width: 80px;
         }
+
+        #dialog_content {
+            width: 1000px;
+            float: left;
+            margin: 10px 0 10px 0;
+            padding: 10px;
+            min-height: 500px;
+            background: white;
+        }
     </style>
 </head>
 
@@ -32,7 +41,7 @@
                 <form:input path="orderNo" id="orderNo"/>
                 <br/>
                 <label for="address">地址 </label>
-                <form:input path="address" id="address" size="90"/>
+                <form:input path="address" id="address" size="140"/>
                 <br/>
                 <%--<label for="contactPerson">收货人 </label>--%>
                 <%--<form:input path="contactPerson" id="contactPerson"/>--%>
