@@ -189,8 +189,168 @@
     $(document).ready(function() {
 //        $("#tdata1 tr:odd").addClass("odd");
 //        $("#tdata1 tr:even").addClass("even");
-        var provinces=["安徽","澳门","北京","福建","甘肃","广东","广西","贵州","海南","河北","河南","黑龙江","湖北","湖南","吉林","江苏","江西","辽宁","内蒙古","宁夏","青海","山东","山西","陕西","上海","四川","台湾","天津","西藏","香港","新疆","云南","浙江","浙江舟山","重庆"];
-        $("#province").autocomplete({source:provinces});
+        var provinces = [
+            {
+                value: "ah anhui 安徽",
+                desc: "安徽"
+            },
+            {
+                value: "am aomen 澳门",
+                desc: "澳门"
+            },
+            {
+                value: "fj fujian 福建",
+                desc: "福建"
+            },
+            {
+                value: "gs gansu 甘肃",
+                desc: "甘肃"
+            },
+            {
+                value: "gd guangdong 广东",
+                desc: "广东"
+            },
+            {
+                value: "gx guangxi 广西",
+                desc: "广西"
+            },
+            {
+                value: "gz guizhou 贵州",
+                desc: "贵州"
+            },
+            {
+                value: "hn hainan 海南",
+                desc: "海南"
+            },
+            {
+                value: "hb hebei 河北",
+                desc: "河北"
+            },
+            {
+                value: "hn henan 河南",
+                desc: "河南"
+            },
+            {
+                value: "hlj heilongjiang 黑龙江",
+                desc: "黑龙江"
+            },
+            {
+                value: "hb hubei 湖北",
+                desc: "湖北"
+            },
+            {
+                value: "hn hunan 湖南",
+                desc: "湖南"
+            },
+            {
+                value: "jl jilin 吉林",
+                desc: "吉林"
+            },
+            {
+                value: "js jiangsu 江苏",
+                desc: "江苏"
+            },
+            {
+                value: "jx jiangxi 江西",
+                desc: "江西"
+            },
+            {
+                value: "ln liaoning 辽宁",
+                desc: "辽宁"
+            },
+            {
+                value: "nmg neimenggu 内蒙古",
+                desc: "内蒙古"
+            },
+            {
+                value: "nx ningxia 宁夏",
+                desc: "宁夏"
+            },
+            {
+                value: "qh qinghai 青海",
+                desc: "青海"
+            },
+            {
+                value: "xz xizang 西藏",
+                desc: "西藏"
+            },
+            {
+                value: "sd shandong 山东",
+                desc: "山东"
+            },
+            {
+                value: "sx shanxi 山西",
+                desc: "山西"
+            },
+            {
+                value: "sx shanxi 陕西",
+                desc: "陕西"
+            },
+            {
+                value: "sc sichuan 四川",
+                desc: "四川"
+            },
+            {
+                value: "tw taiwan 台湾",
+                desc: "台湾"
+            },
+            {
+                value: "tj tianjin 天津",
+                desc: "天津"
+            },
+            {
+                value: "xg xianggang 香港",
+                desc: "香港"
+            },
+            {
+                value: "xj xinjiang 新疆",
+                desc: "新疆"
+            },
+            {
+                value: "yn yunnan 云南",
+                desc: "云南"
+            },
+            {
+                value: "zj zhejiang 浙江",
+                desc: "浙江"
+            },
+            {
+                value: "cq chongqing 重庆",
+                desc: "重庆"
+            },
+            {
+                value: "zs zhoushan 浙江舟山",
+                desc: "浙江舟山"
+            },
+            {
+                value: "bj beijing 北京",
+                desc: "北京"
+            },
+            {
+                value: "sh shanghai 上海",
+                desc: "上海"
+            }
+        ];
+
+        $( "#province" ).autocomplete({
+            minLength: 1,
+            source: provinces,
+            focus: function( event, ui ) {
+                $( "#province" ).val( ui.item.desc );
+                return false;
+            },
+            select: function( event, ui ) {
+                $( "#province" ).val( ui.item.desc );
+                $("#form").submit();
+                return false;
+            }
+        })
+        .data( "autocomplete" )._renderItem = function( ul, item ) {
+            return $( "<li>" )
+                .data( "item.autocomplete", item )
+                .append( "<a>" + item.desc + "</a>" )
+                .appendTo( ul );
+        };
     });
 
     function popup(province){
