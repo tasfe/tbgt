@@ -16,7 +16,7 @@ public class Baobei {
     @DateTimeFormat(pattern = DateUtil.DATE_FORMAT)
 	private Date incomingTime;
 	public Price price;
-	public BigDecimal weight;
+	public String weight;
 
     public int getId() {
         return id;
@@ -71,11 +71,11 @@ public class Baobei {
         this.taobaoId = taobaoId;
     }
 
-    public BigDecimal getWeight() {
+    public String getWeight() {
         return weight;
     }
 
-    public void setWeight(BigDecimal weight) {
+    public void setWeight(String weight) {
         this.weight = weight;
     }
 }

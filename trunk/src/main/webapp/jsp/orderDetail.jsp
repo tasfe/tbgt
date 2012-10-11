@@ -75,6 +75,7 @@
                         <form:hidden path="soldBaobeis[${index.index}].salePrice"/>
                         <form:hidden path="soldBaobeis[${index.index}].baobeiId"/>
                         <form:hidden path="soldBaobeis[${index.index}].purchasePrice"/>
+                        <form:hidden path="soldBaobeis[${index.index}].weight"/>
                     </tr>
                 </c:forEach>
 

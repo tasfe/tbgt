@@ -11,9 +11,10 @@ public class SoldBaobei {
     private String color;
     private String spec;
     private String name;
+    private String weight;
     private BigDecimal purchasePrice;
 	private BigDecimal salePrice;
-    public BigDecimal weight;
+
 
     public int getId() {
         return id;
@@ -87,11 +88,11 @@ public class SoldBaobei {
         this.orderId = orderId;
     }
 
-    public BigDecimal getWeight() {
+    public String getWeight() {
         return weight;
     }
 
-    public void setWeight(BigDecimal weight) {
+    public void setWeight(String weight) {
         this.weight = weight;
     }
 }

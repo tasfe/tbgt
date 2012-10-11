@@ -9,8 +9,8 @@
     </select>
 
     <insert id="saveSoldBaoBei" parameterType="soldBaobei">
-		INSERT INTO soldBaobei (orderId,baobeiId,quantity,color,spec,name,purchasePrice,salePrice)
-    	VALUE (#{orderId},#{baobeiId},#{quantity},#{color},#{spec},#{name},#{purchasePrice},#{salePrice})
+		INSERT INTO soldBaobei (orderId,baobeiId,quantity,color,spec,name,purchasePrice,salePrice,weight)
+    	VALUE (#{orderId},#{baobeiId},#{quantity},#{color},#{spec},#{name},#{purchasePrice},#{salePrice},#{weight})
         <selectKey keyProperty="id" resultType="int" order="AFTER">
                    SELECT LAST_INSERT_ID();
         </selectKey>
