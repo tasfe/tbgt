@@ -22,7 +22,7 @@
             <fieldset id="info">
                 <legend>快递信息</legend>
                 <label for="expressNo">单号 </label>
-                <form:input path="expressNo" id="expressNo"/>
+                <form:input path="expressNo" id="expressNo" onchange="getExpressFee(this.value)"/>
                 <br/>
                 <label for="fee">费用 </label>
                 <form:input path="fee" id="fee"/>
@@ -46,4 +46,25 @@
         $(".date").datepicker({ dateFormat: "yy-mm-dd"});
         $(".date").datepicker("setDate", new Date());
     });
+    function getExpressFee(expressNo){
+        if($("#fee").val()=="" || $("#fee").val()=="0"){
+            $.ajax({
+                type: "post",
+                url: '<tbgt:constant name='ContextPath'/>/order/getExpressFee.html?expressNo='+expressNo+"&orderId="+$("#orderId").val(),
+                beforeSend: function(XMLHttpRequest) {
+                    //ShowLoading();
+                },
+                success: function(data, textStatus) {
+                    $("#fee").val(data);
+                },
+                complete: function(XMLHttpRequest, textStatus) {
+                    //HideLoading();
+                },
+                error: function() {
+                    //请求出错处理
+                }
+            });
+        }
+
+    }
 </script>

@@ -40,7 +40,7 @@ public class ExpressCodeController {
         if(expressCodeCriteria == null){
             expressCodeCriteria = new ExpressCodeCriteria();
         }
-        List<ExpressCode> expressCodes = expressCodeService.getExpressCode(expressCodeCriteria);
+        List<ExpressCode> expressCodes = expressCodeService.getExpressCodeList(expressCodeCriteria);
         ModelAndView mv = new ModelAndView("tools");
         mv.addObject("expressCodeCriteria",expressCodeCriteria);
         mv.addObject("expressCodes",expressCodes);

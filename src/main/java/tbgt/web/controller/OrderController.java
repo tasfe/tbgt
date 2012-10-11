@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import tbgt.domain.*;
 import tbgt.service.BaoBeiService;
+import tbgt.service.ExpressCodeService;
 import tbgt.service.OrderService;
 import tbgt.web.criteria.OrderCriteria;
 import tbgt.web.paging.PaginationTO;
@@ -28,6 +29,7 @@ import java.util.Random;
 public class OrderController {
     private BaoBeiService baoBeiService;
     private OrderService orderService;
+    private ExpressCodeService expressCodeService;
 
     @Autowired
     public void setBaoBeiService(BaoBeiService baoBeiService) {
@@ -37,6 +39,10 @@ public class OrderController {
     @Autowired
     public void setOrderService(OrderService orderService) {
         this.orderService = orderService;
+    }
+    @Autowired
+    public void setExpressCodeService(ExpressCodeService expressCodeService) {
+        this.expressCodeService = expressCodeService;
     }
 
     @RequestMapping(value = "/view", method = RequestMethod.GET)
@@ -66,6 +72,7 @@ public class OrderController {
             Baobei baobei = baoBeiService.getBaobeiById(baobeiId);
             soldBaobei.setBaobeiId(baobeiId);
             soldBaobei.setName(baobei.getName());
+            soldBaobei.setWeight(baobei.getWeight());
             soldBaobei.setSalePrice(baobei.getPrice().getSalePrice());
             soldBaobei.setPurchasePrice(baobei.getPrice().getPurchasePrice());
 
@@ -108,7 +115,8 @@ public class OrderController {
     public ModelAndView express(@RequestParam int orderId) {
         ModelAndView mv = new ModelAndView("express");
         Express express = orderService.getExpressByOrderId(orderId);
-        if(express==null) {
+
+        if(express ==null) {
             express = new Express();
             express.setOrderId(orderId);
         }
@@ -130,6 +138,30 @@ public class OrderController {
 //        mv.addObject("orders", orderService.getAllOrders());
         mv.addObject("orders", new ArrayList());
         return mv;
+    }
+
+    @RequestMapping(value = "/getExpressFee", method = RequestMethod.POST)
+    public @ResponseBody int getExpressFee(@RequestParam int orderId,@RequestParam String expressNo){
+
+        Order order = orderService.getOrderById(orderId);
+        String address = order.getAddress();
+        BigDecimal weight = BigDecimal.ZERO;
+        for(SoldBaobei soldBaobei : order.getSoldBaobeis()){
+            String baobeiWeight = soldBaobei.getWeight();
+            if(baobeiWeight==null) return 0;
+            weight = weight.add(new BigDecimal(baobeiWeight));
+        }
+        int provinceIndex = address.indexOf("省");
+        String substring = address.substring(0, provinceIndex);
+        int commaIndex = substring.lastIndexOf("，");
+        String province = substring.substring(commaIndex+1,provinceIndex).trim();
+        String type = "韵达";
+        if(expressNo.startsWith("EF")){
+            type = "E邮宝";
+        }
+        ExpressCode expressCode = expressCodeService.getExpressCode(province,type);
+        if(expressCode==null) return 0;
+        return expressCodeService.getExpressFee(expressCode,weight) ;
     }
 
 }

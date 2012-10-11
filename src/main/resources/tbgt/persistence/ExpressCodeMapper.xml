@@ -4,7 +4,7 @@
 
 <mapper namespace="tbgt.persistence.ExpressCodeMapper">
 
-    <select id="getExpressCode" resultType="ExpressCode" parameterType="string">
+    <select id="getExpressCodeList" resultType="ExpressCode" parameterType="string">
       SELECT * FROM express_code
       <trim prefix="WHERE" prefixOverrides="AND|OR">
             <if test="_parameter != null and _parameter != ''">
@@ -12,6 +12,10 @@
             </if>
         </trim>
       order by province,type
+    </select>
+
+    <select id="getExpressCode" resultType="ExpressCode" parameterType="java.util.Map">
+      SELECT * FROM express_code where province=#{province} and type = #{type}
     </select>
 
 </mapper>
