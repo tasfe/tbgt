@@ -9,6 +9,11 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta http-equiv="pragma" content="no-cache"/>
     <title>易家生活坊宝贝跟踪 订单详情</title>
+    <style type="text/css">
+        form#form fieldset label {
+            width: 80px;
+        }
+    </style>
 </head>
 
 <body>
@@ -27,7 +32,7 @@
                 <form:input path="orderNo" id="orderNo"/>
                 <br/>
                 <label for="address">地址 </label>
-                <form:input path="address" id="address"/>
+                <form:input path="address" id="address" size="90"/>
                 <br/>
                 <%--<label for="contactPerson">收货人 </label>--%>
                 <%--<form:input path="contactPerson" id="contactPerson"/>--%>

@@ -146,7 +146,7 @@
         tdata1 = $('#tdata1').dataTable({
             "sPaginationType": "full_numbers",
             "bJQueryUI": true,
-            'iDisplayLength': 10,
+            'iDisplayLength': 50,
             "aLengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
             "bStateSave": true,
             "oLanguage": {
