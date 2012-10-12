@@ -48,14 +48,15 @@ public class OrderController {
     @RequestMapping(value = "/view", method = RequestMethod.GET)
     public ModelAndView viewOrder() {
         ModelAndView mv = new ModelAndView("order");
+        mv.addObject("status","P");
         return mv;
     }
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public @ResponseBody PaginationTO list(@RequestParam String expressInd) {
+    public @ResponseBody PaginationTO list(@RequestParam String status) {
         OrderCriteria orderCriteria = new OrderCriteria();
         orderCriteria.setName( PagingContextHolder.get().getsSearch());
-        orderCriteria.setExpressInd(expressInd);
+        orderCriteria.setStatus(status);
         List<Order> orders = orderService.getOrders(orderCriteria);
         return PagingEnabler.enablePaging(orders);
     }
@@ -87,6 +88,14 @@ public class OrderController {
     public ModelAndView updateOrder(@RequestParam int id) {
         ModelAndView mv = new ModelAndView("orderDetail");
         mv.addObject("order", orderService.getOrderById(id));
+        return mv;
+    }
+
+    @RequestMapping(value = "/confirm", method = RequestMethod.POST)
+    public ModelAndView confirm(@RequestParam int id) {
+        ModelAndView mv = new ModelAndView("order");
+        orderService.updateStatus(id,"C");
+        mv.addObject("status","C");
         return mv;
     }
 

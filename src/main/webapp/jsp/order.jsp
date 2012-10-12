@@ -45,14 +45,15 @@
         <div id="top-panel">
             <div id="panel">
                 <ul>
-            		<li><a href="#" onclick="showOrders('N');return false" class="pending">未发货</a></li>
-                    <li><a href="#" onclick="showOrders('Y');return false" class="express">已发货</a></li>
+            		<li><a href="#" onclick="showOrders('P');return false" class="pending">未发货</a></li>
+                    <li><a href="#" onclick="showOrders('S');return false" class="express">已发货</a></li>
+                    <li><a href="#" onclick="showOrders('C');return false" class="edit">交易成功</a></li>
                 </ul>
             </div>
       </div>
         <div id="wrapper">
             <div id="content">
-                    <h3>订单列表（<span id='expressStat'>未发货</span>）</h3>
+                    <h3>订单列表（<span id='status'>未发货</span>）</h3>
                 	<table id="tdata1" class="display" cellspacing="0" cellpadding="0" border="0" width="100%">
                         <thead>
 							<tr>
@@ -140,7 +141,8 @@
     }
 
     var tdata1;
-    var expressInd="N";
+    var status='${status}';
+    $('#status').html(status=='P'?"未发货":(status=='S'?"已发货":"交易成功"));
     var gaiSelected = [];
     $(document).ready(function() {
         tdata1 = $('#tdata1').dataTable({
@@ -156,7 +158,7 @@
                 "sInfo": "第 _START_ 到 _END_ 条, 总共 _TOTAL_ 条记录",
                 "sInfoFiltered": "(从 _MAX_ 条记录中过滤)",
                 "sSearch": "搜索名称" ,
-                "sZeroRecords": "没有宝贝",
+                "sZeroRecords": "没有订单",
                 "sInfoEmpty": "",
                 "oPaginate": {
                     "sFirst": "第一页",
@@ -169,7 +171,7 @@
             "bServerSide": true,
             "sAjaxSource": "<tbgt:constant name='ContextPath'/>/order/list.html",
             "fnServerParams": function (aoData) {
-                aoData.push({ "name": "expressInd", "value": expressInd });
+                aoData.push({ "name": "status", "value": status });
             },
             "aoColumns": [
                 { "mData": "orderNo" },
@@ -188,7 +190,7 @@
                 { "bSortable": false, "aTargets": [ 5 ],  "sWidth": "80px" }
             ],
             "fnRowCallback": function(nRow, aData, iDisplayIndex) {
-                    $('td:eq(5)', nRow).html('<a href="#" onclick="express(\''+aData.id+'\');return false"><img src="<tbgt:constant name="ContextPath"/>/images/icons/express.png" width="16" height="16" alt="快递"/></a><a href="#" onclick="updateOrder(\'updateOrder\',\''+aData.id+'\');return false"><img src="<tbgt:constant name="ContextPath"/>/images/icons/edit.png" width="16" height="16" alt="修改订单"/></a> <a href="#" onclick="deleteOrder(\''+aData.id+'\');return false"><img src="<tbgt:constant name="ContextPath"/>/images/icons/delete.png" width="16" height="16" alt="删除订单"/></a>');
+                    $('td:eq(5)', nRow).html('<a href="#" onclick="express(\''+aData.id+'\');return false"><img src="<tbgt:constant name="ContextPath"/>/images/icons/express.png" width="16" height="16" alt="快递"/></a><a href="#" class="confirmOrder" onclick="confirmOrder(\''+aData.id+'\');return false"><img src="<tbgt:constant name="ContextPath"/>/images/icons/edit.png" width="16" height="16" alt="确认收货"/></a> <a href="#" onclick="deleteOrder(\''+aData.id+'\');return false"><img src="<tbgt:constant name="ContextPath"/>/images/icons/delete.png" width="16" height="16" alt="删除订单"/></a>');
                     if (jQuery.inArray(aData.id, gaiSelected) !== -1) {
                         $(nRow).addClass('row_selected');
                     }
@@ -201,6 +203,11 @@
                          }
                          return detail;
                     });
+            },
+            "fnDrawCallback": function(oSettings) {
+                if(status!='S'){
+                    $(".confirmOrder").hide();
+                }
             }
 
         });
@@ -229,8 +236,17 @@
 
     });
     function showOrders(ind){
-        expressInd = ind;
-        $('#expressStat').html(ind=='Y'?"已发货":"未发货");
+        status = ind;
+        $('#status').html(ind=='P'?"未发货":(ind=='S'?"已发货":"交易成功"));
         tdata1.fnDraw();
+    }
+
+    function confirmOrder(orderId){
+        var form = $("<form></form>");
+        form.attr('action', "<tbgt:constant name='ContextPath'/>/order/confirm.html?id=" + orderId);
+        form.attr('method', 'post');
+        form.appendTo("body");
+        form.css('display', 'none');
+        form.submit()
     }
 </script>
