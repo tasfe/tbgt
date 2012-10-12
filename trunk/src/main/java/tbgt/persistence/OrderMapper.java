@@ -18,4 +18,6 @@ public interface OrderMapper {
     public Order getOrderById(int id);
 
     public List<Order> getOrders(Map criteria);
+
+    public void updateStatus(Map param);
 }

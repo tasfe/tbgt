@@ -11,6 +11,7 @@ import tbgt.web.criteria.OrderCriteria;
 import tbgt.web.paging.PaginationTO;
 import tbgt.web.paging.PagingContextHolder;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -68,9 +69,16 @@ public class OrderServiceImpl implements OrderService {
           paraMap.put("fromDate",orderCriteria.getFromDate());
           paraMap.put("toDate",orderCriteria.getToDate());
           paraMap.put("name",orderCriteria.getName());
-          paraMap.put("expressInd",orderCriteria.getExpressInd());
+          paraMap.put("status",orderCriteria.getStatus());
         }
         return orderMapper.getOrders(paraMap);
+    }
+
+    public void updateStatus(int orderId,String status){
+        Map<String,Serializable> param = new HashMap<String, Serializable>();
+        param.put("orderId",orderId);
+        param.put("status",status);
+        orderMapper.updateStatus(param);
     }
 
     public void saveOrder(Order order) {
@@ -94,12 +102,14 @@ public class OrderServiceImpl implements OrderService {
     @Transactional
     public void insertExpress(Express express) {
         expressMapper.insertExpress(express);
+        updateStatus(express.getOrderId(),"S");
     }
 
     @Override
     @Transactional
     public void updateExpress(Express express) {
         expressMapper.updateExpress(express);
+        updateStatus(express.getOrderId(),"S");
     }
 
     @Override

@@ -11,7 +11,7 @@ public class OrderCriteria {
     @DateTimeFormat(pattern = DateUtil.DATE_FORMAT)
     private Date toDate;
     private String name;
-    private String expressInd;
+    private String status;
 
     public Date getFromDate() {
         return fromDate;
@@ -37,11 +37,11 @@ public class OrderCriteria {
         this.name = name;
     }
 
-    public String getExpressInd() {
-        return expressInd;
+    public String getStatus() {
+        return status;
     }
 
-    public void setExpressInd(String expressInd) {
-        this.expressInd = expressInd;
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

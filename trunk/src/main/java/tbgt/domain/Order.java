@@ -23,6 +23,7 @@ public class Order {
     @DateTimeFormat(pattern = DateUtil.DATE_FORMAT)
     private Date soldTime;
     private BigDecimal agencyFee;
+    private String status;
 
     public int getId() {
         return id;
@@ -136,4 +137,11 @@ public class Order {
                 .subtract(getExpress().getFee()).subtract(getAgencyFee());
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 }

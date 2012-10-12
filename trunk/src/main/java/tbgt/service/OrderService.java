@@ -28,4 +28,6 @@ public interface OrderService {
     public void deleteExpress(int id);
 
     public List<Order> getOrders(OrderCriteria orderCriteria);
+
+    public void updateStatus(int orderId,String status);
 }

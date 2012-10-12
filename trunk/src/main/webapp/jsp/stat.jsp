@@ -171,7 +171,7 @@
                 "sInfo": "第 _START_ 到 _END_ 条, 总共 _TOTAL_ 条记录",
                 "sInfoFiltered": "(从 _MAX_ 条记录中过滤)",
                 "sSearch": "全局搜索" ,
-                "sZeroRecords": "没有宝贝",
+                "sZeroRecords": "没有订单",
                 "sInfoEmpty": "",
                 "oPaginate": {
                     "sFirst": "第一页",
