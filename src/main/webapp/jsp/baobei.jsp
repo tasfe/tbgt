@@ -166,7 +166,7 @@
                     orderDialog.dialog({
                         title: "添加订单",
                         modal: true,
-                        width: 800,
+                        width: 1100,
                         height: 600,
                         close: function(event, ui) {
                             orderDialog.remove();
