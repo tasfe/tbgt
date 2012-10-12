@@ -112,7 +112,6 @@
             <groupId>jstl</groupId>
             <artifactId>jstl</artifactId>
             <version>1.2</version>
-            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>javax.servlet.jsp</groupId>
@@ -207,6 +206,7 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>2.3.2</version>
                 <configuration>
+                    <encoding>utf-8</encoding>
                     <source>1.6</source>
                     <target>1.6</target>
                     <compilerArgument>-Xlint:all</compilerArgument>
