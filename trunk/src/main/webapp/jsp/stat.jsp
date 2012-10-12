@@ -249,10 +249,10 @@
         $("#tabs").tabs();
        
         if(plot1==null) {
-            plot1 = createChart('chart1',"<tbgt:constant name='ContextPath'/>/stat/lastweek.html");
+            plot1 = createChart('chart1',"<tbgt:constant name='ContextPath'/>/stat/lastweek.html","1 days");
         }
         if(plot2==null)  {
-            plot2 = createChart('chart2',"<tbgt:constant name='ContextPath'/>/stat/lastmonth.html");
+            plot2 = createChart('chart2',"<tbgt:constant name='ContextPath'/>/stat/lastmonth.html","3 days");
         }
         //jqplot
         $('#tabs').bind('tabsshow', function(event, ui) {
@@ -280,16 +280,14 @@
         });
         return [ret];
     };
-    function createChart(target,url){
-        console.log(target+url);
+    function createChart(target,url,dateInterval){
         return $.jqplot(target, url, {
             title:'利润图',
             dataRenderer: ajaxDataRenderer,
-            dataRendererOptions: {
-                unusedOptionalUrl: url
-            },
             axes:{
                 xaxis:{
+                    max:new Date(),
+                    tickInterval:dateInterval,
                     tickOptions:{
                         angle: -20,
                         formatString:'%m-%d'
@@ -307,7 +305,7 @@
             },
             highlighter: {
                 show: true,
-                sizeAdjust: 10,
+                sizeAdjust: 15,
                 tooltipLocation: 's',
                 tooltipAxes: 'xy',
                 useAxesFormatters: true
@@ -327,4 +325,38 @@
             ]
         });
     }
+
+
+//    Date.prototype.format = function(format)
+//    {
+//        /*
+//         * format="yyyy-MM-dd hh:mm:ss";
+//         */
+//        var o = {
+//            "M+" : this.getMonth() + 1,
+//            "d+" : this.getDate(),
+//            "h+" : this.getHours(),
+//            "m+" : this.getMinutes(),
+//            "s+" : this.getSeconds(),
+//            "q+" : Math.floor((this.getMonth() + 3) / 3),
+//            "S" : this.getMilliseconds()
+//        }
+//
+//        if (/(y+)/.test(format))
+//        {
+//            format = format.replace(RegExp.$1, (this.getFullYear() + "").substr(4
+//                    - RegExp.$1.length));
+//        }
+//
+//        for (var k in o)
+//        {
+//            if (new RegExp("(" + k + ")").test(format))
+//            {
+//                format = format.replace(RegExp.$1, RegExp.$1.length == 1
+//                        ? o[k]
+//                        : ("00" + o[k]).substr(("" + o[k]).length));
+//            }
+//        }
+//        return format;
+//    }
 </script>
