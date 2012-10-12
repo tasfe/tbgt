@@ -15,6 +15,7 @@ import tbgt.domain.Order;
 import tbgt.service.OrderService;
 import tbgt.service.StatService;
 import tbgt.web.criteria.OrderCriteria;
+import tbgt.util.DateUtil;
 
 import java.math.BigDecimal;
 import java.util.*;
@@ -51,39 +52,38 @@ public class StatController {
 
     @RequestMapping(value = "/lastweek", method = RequestMethod.POST)
     public @ResponseBody String lastweek() {
-        return "[\n" +
-                "            ['2008-06-30',40.00],\n" +
-                "            ['2008-7-14',60.50],\n" +
-                "            ['2008-7-28',50.70],\n" +
-                "            ['2008-8-11',90.00],\n" +
-                "            ['2008-8-25',80.20]\n" +
-                "        ]";
+       return getChartData(new DateTime().minusDays(7).toDate(),new Date());
     }
 
     @RequestMapping(value = "/lastmonth", method = RequestMethod.POST)
     public @ResponseBody String lastmonth() {
-        return "[\n" +
-                "            ['2008-8-13',40.00],\n" +
-                "            ['2008-8-14',60.50],\n" +
-                "            ['2008-8-15',50.70],\n" +
-                "            ['2008-8-16',90.00],\n" +
-                "            ['2008-8-17',80.20],\n" +
-                "            ['2008-8-18',80.20],\n" +
-                "            ['2008-8-19',90.20],\n" +
-                "            ['2008-8-20',45.20],\n" +
-                "            ['2008-8-21',67.20],\n" +
-                "            ['2008-8-22',67.20],\n" +
-                "            ['2008-8-23',67.20],\n" +
-                "            ['2008-8-24',67.20],\n" +
-                "            ['2008-8-25',67.20],\n" +
-                "            ['2008-8-26',67.20],\n" +
-                "            ['2008-8-27',67.20],\n" +
-                "            ['2008-8-28',67.20],\n" +
-                "            ['2008-8-29',67.20],\n" +
-                "            ['2008-8-30',67.20],\n" +
-                "            ['2008-8-31',67.20],\n" +
-                "            ['2008-9-1',31.20]\n" +
-                "        ]";
+      return getChartData(new DateTime().minusDays(30).toDate(),new Date());
+    }
+
+    private String getChartData(Date fromDate, Date toDate){
+        OrderCriteria orderCriteria = new OrderCriteria();
+        orderCriteria.setFromDate(fromDate);
+        orderCriteria.setToDate(toDate);
+        orderCriteria.setStatus("C");
+        List<Order> orders = orderService.getOrders(orderCriteria);
+        Map<String, BigDecimal> chartDataMap = new HashMap<String, BigDecimal>();
+        for (Order order : orders) {
+            String soldDate = new DateTime(order.getSoldTime()).toString(DateUtil.DATE_FORMAT);
+            BigDecimal profit = chartDataMap.get(soldDate);
+            if (profit != null) {
+                profit = profit.add(order.getProfit());
+            }else{
+                profit = order.getProfit();
+            }
+            chartDataMap.put(soldDate, profit);
+        }
+        StringBuffer buff = new StringBuffer();
+        buff.append("[");
+        for(Map.Entry<String, BigDecimal> entry:chartDataMap.entrySet()){
+          buff.append("['").append(entry.getKey()).append("',").append(entry.getValue().toString()).append("],");
+        }
+        buff.append("]");
+        return buff.toString();
     }
 
     public ModelAndView profit(OrderCriteria orderCriteria) {
