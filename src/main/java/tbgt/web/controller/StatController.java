@@ -8,6 +8,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import tbgt.domain.Express;
 import tbgt.domain.Order;
@@ -45,6 +46,44 @@ public class StatController {
     @RequestMapping(value = "/profit", method = RequestMethod.POST)
     public ModelAndView viewProfit(@ModelAttribute (value = "orderCriteria") OrderCriteria orderCriteria, BindingResult result) {
         return profit(orderCriteria);
+    }
+
+
+    @RequestMapping(value = "/lastweek", method = RequestMethod.POST)
+    public @ResponseBody String lastweek() {
+        return "[\n" +
+                "            ['2008-06-30',40.00],\n" +
+                "            ['2008-7-14',60.50],\n" +
+                "            ['2008-7-28',50.70],\n" +
+                "            ['2008-8-11',90.00],\n" +
+                "            ['2008-8-25',80.20]\n" +
+                "        ]";
+    }
+
+    @RequestMapping(value = "/lastmonth", method = RequestMethod.POST)
+    public @ResponseBody String lastmonth() {
+        return "[\n" +
+                "            ['2008-8-13',40.00],\n" +
+                "            ['2008-8-14',60.50],\n" +
+                "            ['2008-8-15',50.70],\n" +
+                "            ['2008-8-16',90.00],\n" +
+                "            ['2008-8-17',80.20],\n" +
+                "            ['2008-8-18',80.20],\n" +
+                "            ['2008-8-19',90.20],\n" +
+                "            ['2008-8-20',45.20],\n" +
+                "            ['2008-8-21',67.20],\n" +
+                "            ['2008-8-22',67.20],\n" +
+                "            ['2008-8-23',67.20],\n" +
+                "            ['2008-8-24',67.20],\n" +
+                "            ['2008-8-25',67.20],\n" +
+                "            ['2008-8-26',67.20],\n" +
+                "            ['2008-8-27',67.20],\n" +
+                "            ['2008-8-28',67.20],\n" +
+                "            ['2008-8-29',67.20],\n" +
+                "            ['2008-8-30',67.20],\n" +
+                "            ['2008-8-31',67.20],\n" +
+                "            ['2008-9-1',31.20]\n" +
+                "        ]";
     }
 
     public ModelAndView profit(OrderCriteria orderCriteria) {

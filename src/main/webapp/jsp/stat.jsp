@@ -1,143 +1,190 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="/WEB-INF/tld/tbgt.tld" prefix="tbgt" %>
-<%@ page language="java" pageEncoding="UTF-8"%>
-<%@ page contentType="text/html;charset=UTF-8"%>
+<%@ page language="java" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta http-equiv="pragma" content="no-cache" />
-<title>易家生活坊宝贝跟踪 统计</title>
-<link rel="shortcut icon" href="<tbgt:constant name="ContextPath"/>/favicon.ico" type="image/x-icon">
-<link rel="stylesheet" type="text/css" href="<tbgt:constant name="ContextPath"/>/css/theme.css" />
-<link rel="stylesheet" type="text/css" href="<tbgt:constant name="ContextPath"/>/css/style.css" />
-<!--[if IE]>
-<link rel="stylesheet" type="text/css" href="<tbgt:constant name="ContextPath"/>/css/ie-sucks.css" />
-<![endif]-->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="pragma" content="no-cache"/>
+    <title>易家生活坊宝贝跟踪 统计</title>
+    <link rel="shortcut icon" href="<tbgt:constant name="ContextPath"/>/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="<tbgt:constant name="ContextPath"/>/css/theme.css"/>
+    <link rel="stylesheet" type="text/css" href="<tbgt:constant name="ContextPath"/>/css/style.css"/>
+    <!--[if IE]>
+    <link rel="stylesheet" type="text/css" href="<tbgt:constant name=" ContextPath"/>/css/ie-sucks.css" />
+    <![endif]-->
 
-<link rel="stylesheet" type="text/css" href="<tbgt:constant name="ContextPath"/>/css/custom/jquery-ui-1.8.23.custom.css"/>
-<link rel="stylesheet" href="<tbgt:constant name="ContextPath"/>/css/jquery.dataTables.css" type="text/css" media="screen, projection">
-<link rel="stylesheet" href="<tbgt:constant name="ContextPath"/>/css/datatable_jui.css" type="text/css" media="screen, projection">
-<script type="text/javascript" src="<tbgt:constant name="ContextPath"/>/js/jquery-1.8.0.min.js"></script>
-<script type="text/javascript" src="<tbgt:constant name="ContextPath"/>/js/jquery-ui-1.8.23.custom.min.js"></script>
-<script type="text/javascript" src="<tbgt:constant name="ContextPath"/>/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" type="text/css"
+          href="<tbgt:constant name="ContextPath"/>/css/custom/jquery-ui-1.8.23.custom.css"/>
+    <link rel="stylesheet" href="<tbgt:constant name="ContextPath"/>/css/jquery.dataTables.css" type="text/css"
+          media="screen, projection">
+    <link rel="stylesheet" href="<tbgt:constant name="ContextPath"/>/css/datatable_jui.css" type="text/css"
+          media="screen, projection">
+    <script type="text/javascript" src="<tbgt:constant name="ContextPath"/>/js/jquery-1.8.0.min.js"></script>
+    <script type="text/javascript" src="<tbgt:constant name="ContextPath"/>/js/jquery-ui-1.8.23.custom.min.js"></script>
+    <script type="text/javascript" src="<tbgt:constant name="ContextPath"/>/js/jquery.dataTables.min.js"></script>
+
+    <!--[if lt IE 9]>
+    <script language="javascript" type="text/javascript" src="<tbgt:constant name="
+            ContextPath"/>/js/excanvas.min.js"></script><![endif]-->
+    <script language="javascript" type="text/javascript"
+            src="<tbgt:constant name="ContextPath"/>/js/jquery.jqplot.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="<tbgt:constant name="ContextPath"/>/css/jquery.jqplot.min.css"/>
+    <script class="include" language="javascript" type="text/javascript"
+            src="<tbgt:constant name="ContextPath"/>/js/plugins/jqplot.dateAxisRenderer.min.js"></script>
+    <script type="text/javascript" src="<tbgt:constant name="ContextPath"/>/js/plugins/jqplot.barRenderer.min.js"></script>
+<script type="text/javascript" src="<tbgt:constant name="ContextPath"/>/js/plugins/jqplot.categoryAxisRenderer.min.js"></script>
+<script type="text/javascript" src="<tbgt:constant name="ContextPath"/>/js/plugins/jqplot.cursor.min.js"></script>
+<script type="text/javascript" src="<tbgt:constant name="ContextPath"/>/js/plugins/jqplot.highlighter.min.js"></script>
+<script type="text/javascript" src="<tbgt:constant name="ContextPath"/>/js/plugins/jqplot.dragable.min.js"></script>
+<script type="text/javascript" src="<tbgt:constant name="ContextPath"/>/js/plugins/jqplot.trendline.min.js"></script>
+<script type="text/javascript" src="<tbgt:constant name="ContextPath"/>/js/plugins/jqplot.canvasTextRenderer.min.js"></script>
+<script type="text/javascript" src="<tbgt:constant name="ContextPath"/>/js/plugins/jqplot.canvasAxisLabelRenderer.min.js"></script>
+<script type="text/javascript" src="<tbgt:constant name="ContextPath"/>/js/plugins/jqplot.canvasAxisTickRenderer.min.js"></script>
+<script type="text/javascript" src="<tbgt:constant name="ContextPath"/>/js/plugins/jqplot.pointLabels.min.js"></script>
+<script type="text/javascript" src="<tbgt:constant name="ContextPath"/>/js/plugins/jqplot.json2.min.js"></script>
+    <style type="text/css">
+        #panel .current a, #panel .current a:hover, #panel .current a:visited {
+            padding: 5px 12px 5px 20px;
+            font-weight: bold;
+        }
+    </style>
 </head>
 
 <body>
-	<div id="container">
-    	<div id="header">
-        	<h2>易家生活坊宝贝跟踪</h2>
-     <div id="topmenu">
-            	<ul>
-                    <li ><a href="<tbgt:constant name="ContextPath"/>/order/view.html">订单管理</a></li>
-                	<li ><a href="<tbgt:constant name="ContextPath"/>/baobei/view.html">宝贝管理</a></li>
-                    <li class="current"><a href="<tbgt:constant name="ContextPath"/>/stat/profit.html">统计</a></li>
-                    <li><a href="<tbgt:constant name="ContextPath"/>/tools/express.html">工具</a></li>
-              </ul>
-      </div>
-      </div>
-        <div id="top-panel">
-            <div id="panel">
-                <ul>
-                    <li><a href="#" class="profit">利润统计</a></li>
-            		<li><a href="#" class="volume">销售量统计</a></li>
-                </ul>
-            </div>
-      </div>
-        <div id="wrapper">
-            <div id="content">
-                <div id="box">
-                	<h3>利润</h3>
-                     <tbgt:constant name='ContextPath' var="ContextPath"/>
-                    <form:form action="${ContextPath}/stat/profit.html" commandName="criteria" id="form">
-                        <table width="100%">
-                            <tr>
-                                <th class="a-left">
-                                    从&nbsp;
-                                    <form:input path="fromDate" id="fromDate" class="date"/>
-                                    &nbsp;到&nbsp;
-                                    <form:input path="toDate" id="toDate" class="date"/>
-                                    &nbsp;
-                                    宝贝名
-                                    <form:input path="name" id="name"/>
-                                    &nbsp;
-                                    <input id="saveBtn" type="submit" value="搜索" class="button"/>
-                                </th>
-                            </tr>
+<div id="container">
+    <div id="header">
+        <h2>易家生活坊宝贝跟踪</h2>
 
-                        </table>
-                    </form:form>
-                       <br/>
-
+        <div id="topmenu">
+            <ul>
+                <li><a href="<tbgt:constant name="ContextPath"/>/order/view.html">订单管理</a></li>
+                <li><a href="<tbgt:constant name="ContextPath"/>/baobei/view.html">宝贝管理</a></li>
+                <li class="current"><a href="<tbgt:constant name="ContextPath"/>/stat/profit.html">统计</a></li>
+                <li><a href="<tbgt:constant name="ContextPath"/>/tools/express.html">工具</a></li>
+            </ul>
+        </div>
+    </div>
+    <div id="top-panel">
+        <div id="panel">
+            <ul>
+                <li id="profitLi" class="current"><a href="<tbgt:constant name="ContextPath"/>/stat/profit.html" class="profit">利润统计</a></li>
+                <li id="chartLi"><a href="#" class="volume" onclick="chart()">统计图表</a></li>
+            </ul>
+        </div>
+    </div>
+    <div id="wrapper">
+        <div id="content">
+            <div id="box">
+                <h3>利润</h3>
+                <tbgt:constant name='ContextPath' var="ContextPath"/>
+                <form:form action="${ContextPath}/stat/profit.html" commandName="criteria" id="form">
                     <table width="100%">
                         <tr>
-                            <td width="200px" class="f_name">总销售额</td>
-                            <td>${summary.totalSale}</td>
-                            <td width="200px" class="f_name">总代理费</td>
-                            <td>${summary.totalAgencyFee}</td>
-                        </tr>
-                        <tr>
-                            <td width="200px" class="f_name">总成本</td>
-                            <td>${summary.totalPurchase}</td>
-                            <td width="200px" class="f_name">总快递费</td>
-                            <td>${summary.totalExpress}</td>
-                        </tr>
-                        <tr>
-                            <td width="70px" class="f_name">总利润</td>
-                            <td>${summary.totalProfit}</td>
-                            <td width="70px" class="f_name">总应付款</td>
-                            <td>${summary.totalPaid}</td>
+                            <th class="a-left">
+                                从&nbsp;
+                                <form:input path="fromDate" id="fromDate" class="date"/>
+                                &nbsp;到&nbsp;
+                                <form:input path="toDate" id="toDate" class="date"/>
+                                &nbsp;
+                                宝贝名
+                                <form:input path="name" id="name"/>
+                                &nbsp;
+                                <input id="saveBtn" type="submit" value="搜索" class="button"/>
+                            </th>
                         </tr>
 
                     </table>
+                </form:form>
+                <br/>
 
-                    <br/>
-                	<table id="tdata1" class="display" cellspacing="0" cellpadding="0" border="0" width="100%">
-						<thead>
-							<tr>
-                            	<th width="70px">订单号</th>
-                            	<th>订单详情</th>
-								<th width="100px">成交时间</th>
-								<th width="60px">成交价</th>
-                                <th width="60px">成本</th>
-                                <th width="80px">快递费用</th>
-                                <th width="60px">代理费</th>
-                                <th width="60px">利润</th>
-                            </tr>
-						</thead>
-						<tbody>
-                        <c:forEach items="${orders}" var="order" varStatus="index">
-							<tr>
-                            	<td class="a-center">${order.id}</td>
-                            	<td>
-                                  ${order.address}<br/>
-                                  <c:forEach items="${order.soldBaobeis}" var="soldBaobei">
+                <table width="100%">
+                    <tr>
+                        <td width="200px" class="f_name">总销售额</td>
+                        <td>${summary.totalSale}</td>
+                        <td width="200px" class="f_name">总代理费</td>
+                        <td>${summary.totalAgencyFee}</td>
+                    </tr>
+                    <tr>
+                        <td width="200px" class="f_name">总成本</td>
+                        <td>${summary.totalPurchase}</td>
+                        <td width="200px" class="f_name">总快递费</td>
+                        <td>${summary.totalExpress}</td>
+                    </tr>
+                    <tr>
+                        <td width="70px" class="f_name">总利润</td>
+                        <td>${summary.totalProfit}</td>
+                        <td width="70px" class="f_name">总应付款</td>
+                        <td>${summary.totalPaid}</td>
+                    </tr>
+
+                </table>
+
+                <br/>
+                <table id="tdata1" class="display" cellspacing="0" cellpadding="0" border="0" width="100%">
+                    <thead>
+                    <tr>
+                        <th width="70px">订单号</th>
+                        <th>订单详情</th>
+                        <th width="100px">成交时间</th>
+                        <th width="60px">成交价</th>
+                        <th width="60px">成本</th>
+                        <th width="80px">快递费用</th>
+                        <th width="60px">代理费</th>
+                        <th width="60px">利润</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <c:forEach items="${orders}" var="order" varStatus="index">
+                        <tr>
+                            <td class="a-center">${order.id}</td>
+                            <td>
+                                    ${order.address}<br/>
+                                <c:forEach items="${order.soldBaobeis}" var="soldBaobei">
                                     ${soldBaobei.quantity} 个 ${soldBaobei.name} <br/>
-                                  </c:forEach>
-                                </td>
-								<td class="a-center"><fmt:formatDate value="${order.soldTime}" type="date" pattern="yyyy-MM-dd"/></td>
-                                <td class="a-right">${order.actualPrice}</td>
-                                <td class="a-right">${order.purchasePrice}</td>
-                                <td class="a-right">${order.express.fee}</td>
-                                <td class="a-right">${order.agencyFee}</td>
-                                <td class="a-right">${order.profit}</td>
-                            </tr>
-                        </c:forEach>
-						</tbody>
-					</table>
+                                </c:forEach>
+                            </td>
+                            <td class="a-center"><fmt:formatDate value="${order.soldTime}" type="date"
+                                                                 pattern="yyyy-MM-dd"/></td>
+                            <td class="a-right">${order.actualPrice}</td>
+                            <td class="a-right">${order.purchasePrice}</td>
+                            <td class="a-right">${order.express.fee}</td>
+                            <td class="a-right">${order.agencyFee}</td>
+                            <td class="a-right">${order.profit}</td>
+                        </tr>
+                    </c:forEach>
+                    </tbody>
+                </table>
 
-                </div>
-                <br />
+            </div>
+            <br/>
+        </div>
+
+        <div id="tabs" style="display:none;margin: 10px 0 10px 0;padding: 10px;background: white;width:960px;clear: both;">
+            <ul>
+                <li><a href="#tabs-1">最近一周</a></li>
+                <li><a href="#tabs-2">最近一个月</a></li>
+            </ul>
+            <div id="tabs-1">
+                <div id="chart1" style="height:300px;width:900px;"></div>
             </div>
 
-      </div>
-        <div id="footer">
-           <div id="credits">
-   		        版权所有 © 2012-2014, 易家生活坊, All Rights Reserved.
-           </div>
+            <div id="tabs-2">
+                 <div id="chart2" style="height:300px;width:900px;"></div>
+            </div>
         </div>
+
+    </div>
+
+
+    <div id="footer">
+        <div id="credits">
+            版权所有 © 2012-2014, 易家生活坊, All Rights Reserved.
+        </div>
+    </div>
 </div>
 </body>
 </html>
@@ -159,12 +206,16 @@
     });
 
     $(function() {
-		$(".date" ).datepicker({ dateFormat: "yy-mm-dd"});
+        $(".date").datepicker({ dateFormat: "yy-mm-dd"});
+        //datatable
         tdata1 = $('#tdata1').dataTable({
             "sPaginationType": "full_numbers",
             "bJQueryUI": true,
             'iDisplayLength': 50,
-            "aLengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+            "aLengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"]
+            ],
 //            "bSort": false,
             "oLanguage": {
                 "sLengthMenu": "每页显示 _MENU_ 记录",
@@ -180,8 +231,128 @@
                     "sPrevious": "上一页"
                 }
             },
-            "aaSorting": [[ 2, "desc" ]]
+            "aaSorting": [
+                [ 2, "desc" ]
+            ]
         });
 
-	});
+
+    });
+    var plot1=null;
+    var plot2=null;
+    function chart() {
+//        $.jqplot.config.enablePlugins = true;
+        $("#profitLi").removeClass("current");
+        $("#chartLi").addClass("current");
+        $("#content").hide();
+        $("#tabs").show();
+        $("#tabs").tabs();
+        var line1 = [
+            ['2008-06-30',40.00],
+            ['2008-7-14',60.50],
+            ['2008-7-28',50.70],
+            ['2008-8-11',90.00],
+            ['2008-8-25',80.20]
+        ];
+        var line2 = [
+            ['2008-8-13',40.00],
+            ['2008-8-14',60.50],
+            ['2008-8-15',50.70],
+            ['2008-8-16',90.00],
+            ['2008-8-17',80.20],
+            ['2008-8-18',80.20],
+            ['2008-8-19',90.20],
+            ['2008-8-20',45.20],
+            ['2008-8-21',67.20],
+            ['2008-8-22',67.20],
+            ['2008-8-23',67.20],
+            ['2008-8-24',67.20],
+            ['2008-8-25',67.20],
+            ['2008-8-26',67.20],
+            ['2008-8-27',67.20],
+            ['2008-8-28',67.20],
+            ['2008-8-29',67.20],
+            ['2008-8-30',67.20],
+            ['2008-8-31',67.20],
+            ['2008-9-1',31.20]
+        ];
+        if(plot1==null) {
+            plot1 = createChart('chart1',"<tbgt:constant name='ContextPath'/>/stat/lastweek.html");
+        }
+        if(plot2==null)  {
+            plot2 = createChart('chart2',"<tbgt:constant name='ContextPath'/>/stat/lastmonth.html");
+        }
+        //jqplot
+        $('#tabs').bind('tabsshow', function(event, ui) {
+            if (ui.index === 0) {
+                plot1.replot();
+            }
+            else if (ui.index === 1) {
+                plot2.replot();
+            }
+        });
+    }
+    var ajaxDataRenderer = function(url, plot, options) {
+        var ret = null;
+        $.ajax({
+            // have to use synchronous here, else the function
+            // will return before the data is fetched
+            async: false,
+            url: url,
+            type: "post",
+//            dataType:"json",
+            success: function(data) {
+                ret = eval("("+data+")");
+//                ret = data;
+            }
+        });
+        return [ret];
+    };
+    function createChart(target,url){
+        console.log(target+url);
+        return $.jqplot(target, url, {
+            title:'利润图',
+            dataRenderer: ajaxDataRenderer,
+            dataRendererOptions: {
+                unusedOptionalUrl: url
+            },
+            axes:{
+                xaxis:{
+                    tickOptions:{
+                        angle: -20,
+                        formatString:'%m-%d'
+                    },
+                    tickRenderer:$.jqplot.CanvasAxisTickRenderer,
+//                    labelRenderer: $.jqplot.CanvasAxisLabelRenderer,
+                    renderer:$.jqplot.DateAxisRenderer
+                },
+                yaxis:{
+                    tickOptions: {
+                        formatString: '￥%.2f'
+                    }
+                }
+
+            },
+            highlighter: {
+                show: true,
+                sizeAdjust: 10,
+                tooltipLocation: 's',
+                tooltipAxes: 'xy',
+                useAxesFormatters: true
+            },
+            cursor: {
+                show: false
+            },
+            animate: true,
+            animateReplot: true,
+            series:[
+                {
+                    lineWidth:4,
+                    pointLabels: {
+                        show: true
+                    }
+                }
+            ]
+        });
+    }
 </script>
