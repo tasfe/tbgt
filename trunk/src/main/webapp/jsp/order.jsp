@@ -190,7 +190,7 @@
                 { "bSortable": false, "aTargets": [ 5 ],  "sWidth": "80px" }
             ],
             "fnRowCallback": function(nRow, aData, iDisplayIndex) {
-                    $('td:eq(5)', nRow).html('<a href="#" onclick="express(\''+aData.id+'\');return false"><img src="<tbgt:constant name="ContextPath"/>/images/icons/express.png" width="16" height="16" alt="快递"/></a><a href="#" class="confirmOrder" onclick="confirmOrder(\''+aData.id+'\');return false"><img src="<tbgt:constant name="ContextPath"/>/images/icons/edit.png" width="16" height="16" alt="确认收货"/></a> <a href="#" onclick="deleteOrder(\''+aData.id+'\');return false"><img src="<tbgt:constant name="ContextPath"/>/images/icons/delete.png" width="16" height="16" alt="删除订单"/></a>');
+                    $('td:eq(5)', nRow).html('<a href="#" onclick="express(\''+aData.id+'\');return false" title="快递"><img src="<tbgt:constant name="ContextPath"/>/images/icons/express.png" width="16" height="16" alt="快递"/></a><a href="#" title="确认收货" class="confirmOrder" onclick="confirmOrder(\''+aData.id+'\');return false"><img src="<tbgt:constant name="ContextPath"/>/images/icons/edit.png" width="16" height="16" alt="确认收货"/></a> <a href="#" title="删除订单" onclick="deleteOrder(\''+aData.id+'\');return false"><img src="<tbgt:constant name="ContextPath"/>/images/icons/delete.png" width="16" height="16" alt="删除订单"/></a>');
                     if (jQuery.inArray(aData.id, gaiSelected) !== -1) {
                         $(nRow).addClass('row_selected');
                     }
@@ -242,11 +242,13 @@
     }
 
     function confirmOrder(orderId){
+      if(confirm("即将确认收货, 确认手没抖吗?")){
         var form = $("<form></form>");
         form.attr('action', "<tbgt:constant name='ContextPath'/>/order/confirm.html?id=" + orderId);
         form.attr('method', 'post');
         form.appendTo("body");
         form.css('display', 'none');
         form.submit()
+      }
     }
 </script>
