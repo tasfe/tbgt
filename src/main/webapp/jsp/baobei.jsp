@@ -232,7 +232,7 @@
             ],
             "fnRowCallback": function(nRow, aData, iDisplayIndex) {
                     $('td:eq(2)', nRow).html('<a target="_blank" href="'+aData.taobaoLink+' ">'+aData.saleTitle+'</a>');
-                    $('td:eq(8)', nRow).html('<a href="#" onclick="saveBaobei(\'updateBaobei\',\''+aData.id+'\');return false"><img src="<tbgt:constant name="ContextPath"/>/images/icons/edit.png" width="16" height="16" alt="修改宝贝"/></a><a href="#" onclick="orderBaobei(\''+aData.id+'\');return false"><img src="<tbgt:constant name="ContextPath"/>/images/icons/order.jpg" width="16" height="16" alt="添加订单"/></a> <a href="#" onclick="deleteBaobei(\''+aData.id+'\');return false"><img src="<tbgt:constant name="ContextPath"/>/images/icons/delete.png" width="16" height="16" alt="删除宝贝"/></a>');
+                    $('td:eq(8)', nRow).html('<a href="#" title="修改宝贝" onclick="saveBaobei(\'updateBaobei\',\''+aData.id+'\');return false"><img src="<tbgt:constant name="ContextPath"/>/images/icons/edit.png" width="16" height="16" alt="修改宝贝"/></a><a href="#" onclick="orderBaobei(\''+aData.id+'\');return false" title="添加订单"><img src="<tbgt:constant name="ContextPath"/>/images/icons/order.jpg" width="16" height="16" alt="添加订单"/></a> <a href="#" onclick="deleteBaobei(\''+aData.id+'\');return false" title="删除宝贝"><img src="<tbgt:constant name="ContextPath"/>/images/icons/delete.png" width="16" height="16" alt="删除宝贝"/></a>');
                 if (jQuery.inArray(aData.id, gaiSelected) !== -1) {
                     $(nRow).addClass('row_selected');
                 }
