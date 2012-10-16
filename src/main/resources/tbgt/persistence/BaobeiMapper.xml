@@ -5,7 +5,12 @@
 <mapper namespace="tbgt.persistence.BaobeiMapper">
 
 	<resultMap id="resultBaobei" type="Baobei">
-
+        <id property="id" column="id"/>
+        <result property="detail_url" column="detail_url"/>
+        <result property="pic_url" column="pic_url"/>
+        <result property="title" column="title"/>
+        <result property="property_alias" column="property_alias"/>
+        <result property="list_time" column="list_time"/>
     </resultMap>
 
     <resultMap id="result" extends="resultBaobei" type="Baobei">

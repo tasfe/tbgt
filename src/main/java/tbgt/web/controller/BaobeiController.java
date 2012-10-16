@@ -60,7 +60,7 @@ public class BaobeiController {
     }
 
     @RequestMapping(value = "/updateBaobei", method = RequestMethod.GET)
-    public ModelAndView updateBaobei(@RequestParam int id) {
+    public ModelAndView updateBaobei(@RequestParam long id) {
         ModelAndView mv = new ModelAndView("baobeiInfo");
         Baobei baobei = baoBeiService.getBaobeiById(id);
         mv.addObject("baobei", baobei);
@@ -68,7 +68,7 @@ public class BaobeiController {
     }
 
     @RequestMapping(value = "/deleteBaobei", method = RequestMethod.POST)
-    public ModelAndView deleteBaobei(@RequestParam int id) {
+    public ModelAndView deleteBaobei(@RequestParam long id) {
         ModelAndView mv = new ModelAndView("baobei");
         baoBeiService.deleteBaobei(id);
 //        mv.addObject("baobeis", baoBeiService.getAllBaobei());
@@ -81,11 +81,7 @@ public class BaobeiController {
         ModelAndView mv = new ModelAndView("baobei");
         //todo..validator
         if (!result.hasErrors()) {
-            if (baobei.getId() == 0) {
-                baoBeiService.insertBaobei(baobei);
-            } else {
-                baoBeiService.updateBaobei(baobei);
-            }
+            baoBeiService.updateBaobeiCustomAttr(baobei);
         }
         return mv;
     }

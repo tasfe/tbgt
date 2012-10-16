@@ -70,4 +70,11 @@ public class BaoBeiServiceImpl implements BaoBeiService {
             }
         }
     }
+
+    @Transactional
+    public void updateBaobeiCustomAttr(Baobei baobei) {
+        for (BaobeiSku sku : baobei.getSkus()) {
+            baobeiSkuMapper.updateBaobeiCustomAttr(sku);
+        }
+    }
 }

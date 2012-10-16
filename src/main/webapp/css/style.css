@@ -391,7 +391,7 @@ form#form #button1:hover, form#form #button2:hover {
 	Dialog
 *********************/
 #dialog_content{
-	width:700px;
+	width:960px;
 	float:left;
 	margin:10px 0 10px 0;
 	padding:10px;
