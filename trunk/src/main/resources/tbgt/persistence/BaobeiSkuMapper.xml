@@ -23,7 +23,13 @@
 			bbid = #{bbid},
 			properties_name = #{properties_name},
 			quantity = #{quantity},
-			price = #{price},
+			price = #{price}
+  		where sku_id = #{sku_id}
+	</update>
+
+    <update id="updateBaobeiCustomAttr" parameterType="BaobeiSku">
+  		UPDATE sku
+  		SET
 			weight = #{weight},
 			purchase_price = #{purchase_price}
   		where sku_id = #{sku_id}

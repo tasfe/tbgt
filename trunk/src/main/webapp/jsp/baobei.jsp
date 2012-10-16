@@ -48,8 +48,7 @@
     <div id="top-panel">
         <div id="panel">
             <ul>
-                <li><a href="#" onclick="saveBaobei('newBaobei');return false" class="add">添加新宝贝</a></li>
-                <li><a href="#" onclick="refresh();return false" class="refresh">同步宝贝</a></li>
+                <li><a href="#" onclick="refresh();return false" class="refresh">同步所有宝贝（不会删除已删除宝贝）</a></li>
             </ul>
         </div>
     </div>
@@ -88,11 +87,13 @@
 <script type="text/javascript">
 
     function refresh(baobeiid){
-        if(baobeiid!=null && baobeiid!=""){
-              alert("还没做好");
+        if (baobeiid != null && baobeiid != "") {
+            alert("还没做好");
             return;
         }
-       window.location.href = "<fmt:bundle basename="tbgt"><fmt:message key="auth.url"/></fmt:bundle>";
+        if (confirm("即将同步所有宝贝吗，确认手没抖吗?")) {
+            window.location.href = "<fmt:bundle basename="tbgt"><fmt:message key="auth.url"/></fmt:bundle>";
+        }
     }
 
     function saveBaobei(action,baobeiId) {
@@ -108,8 +109,8 @@
                     dialog.dialog({
                         title: "宝贝详情",
                         modal: true,
-                        width: 800,
-                        height: 600,
+                        width: 1024,
+                        height: 768,
                         close: function(event, ui) {
                             dialog.remove();
                         }

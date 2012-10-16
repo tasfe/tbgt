@@ -10,6 +10,8 @@ public interface BaobeiSkuMapper {
 
     public void updateSku(BaobeiSku baobeiSku);
 
+    public void updateBaobeiCustomAttr(BaobeiSku baobeiSku);
+
     public void deleteSku(long sku_id);
 
     public List<BaobeiSku> getSkuByBbid(long id);

@@ -16,4 +16,6 @@ public interface BaoBeiService {
     public void insertBaobei(Baobei baobei);
 
     public void updateBaobei(Baobei baobei);
+
+    public void updateBaobeiCustomAttr(Baobei baobei);
 }
