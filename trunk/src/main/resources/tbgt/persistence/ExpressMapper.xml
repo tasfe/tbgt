@@ -13,7 +13,7 @@
     	VALUE (#{orderId},#{expressNo},#{fee},#{sendTime})
 	</insert>
 
-	<update id="updateExpress" parameterType="Price">
+	<update id="updateExpress" parameterType="Express">
   		UPDATE express
   		SET
 			fee = #{fee},

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="tbgt.persistence.BaobeiSkuMapper">
+
+    <select id="getSkuById" resultType="BaobeiSku" parameterType="long">
+      SELECT * FROM sku WHERE sku_id=#{sku_id}
+    </select>
+
+     <select id="getSkuByBbid" resultType="BaobeiSku" parameterType="long">
+      SELECT * FROM sku WHERE bbid=#{id}
+    </select>
+    
+    <insert id="insertSku" parameterType="BaobeiSku">
+		INSERT INTO sku (sku_id,bbid,properties_name,quantity,price)
+    	VALUE (#{sku_id},#{bbid},#{properties_name},#{quantity},#{price})
+	</insert>
+
+	<update id="updateSku" parameterType="BaobeiSku">
+  		UPDATE sku
+  		SET
+			bbid = #{bbid},
+			properties_name = #{properties_name},
+			quantity = #{quantity},
+			price = #{price},
+			weight = #{weight},
+			purchase_price = #{purchase_price}
+  		where sku_id = #{sku_id}
+	</update>
+
+	<delete id="deleteSku" parameterType="long">
+    	DELETE FROM sku WHERE sku_id = #{sku_id}
+    </delete>
+</mapper>

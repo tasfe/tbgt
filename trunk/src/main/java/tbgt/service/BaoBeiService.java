@@ -7,13 +7,11 @@ import java.util.List;
 
 public interface BaoBeiService {
 
-    public List<Baobei> getAllBaobei();
+    public PaginationTO getBaobei();
 
-    public PaginationTO getBaobeiWithPaging();
+    public void deleteBaobei(long id);
 
-    public void deleteBaobei(int id);
-
-    public Baobei getBaobeiById(int id);
+    public Baobei getBaobeiById(long id);
 
     public void insertBaobei(Baobei baobei);
 

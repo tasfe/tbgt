@@ -385,6 +385,7 @@ form#form #button1:hover, form#form #button2:hover {
 .volume{background:transparent url(../images/icons/volume.png) no-repeat left;}
 .pending{background:transparent url(../images/icons/pending.png) no-repeat left;}
 .calc{background:transparent url(../images/icons/calc.png) no-repeat left;}
+.refresh{background:transparent url(../images/icons/refresh.png) no-repeat left;}
 
 /*********************
 	Dialog
@@ -417,4 +418,12 @@ background: white url(../images/form_blue.gif) repeat-x top left;
 	font-size:12px;
 	color: #CC6666;
 	font-weight:bold;
+}
+
+.item-pic {
+/*display: block;*/
+border: #CDCDCD 1px solid;
+width: 52px;
+height: 52px;
+float:left;
 }

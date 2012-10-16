@@ -5,40 +5,20 @@
 <mapper namespace="tbgt.persistence.BaobeiMapper">
 
 	<resultMap id="resultBaobei" type="Baobei">
-        <id property="id" column="id"/>
-        <result property="name" column="name"/>
-        <result property="taobaoId" column="taobaoId"/>
-        <result property="incomingTime" column="incomingTime"/>
-        <result property="saleTitle" column="saleTitle"/>
-        <result property="weight" column="weight"/>
+
     </resultMap>
 
     <resultMap id="result" extends="resultBaobei" type="Baobei">
-        <association property="price" column="id" javaType="Price"
-                     select="tbgt.persistence.PriceMapper.getPrice"/>
-    </resultMap>
-
-    <resultMap id="pagingResult" extends="resultBaobei" type="Baobei">
-        <association property="price" column="id" javaType="Price">
-            <id property="id" column="price.id"/>
-            <result property="baobeiId" column="id"/>
-            <result property="recommendedPrice" column="recommendedPrice"/>
-            <result property="purchasePrice" column="purchasePrice"/>
-            <result property="salePrice" column="salePrice"/>
-        </association>
+        <collection property="skus" column="id" javaType="java.util.ArrayList" ofType="BaobeiSku"
+                     select="tbgt.persistence.BaobeiSkuMapper.getSkuByBbid"/>
     </resultMap>
 
 
-
-	<select id="getAllBaobei" resultMap="result">
+    <select id="getBaobei" parameterType="java.util.Map" resultMap="resultBaobei">
 		SELECT * FROM baobei
-	</select>
-
-    <select id="getBaobeiWithPaging" parameterType="java.util.Map" resultMap="pagingResult">
-		SELECT * FROM baobei join price on baobei.id=price.baobeiid
         <trim prefix="WHERE" prefixOverrides="AND|OR">
             <if test="sSearch != null and sSearch != ''">
-                name like CONCAT(CONCAT('%', #{sSearch}),'%')  or saleTitle like CONCAT(CONCAT('%', #{sSearch}),'%')
+                title like CONCAT(CONCAT('%', #{sSearch}),'%')
             </if>
         </trim>
         <trim prefix="ORDER BY">
@@ -48,32 +28,28 @@
         </trim>
 	</select>
 
-    <select id="getBaobeiById" resultMap="result" parameterType="int">
+    <select id="getBaobeiById" resultMap="result" parameterType="long">
 		SELECT * FROM baobei where id=#{id};
 	</select>
 
 	<insert id="insertBaobei" parameterType="Baobei">
-		INSERT INTO baobei (name,taobaoId,weight,saleTitle,incomingTime)
-    	VALUE (#{name},#{taobaoId},#{weight},#{saleTitle},#{incomingTime})
-        <selectKey keyProperty="id" resultType="int" order="AFTER">
-                   SELECT LAST_INSERT_ID();
-        </selectKey>
-
+		INSERT INTO baobei (id,detail_url,title,pic_url,property_alias,list_time)
+    	VALUE (#{id},#{detail_url},#{title},#{pic_url},#{property_alias},#{list_time})
 	</insert>
 
 
 	<update id="updateBaobei" parameterType="Baobei">
   		UPDATE baobei
   		SET
-  			name = #{name},
-			taobaoId = #{taobaoId},
-			saleTitle = #{saleTitle},
-			weight = #{weight},
-			incomingTime = #{incomingTime}
+  			detail_url = #{detail_url},
+			title = #{title},
+			pic_url = #{pic_url},
+			property_alias = #{property_alias},
+			list_time = #{list_time}
   		where id = #{id}
 	</update>
 
-	<delete id="deleteBaobei" parameterType="int">
+	<delete id="deleteBaobei" parameterType="long">
     	DELETE FROM baobei WHERE id = #{id}
     </delete>
 </mapper>

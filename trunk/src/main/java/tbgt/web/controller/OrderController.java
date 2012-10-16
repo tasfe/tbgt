@@ -72,10 +72,10 @@ public class OrderController {
             Integer baobeiId = Integer.valueOf(baobeiIdStr);
             Baobei baobei = baoBeiService.getBaobeiById(baobeiId);
             soldBaobei.setBaobeiId(baobeiId);
-            soldBaobei.setName(baobei.getName());
-            soldBaobei.setWeight(baobei.getWeight());
-            soldBaobei.setSalePrice(baobei.getPrice().getSalePrice());
-            soldBaobei.setPurchasePrice(baobei.getPrice().getPurchasePrice());
+            soldBaobei.setName("");
+            soldBaobei.setWeight("");
+            soldBaobei.setSalePrice(null);
+            soldBaobei.setPurchasePrice(null);
 
             soldBaobeis.add(soldBaobei);
         }

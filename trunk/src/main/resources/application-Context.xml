@@ -57,6 +57,11 @@
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
 		p:dataSource-ref="dataSource" />
 
+    <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <property name="basename">
+            <value>tbgt</value>
+        </property>
+    </bean>
 
 	<!-- define the SqlSessionFactory, notice that configLocation is not needed when you use MapperFactoryBean -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
@@ -76,5 +81,6 @@
     <bean id="statService" class="tbgt.service.StatServiceImpl" autowire="byName"/>
 
     <bean id="expressCodeService" class="tbgt.service.ExpressCodeServiceImpl" autowire="byName"/>
+    <bean id="applicationContextUtil" class="tbgt.util.ApplicationContextUtil" autowire="byName"/>
 
 </beans>       		

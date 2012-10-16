@@ -13,7 +13,7 @@
     <typeAliases>
         <!-- -->
         <typeAlias alias="Baobei" type="tbgt.domain.Baobei"/>
-        <typeAlias alias="Price" type="tbgt.domain.Price"/>
+        <typeAlias alias="BaobeiSku" type="tbgt.domain.BaobeiSku"/>
         <typeAlias alias="Express" type="tbgt.domain.Express"/>
         <typeAlias alias="Order" type="tbgt.domain.Order"/>
         <typeAlias alias="SoldBaobei" type="tbgt.domain.SoldBaobei"/>
