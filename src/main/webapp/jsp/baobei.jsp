@@ -3,6 +3,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="/WEB-INF/tld/tbgt.tld" prefix="tbgt" %>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -48,7 +49,7 @@
         <div id="panel">
             <ul>
                 <li><a href="#" onclick="saveBaobei('newBaobei');return false" class="add">添加新宝贝</a></li>
-                <li><a href="#" onclick="batchOrderBaobei();return false" class="order">添加订单</a></li>
+                <li><a href="#" onclick="refresh();return false" class="refresh">同步宝贝</a></li>
             </ul>
         </div>
     </div>
@@ -59,14 +60,9 @@
                     <table id="tdata1" class="display" cellspacing="0" cellpadding="0" border="0" width="100%">
                         <thead>
                         <tr>
-                            <th width="70px">序号</th>
-                            <th>名称</th>
+                            <th width="70px">宝贝ID</th>
                             <th>标题</th>
-                            <th width="60px" nowrap>重量(公斤)</th>
                             <th width="120px" nowrap>上架时间</th>
-                            <th width="50px" nowrap>采购价</th>
-                            <th width="50px" nowrap>推荐价</th>
-                            <th width="60px" nowrap>实际卖价</th>
                             <th width="60px" nowrap>操作</th>
                         </tr>
                         </thead>
@@ -90,6 +86,15 @@
 </html>
 
 <script type="text/javascript">
+
+    function refresh(baobeiid){
+        if(baobeiid!=null && baobeiid!=""){
+              alert("还没做好");
+            return;
+        }
+       window.location.href = "<fmt:bundle basename="tbgt"><fmt:message key="auth.url"/></fmt:bundle>";
+    }
+
     function saveBaobei(action,baobeiId) {
         var dialog = $('<div style="display:none"></div>').appendTo('body');
         // load remote content
@@ -115,21 +120,7 @@
         return false;
     }
 
-    function batchOrderBaobei(){
-        var  baobeiIds;
-        for(var index in gaiSelected){
-            if(baobeiIds && baobeiIds!=null){
-               baobeiIds = baobeiIds + "," + gaiSelected[index];
-            }else{
-              baobeiIds= gaiSelected[index];
-            }
-        }
-        if(baobeiIds==null){
-            alert("没有宝贝被选择");
-            return false;
-        }
-        return orderBaobei(baobeiIds);
-    }
+
 
 
     function deleteBaobei(baobeiId){
@@ -142,41 +133,7 @@
             form.submit()
         }
     }
-     var orderDialog;
-    function orderBaobei(baobeiId){
-        if (jQuery.inArray(baobeiId, gaiSelected) == -1) {
-            gaiSelected[gaiSelected.length++] = baobeiId;
-        }
-        else {
-            gaiSelected = jQuery.grep(gaiSelected, function(value) {
-                return value != baobeiId;
-            });
-        }
-        $(this).toggleClass('row_selected');
-        return orderBaobeiDialog(baobeiId);
-    }
 
-    function orderBaobeiDialog(baobeiIds){
-        orderDialog = $('<div style="display:none"></div>').appendTo('body');
-        // load remote content
-        var url = "<tbgt:constant name="ContextPath"/>/order/addOrder.html?baobeiIdsStr="+baobeiIds;
-        orderDialog.load(
-                url,
-                function (responseText, textStatus, XMLHttpRequest) {
-                    orderDialog.dialog({
-                        title: "添加订单",
-                        modal: true,
-                        width: 1100,
-                        height: 600,
-                        close: function(event, ui) {
-                            orderDialog.remove();
-                        }
-                    });
-                }
-        );
-        //prevent the browser to follow the link
-        return false;
-    }
 
     var tdata1;
     var gaiSelected = [];
@@ -209,52 +166,25 @@
             "bServerSide": true,
             "sAjaxSource": "<tbgt:constant name="ContextPath"/>/baobei/list.html",
             "aoColumns": [
-                { "mData": "price.baobeiId" },
-                { "mData": "name" },
-                { "mData": "saleTitle" },
-                { "mData": "weight" },
-                { "mData": "incomingTime" },
-                { "mData": "price.purchasePrice" },
-                { "mData": "price.recommendedPrice" },
-                { "mData": "price.salePrice" },
+                { "mData": "id" },
+                { "mData": "title" },
+                { "mData": "list_time" },
                 { "mData": null }
             ],
             "aoColumnDefs": [
-                { "bSortable" :true, "aTargets": [ 0 ],"sWidth": "70px"},
-                { "bSortable" :true, "aTargets": [ 1 ],  "sWidth": "150px"},
-                { "bSortable" :true, "aTargets": [ 2 ],  "sWidth": "260px"},
-                { "bSortable": false, "aTargets": [ 3 ],  "sWidth": "100px" ,"sClass":"nowrap  a-right"},
-                { "bSortable": true, "aTargets": [ 4 ],  "sWidth": "120px" },
-                { "bSortable": true, "aTargets": [ 5 ],  "sWidth": "70px","sClass":"nowrap a-right" },
-                { "bSortable": true, "aTargets": [ 6 ],  "sWidth": "70px","sClass":"nowrap  a-right" },
-                { "bSortable": true, "aTargets": [ 7 ],  "sWidth": "80px ,","sClass":"nowrap  a-right" },
-                { "bSortable": false, "aTargets": [ 8 ],  "sWidth": "80px" }
+                { "bSortable" :true, "aTargets": [ 0 ],"sWidth": "150px","sClass":"a-center"},
+                { "bSortable" :true, "aTargets": [ 1 ]},
+                { "bSortable" :true, "aTargets": [ 2 ],  "sWidth": "160px","sClass":"a-center"},
+                { "bSortable": false, "aTargets": [ 3 ],  "sWidth": "80px" ,"sClass":"a-center"}
             ],
             "fnRowCallback": function(nRow, aData, iDisplayIndex) {
-                    $('td:eq(2)', nRow).html('<a target="_blank" href="'+aData.taobaoLink+' ">'+aData.saleTitle+'</a>');
-                    $('td:eq(8)', nRow).html('<a href="#" title="修改宝贝" onclick="saveBaobei(\'updateBaobei\',\''+aData.id+'\');return false"><img src="<tbgt:constant name="ContextPath"/>/images/icons/edit.png" width="16" height="16" alt="修改宝贝"/></a><a href="#" onclick="orderBaobei(\''+aData.id+'\');return false" title="添加订单"><img src="<tbgt:constant name="ContextPath"/>/images/icons/order.jpg" width="16" height="16" alt="添加订单"/></a> <a href="#" onclick="deleteBaobei(\''+aData.id+'\');return false" title="删除宝贝"><img src="<tbgt:constant name="ContextPath"/>/images/icons/delete.png" width="16" height="16" alt="删除宝贝"/></a>');
+                    $('td:eq(1)', nRow).html('<div><a target="_blank" href="'+aData.detail_url+' "><img src="'+aData.pic_url+'" class="item-pic"></a></div>'+'<div><a target="_blank" href="'+aData.detail_url+' ">'+aData.title+'</a></div>');
+                    $('td:eq(3)', nRow).html('<a href="#" title="同步宝贝" onclick="refresh(\''+aData.id+'\');return false"><img src="<tbgt:constant name="ContextPath"/>/images/icons/refresh.png" width="16" height="16" alt="同步宝贝"/></a> <a href="#" onclick="deleteBaobei(\''+aData.id+'\');return false" title="删除宝贝"><img src="<tbgt:constant name="ContextPath"/>/images/icons/delete.png" width="16" height="16" alt="删除宝贝"/></a>');
                 if (jQuery.inArray(aData.id, gaiSelected) !== -1) {
                     $(nRow).addClass('row_selected');
                 }
             }
 
-        });
-
-        /* Click event handler */
-        $('#tdata1 tbody tr').live('click', function () {
-            var aData = tdata1.fnGetData(this);
-            var id = aData.id;
-
-            if (jQuery.inArray(id, gaiSelected) == -1) {
-                gaiSelected[gaiSelected.length++] = id;
-            }
-            else {
-                gaiSelected = jQuery.grep(gaiSelected, function(value) {
-                    return value != id;
-                });
-            }
-//            console.log(gaiSelected);
-            $(this).toggleClass('row_selected');
         });
 
 

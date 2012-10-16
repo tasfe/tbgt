@@ -11,11 +11,9 @@ public interface BaobeiMapper {
 
     public void updateBaobei(Baobei baobei);
 
-    public void deleteBaobei(int id);
+    public void deleteBaobei(long id);
 
-    public List<Baobei> getAllBaobei();
+    public List<Baobei> getBaobei(Map paramMap);
 
-    public List<Baobei> getBaobeiWithPaging(Map paramMap);
-
-    public Baobei getBaobeiById(int id);
+    public Baobei getBaobeiById(long id);
 }
