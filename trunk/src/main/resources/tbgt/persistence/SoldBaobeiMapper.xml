@@ -4,33 +4,30 @@
 
 <mapper namespace="tbgt.persistence.SoldBaobeiMapper">
 
-    <select id="getSoldBaobeiByOrderNo" resultType="SoldBaobei" parameterType="int">
-      SELECT * FROM soldbaobei WHERE orderid=#{id}
+    <select id="getSoldBaobeiByOrderId" resultType="SoldBaobei" parameterType="long">
+      SELECT * FROM soldbaobei WHERE tid=#{id}
     </select>
 
     <insert id="saveSoldBaoBei" parameterType="soldBaobei">
-		INSERT INTO soldBaobei (orderId,baobeiId,quantity,color,spec,name,purchasePrice,salePrice,weight)
-    	VALUE (#{orderId},#{baobeiId},#{quantity},#{color},#{spec},#{name},#{purchasePrice},#{salePrice},#{weight})
-        <selectKey keyProperty="id" resultType="int" order="AFTER">
-                   SELECT LAST_INSERT_ID();
-        </selectKey>
+		INSERT INTO soldBaobei (id,tid,bbid,quantity,sku_id,sku_properties_name,title,purchase_price,price,weight)
+    	VALUE (#{id},#{tid},#{bbid},#{quantity},#{sku_id},#{sku_properties_name},#{title},#{purchase_price},#{price},#{weight})
 	</insert>
 
-    <delete id="deleteSoldBaobei" parameterType="int">
+    <delete id="deleteSoldBaobei" parameterType="long">
     	DELETE FROM soldbaobei WHERE id = #{id}
     </delete>
-
     <update id="updateSoldBaobei" parameterType="soldBaobei">
   		UPDATE soldbaobei
   		SET
-  			orderId = #{orderId},
-			baobeiId = #{baobeiId},
+  			tid = #{tid},
+			bbid = #{bbid},
 			quantity = #{quantity},
-			color = #{color},
-			spec = #{spec},
-			name = #{name},
-			purchasePrice = #{purchasePrice},
-			salePrice = #{salePrice}
+			sku_id = #{sku_id},
+			sku_properties_name = #{sku_properties_name},
+			title = #{title},
+			purchase_price = #{purchase_price},
+			weight = #{weight},
+			price = #{price}
   		where id = #{id}
 	</update>
 </mapper>

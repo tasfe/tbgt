@@ -133,6 +133,7 @@
                         <th width="60px">成交价</th>
                         <th width="60px">成本</th>
                         <th width="80px">快递费用</th>
+                        <th width="80px">小礼物费用</th>
                         <th width="60px">代理费</th>
                         <th width="60px">利润</th>
                     </tr>
@@ -142,16 +143,17 @@
                         <tr>
                             <td class="a-center">${order.id}</td>
                             <td>
-                                    ${order.address}<br/>
+                                    ${order.receiver_address}<br/>
                                 <c:forEach items="${order.soldBaobeis}" var="soldBaobei">
-                                    ${soldBaobei.quantity} 个 ${soldBaobei.name} <br/>
+                                    ${soldBaobei.quantity} 个 ${soldBaobei.title} <br/>
                                 </c:forEach>
                             </td>
-                            <td class="a-center"><fmt:formatDate value="${order.soldTime}" type="date"
+                            <td class="a-center"><fmt:formatDate value="${order.pay_time}" type="date"
                                                                  pattern="yyyy-MM-dd"/></td>
                             <td class="a-right">${order.actualPrice}</td>
                             <td class="a-right">${order.purchasePrice}</td>
                             <td class="a-right">${order.express.fee}</td>
+                            <td class="a-right">${order.express.giftFee}</td>
                             <td class="a-right">${order.agencyFee}</td>
                             <td class="a-right">${order.profit}</td>
                         </tr>

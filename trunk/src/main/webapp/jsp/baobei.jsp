@@ -91,7 +91,7 @@
             alert("还没做好");
             return;
         }
-        if (confirm("即将同步所有宝贝吗，确认手没抖吗?")) {
+        if (confirm("即将同步所有宝贝，确认手没抖吗?")) {
             window.location.href = "<tbgt:constant name="ContextPath"/>/top/getSessionKey.html?callbackUrl=<tbgt:constant name="ContextPath"/>/baobei/refresh.html";
         }
     }

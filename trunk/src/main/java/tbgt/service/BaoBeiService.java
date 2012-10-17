@@ -6,6 +6,8 @@ import tbgt.web.paging.PaginationTO;
 
 import java.util.List;
 
+import com.taobao.api.ApiException;
+
 public interface BaoBeiService {
 
     public PaginationTO getBaobei();
@@ -21,4 +23,6 @@ public interface BaoBeiService {
     public void updateBaobeiCustomAttr(Baobei baobei);
 
     public BaobeiSku getSkuById(long sku_id);
+
+    public  void refreshBaobei(String top_session) throws ApiException;
 }

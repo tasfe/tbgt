@@ -11,6 +11,7 @@ public class Express {
     private long orderId;
     private String expressNo;
     private BigDecimal fee;
+    private BigDecimal giftFee;
     @DateTimeFormat(pattern = DateUtil.DATE_FORMAT)
     private Date sendTime;
 
@@ -53,5 +54,13 @@ public class Express {
 
     public void setExpressNo(String expressNo) {
         this.expressNo = expressNo;
+    }
+
+    public BigDecimal getGiftFee() {
+        return giftFee;
+    }
+
+    public void setGiftFee(BigDecimal giftFee) {
+        this.giftFee = giftFee;
     }
 }

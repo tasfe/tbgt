@@ -1,6 +1,7 @@
 package tbgt.domain;
 
 import org.codehaus.jackson.map.annotate.JsonSerialize;
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.springframework.format.annotation.DateTimeFormat;
 import tbgt.common.CustomJsonDateSerializer;
 import tbgt.util.DateUtil;
@@ -9,6 +10,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.sql.Timestamp;
 
 public class Order {
     private long id;
@@ -20,9 +22,9 @@ public class Order {
     private BigDecimal actualPrice;
     @DateTimeFormat(pattern = DateUtil.DATE_FORMAT)
     private Date pay_time;
-    private BigDecimal giftFee;
     private BigDecimal agencyFee;
     private String status;
+    private Timestamp modified;
 
     public long getId() {
         return id;
@@ -84,10 +86,11 @@ public class Order {
         this.agencyFee = agencyFee;
     }
 
+    @JsonIgnore
     public BigDecimal getPurchasePrice() {
         BigDecimal totalPurchasePrice = BigDecimal.ZERO;
         for (SoldBaobei soldBaobei : soldBaobeis) {
-            BigDecimal purchasePrice = soldBaobei.getPurchasePrice();
+            BigDecimal purchasePrice = soldBaobei.getPurchase_price();
             purchasePrice = purchasePrice != null ? purchasePrice : BigDecimal.ZERO;
             purchasePrice = purchasePrice.multiply(new BigDecimal(soldBaobei.getQuantity()));
             totalPurchasePrice = totalPurchasePrice.add(purchasePrice);
@@ -95,9 +98,10 @@ public class Order {
         return totalPurchasePrice;
     }
 
+    @JsonIgnore
     public BigDecimal getProfit() {
         return actualPrice.subtract(getPurchasePrice())
-                .subtract(getExpress().getFee()).subtract(getAgencyFee()).subtract(getGiftFee());
+                .subtract(getExpress().getFee()).subtract(getAgencyFee()).subtract(getExpress().getGiftFee());
     }
 
     public String getStatus() {
@@ -132,11 +136,11 @@ public class Order {
         this.buyer_msg = buyer_msg;
     }
 
-    public BigDecimal getGiftFee() {
-        return giftFee;
+    public Timestamp getModified() {
+        return modified;
     }
 
-    public void setGiftFee(BigDecimal giftFee) {
-        this.giftFee = giftFee;
+    public void setModified(Timestamp modified) {
+        this.modified = modified;
     }
 }

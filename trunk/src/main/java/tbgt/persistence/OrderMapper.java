@@ -11,11 +11,12 @@ public interface OrderMapper {
 
     public void updateOrder(Order order);
 
-    public void deleteOrder(int id);
+    public void deleteOrder(long id);
 
-    public List<Order> getAllOrder();
+    public List<Order> getAllOrders();
 
-    public Order getOrderById(int id);
+    public Order getOrderById(long id);
+   
 
     public List<Order> getOrders(Map criteria);
 

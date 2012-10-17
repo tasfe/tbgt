@@ -8,9 +8,10 @@ public interface SoldBaobeiMapper {
 
     public void saveSoldBaoBei(SoldBaobei soldBaobei);
 
-    public List<SoldBaobei> getSoldBaobeiByOrderNo(String orderNo);
+    public void updateSoldBaoBei(SoldBaobei soldBaobei);
+
+    public List<SoldBaobei> getSoldBaobeiByOrderId(String orderNo);
 
     public void deleteSoldBaobei(long id);
 
-    public void updateSoldBaobei(SoldBaobei soldBaobei);
 }
