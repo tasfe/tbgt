@@ -7,19 +7,21 @@ import tbgt.web.criteria.OrderCriteria;
 
 import java.util.List;
 
+import com.taobao.api.ApiException;
+
 public interface OrderService {
 
     public List<Order> getAllOrders();
 
-    public void deleteOrder(int id);
+    public void deleteOrder(long id);
 
-    public Order getOrderById(int id);
+    public Order getOrderById(long id);
 
     public void saveOrder(Order order);
 
     public void updateOrder(Order order);
 
-    public Express getExpressByOrderId(int orderId);
+    public Express getExpressByOrderId(long orderId);
 
     public void insertExpress(Express express);
 
@@ -29,5 +31,7 @@ public interface OrderService {
 
     public List<Order> getOrders(OrderCriteria orderCriteria);
 
-    public void updateStatus(int orderId,String status);
+    public void updateStatus(long orderId,String status);
+
+    public  void refreshOrder(String top_session,boolean refreshAll) throws ApiException;
 }

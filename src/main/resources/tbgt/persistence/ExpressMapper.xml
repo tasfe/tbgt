@@ -9,14 +9,15 @@
     </select>
 
     <insert id="insertExpress" parameterType="Express">
-		INSERT INTO express (orderId,expressNo,fee,sendTime)
-    	VALUE (#{orderId},#{expressNo},#{fee},#{sendTime})
+		INSERT INTO express (orderId,expressNo,fee,giftFee,sendTime)
+    	VALUE (#{orderId},#{expressNo},#{fee},#{giftFee},#{sendTime})
 	</insert>
 
 	<update id="updateExpress" parameterType="Express">
   		UPDATE express
   		SET
 			fee = #{fee},
+			giftFee = #{giftFee},
 			expressNo = #{expressNo},
 			sendTime = #{sendTime}
   		where id = #{id}

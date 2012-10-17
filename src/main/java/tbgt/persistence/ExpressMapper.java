@@ -4,7 +4,7 @@ import tbgt.domain.Express;
 
 public interface ExpressMapper {
 
-    public Express getExpressByOrderId(int orderId);
+    public Express getExpressByOrderId(long orderId);
 
     public void insertExpress(Express express);
 

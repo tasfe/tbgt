@@ -11,9 +11,9 @@
         <result property="buyer_msg" column="buyer_msg"/>
         <result property="actualPrice" column="actualPrice"/>
         <result property="pay_time" column="pay_time"/>
-        <result property="giftFee" column="giftFee"/>
         <result property="agencyFee" column="agencyFee"/>
         <result property="status" column="status"/>
+        <result property="modified" column="modified"/>
     </resultMap>
 
     <resultMap id="resultOrders" type="Order" extends="resultBase">
@@ -22,25 +22,27 @@
             <result property="orderId" column="id"/>
             <result property="expressNo" column="expressNo"/>
             <result property="fee" column="fee"/>
+            <result property="giftFee" column="giftFee"/>
             <result property="sendTime" column="sendTime"/>
         </association>
         <collection property="soldBaobeis" column="id" javaType="java.util.ArrayList" ofType="SoldBaobei">
             <id property="id" column="SoldBaobei.id"/>
-            <result property="orderId" column="id"/>
-            <result property="baobeiId" column="baobeiId"/>
+            <result property="tid" column="id"/>
+            <result property="bbid" column="bbid"/>
             <result property="quantity" column="quantity"/>
-            <result property="color" column="color"/>
-            <result property="spec" column="spec"/>
-            <result property="name" column="name"/>
-            <result property="purchasePrice" column="purchasePrice"/>
-            <result property="salePrice" column="salePrice"/>
+            <result property="sku_id" column="sku_id"/>
+            <result property="sku_properties_name" column="sku_properties_name"/>
+            <result property="title" column="title"/>
+            <result property="weight" column="weight"/>
+            <result property="purchase_price" column="purchase_price"/>
+            <result property="price" column="price"/>
         </collection>
     </resultMap>
 
     <resultMap id="resultOrderById" type="Order" extends="resultBase">
         <association property="express" column="id" javaType="Express"
                      select="tbgt.persistence.ExpressMapper.getExpressByOrderId"/>
-        <collection property="soldBaobeis" column="id" javaType="java.util.ArrayList" ofType="SoldBaobei" select="tbgt.persistence.SoldBaobeiMapper.getSoldBaobeiByOrderNo">
+        <collection property="soldBaobeis" column="id" javaType="java.util.ArrayList" ofType="SoldBaobei" select="tbgt.persistence.SoldBaobeiMapper.getSoldBaobeiByOrderId">
 
         </collection>
 
@@ -48,27 +50,27 @@
 
 
 
-    <sql id="orderColumns"> ORDERS.id,address,orderNo,contactPerson,phone,actualPrice,soldTime,agencyFee,status,
+    <sql id="orderColumns"> ORDERS.id,receiver_address,receiver_state,buyer_msg,actualPrice,pay_time,agencyFee,status, modified,
  express.id ,expressNo,
- fee,sendTime,SoldBaobei.id,baobeiId,quantity,color,
- spec,name,purchasePrice,salePrice </sql>
+ fee,giftFee,sendTime,SoldBaobei.id,bbid,quantity,sku_id,sku_properties_name,
+ title,weight,purchase_price,price </sql>
 
     <select id="getOrders" parameterType="java.util.Map" resultMap="resultOrders">
       SELECT <include refid="orderColumns"/> FROM ORDERS
         LEFT JOIN EXPRESS ON ORDERS.ID = EXPRESS.ORDERID
-        LEFT JOIN SOLDBAOBEI ON ORDERS.ID = SOLDBAOBEI.ORDERID
+        LEFT JOIN SOLDBAOBEI ON ORDERS.ID = SOLDBAOBEI.tid
         <trim prefix="WHERE" prefixOverrides="AND|OR">
             <if test="name != null and name != ''">
-                SOLDBAOBEI.name like CONCAT(CONCAT('%', #{name}),'%') or ORDERS.orderNo like CONCAT(CONCAT('%', #{name}),'%')
+                SOLDBAOBEI.title like CONCAT(CONCAT('%', #{name}),'%') or ORDERS.receiver_address like CONCAT(CONCAT('%', #{name}),'%')
             </if>
             <if test="status != null and status != '' ">
                 and ORDERS.status = #{status}
             </if>
             <if test="fromDate != null">
-                and ORDERS.soldTime &gt;= #{fromDate}
+                and ORDERS.pay_time &gt;= #{fromDate}
             </if>
             <if test="toDate != null">
-                and ORDERS.soldTime &lt;= #{toDate}
+                and ORDERS.pay_time &lt;= #{toDate}
             </if>
         </trim>
         <trim prefix="ORDER BY">
@@ -79,20 +81,29 @@
     </select>
 
     <insert id="saveOrder" parameterType="Order">
-		INSERT INTO orders (id,receiver_state,receiver_address,buyer_msg,actualPrice,pay_time,status)
-    	VALUE (#{id},#{receiver_state},#{receiver_address},#{buyer_msg},#{actualPrice},#{pay_time},#{status})
+		INSERT INTO orders (id,receiver_state,receiver_address,buyer_msg,actualPrice,pay_time,status,modified)
+    	VALUE (#{id},#{receiver_state},#{receiver_address},#{buyer_msg},#{actualPrice},#{pay_time},#{status},#{modified})
 
 	</insert>
 
     <update id="updateOrder" parameterType="Order">
   		UPDATE orders
   		SET
-			giftFee = #{giftFee},
-			agencyFee =#{agencyFee}
+			receiver_state =#{receiver_state},
+			receiver_address =#{receiver_address},
+			buyer_msg =#{buyer_msg},
+			actualPrice =#{actualPrice},
+			pay_time =#{pay_time},
+			modified =#{modified},
+			status =#{status}
   		where id = #{id}
 	</update>
     <select id="getOrderById" resultMap="resultOrderById" parameterType="long">
 		SELECT * FROM orders where id=#{id};
+	</select>
+
+     <select id="getAllOrders" resultMap="resultBase">
+		SELECT * FROM orders;
 	</select>
 
     <delete id="deleteOrder" parameterType="long">

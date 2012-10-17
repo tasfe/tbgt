@@ -45,9 +45,11 @@
         <div id="top-panel">
             <div id="panel">
                 <ul>
-            		<li><a href="#" onclick="showOrders('P');return false" class="pending">未发货</a></li>
-                    <li><a href="#" onclick="showOrders('S');return false" class="express">已发货</a></li>
-                    <li><a href="#" onclick="showOrders('C');return false" class="edit">交易成功</a></li>
+            		<li><a href="#" onclick="showOrders('WAIT_SELLER_SEND_GOODS');return false" class="pending">未发货</a></li>
+                    <li><a href="#" onclick="showOrders('WAIT_BUYER_CONFIRM_GOODS');return false" class="express">已发货</a></li>
+                    <li><a href="#" onclick="showOrders('TRADE_FINISHED');return false" class="edit">交易成功</a></li>
+                    <li><a href="#" onclick="refresh();return false" class="refresh">增量同步订单</a></li>
+                    <li><a href="#" onclick="refreshAll();return false" class="refresh">同步所有订单</a></li>
                 </ul>
             </div>
       </div>
@@ -60,6 +62,7 @@
                             	<th width="70px">订单号</th>
                             	<th>订单详情</th>
 								<th width="150px">成交时间</th>
+                                <th width="100px">成交价格</th>
                                 <th width="100px">快递单号</th>
                                 <th width="100px">快递费用</th>
                                 <th width="100px">操作</th>
@@ -67,7 +70,7 @@
 						</thead>
 						
                         <tbody>
-                          <td colspan="9" class="dataTables_empty">加载数据.....</td>
+                          <td colspan="7" class="dataTables_empty">加载数据.....</td>
                         </tbody>
 					</table>
 
@@ -85,6 +88,21 @@
 </html>
 
 <script type="text/javascript">
+     function refresh(orderId){
+        if (orderId != null && orderId != "") {
+            alert("还没做好");
+            return;
+        }
+        if (confirm("即将增量同步订单，确认手没抖吗?")) {
+            window.location.href = "<tbgt:constant name="ContextPath"/>/top/getSessionKey.html?callbackUrl=<tbgt:constant name="ContextPath"/>/order/refresh.html";
+        }
+    }
+     function refreshAll(){
+        if (confirm("即将同步所有订单，确认手没抖吗?")) {
+            window.location.href = "<tbgt:constant name="ContextPath"/>/top/getSessionKey.html?callbackUrl=<tbgt:constant name="ContextPath"/>/order/refreshAll.html";
+        }
+    }
+     
     function express(orderId) {
         var dialog = $('<div style="display:none"></div>').appendTo('body');
         // load remote content
@@ -95,7 +113,7 @@
                     dialog.dialog({
                         title: "快递详情",
                         modal: true,
-                        width: 800,
+                        width: 1024,
                         height: 600,
                         close: function(event, ui) {
                             dialog.remove();
@@ -106,28 +124,28 @@
         //prevent the browser to follow the link
         return false;
     }
-    var orderDialog;
-    function updateOrder(action,id) {
-        orderDialog = $('<div style="display:none"></div>').appendTo('body');
-        // load remote content
-        var url = "<tbgt:constant name='ContextPath'/>/order/"+action+".html?id="+id;
-        orderDialog.load(
-                url,
-                function (responseText, textStatus, XMLHttpRequest) {
-                    orderDialog.dialog({
-                        title: "订单详情",
-                        modal: true,
-                        width: 1100,
-                        height: 600,
-                        close: function(event, ui) {
-                            orderDialog.remove();
-                        }
-                    });
-                }
-        );
-        //prevent the browser to follow the link
-        return false;
-    }
+    <%--var orderDialog;--%>
+    <%--function updateOrder(action,id) {--%>
+        <%--orderDialog = $('<div style="display:none"></div>').appendTo('body');--%>
+        <%--// load remote content--%>
+        <%--var url = "<tbgt:constant name='ContextPath'/>/order/"+action+".html?id="+id;--%>
+        <%--orderDialog.load(--%>
+                <%--url,--%>
+                <%--function (responseText, textStatus, XMLHttpRequest) {--%>
+                    <%--orderDialog.dialog({--%>
+                        <%--title: "订单详情",--%>
+                        <%--modal: true,--%>
+                        <%--width: 1100,--%>
+                        <%--height: 600,--%>
+                        <%--close: function(event, ui) {--%>
+                            <%--orderDialog.remove();--%>
+                        <%--}--%>
+                    <%--});--%>
+                <%--}--%>
+        <%--);--%>
+        <%--//prevent the browser to follow the link--%>
+        <%--return false;--%>
+    <%--}--%>
 
     function deleteOrder(orderNo){
         if(confirm("确认要删除该订单吗?")){
@@ -142,7 +160,7 @@
 
     var tdata1;
     var status='${status}';
-    $('#status').html(status=='P'?"未发货":(status=='S'?"已发货":"交易成功"));
+    $('#status').html(status=='WAIT_SELLER_SEND_GOODS'?"未发货":(status=='WAIT_BUYER_CONFIRM_GOODS'?"已发货":"交易成功"));
     var gaiSelected = [];
     $(document).ready(function() {
         tdata1 = $('#tdata1').dataTable({
@@ -174,81 +192,73 @@
                 aoData.push({ "name": "status", "value": status });
             },
             "aoColumns": [
-                { "mData": "orderNo" },
-                { "mData": "address" },
-                { "mData": "soldTime" },
+                { "mData": "id" },
+                { "mData": "receiver_address" },
+                { "mData": "pay_time" },
+                { "mData": "actualPrice" },
                 { "mData": "express.expressNo" },
                 { "mData": "express.fee" },
                 { "mData": null }
             ],
             "aoColumnDefs": [
-                { "bSortable" :true, "aTargets": [ 0 ],"sWidth": "70px"},
+                { "bSortable" :false, "aTargets": [ 0 ],"sWidth": "70px"},
                 { "bSortable" :false, "aTargets": [ 1 ],  "sClass":"nowrap"},
                 { "bSortable" :true, "aTargets": [ 2 ],  "sWidth": "100px"},
-                { "bSortable": true, "aTargets": [ 3 ],  "sWidth": "80px" },
+                { "bSortable" :true, "aTargets": [ 3 ],  "sWidth": "100px","sClass":"a-right"},
                 { "bSortable": true, "aTargets": [ 4 ],  "sWidth": "80px" },
-                { "bSortable": false, "aTargets": [ 5 ],  "sWidth": "80px" }
+                { "bSortable": true, "aTargets": [ 5 ],  "sWidth": "80px","sClass":"a-right" },
+                { "bSortable": false, "aTargets": [6 ],  "sWidth": "80px" }
+            ],
+            "aaSorting": [
+                [ 2, "desc" ]
             ],
             "fnRowCallback": function(nRow, aData, iDisplayIndex) {
-                    $('td:eq(5)', nRow).html('<a href="#" onclick="express(\''+aData.id+'\');return false" title="快递"><img src="<tbgt:constant name="ContextPath"/>/images/icons/express.png" width="16" height="16" alt="快递"/></a><a href="#" title="确认收货" class="confirmOrder" onclick="confirmOrder(\''+aData.id+'\');return false"><img src="<tbgt:constant name="ContextPath"/>/images/icons/edit.png" width="16" height="16" alt="确认收货"/></a> <a href="#" title="删除订单" onclick="deleteOrder(\''+aData.id+'\');return false"><img src="<tbgt:constant name="ContextPath"/>/images/icons/delete.png" width="16" height="16" alt="删除订单"/></a>');
-                    if (jQuery.inArray(aData.id, gaiSelected) !== -1) {
-                        $(nRow).addClass('row_selected');
-                    }
+                    $('td:eq(6)', nRow).html('<a href="#" onclick="express(\''+aData.id+'\');return false" title="快递"><img src="<tbgt:constant name="ContextPath"/>/images/icons/express.png" width="16" height="16" alt="快递"/></a><a href="#" title="同步订单" onclick="refresh(\''+aData.id+'\');return false"><img src="<tbgt:constant name="ContextPath"/>/images/icons/refresh.png" width="16" height="16" alt="同步订单"/></a> <a href="#" title="删除订单" onclick="deleteOrder(\''+aData.id+'\');return false"><img src="<tbgt:constant name="ContextPath"/>/images/icons/delete.png" width="16" height="16" alt="删除订单"/></a>');
+
                     $('td:eq(1)', nRow).html(function(){
-                         var detail = "<span class='title'>地址 : </span><br/>" + aData.address + "<br/><br/><span class='title'>商品详情 : </span>";
-//                         console.log(aData.soldBaobeis);
+                         var detail = "<span class='title'>地址 : </span><br/>" + aData.receiver_address + "<br/><br/><span class='title'>商品详情 : </span>";
                          for(var i = 0 ;  i <  aData.soldBaobeis.length ; i ++){
                              var soldbaobei = aData.soldBaobeis[i];
-                             detail = detail + "<br/>" + soldbaobei.quantity + "个" + soldbaobei.name + "， " + soldbaobei.color + "，" + soldbaobei.spec;
+                             detail = detail + "<br/>" + soldbaobei.title +" ， 数量 ： "+ soldbaobei.quantity + "个"  + " ， " + soldbaobei.sku_properties_name;
                          }
+                        if(aData.buyer_msg!=null){
+                         detail = detail + "<br/><br/><span class='title'>买家留言 : </span>" + aData.buyer_msg;
+                        };
                          return detail;
                     });
-            },
-            "fnDrawCallback": function(oSettings) {
-                if(status!='S'){
-                    $(".confirmOrder").hide();
-                }
+
+                   $('td:eq(5)', nRow).html(aData.express.fee==0?"":aData.express.fee);
             }
 
         });
 
-        /* Click event handler */
-        $('#tdata1 tbody tr').live('click', function () {
-            var aData = tdata1.fnGetData(this);
-            var id = aData.id;
-
-            if (jQuery.inArray(id, gaiSelected) == -1) {
-                gaiSelected[gaiSelected.length++] = id;
-            }
-            else {
-                gaiSelected = jQuery.grep(gaiSelected, function(value) {
-                    return value != id;
-                });
-            }
-//            console.log(gaiSelected);
-            $(this).toggleClass('row_selected');
-        });
-
-
-        $("#tdata1 tbody tr").live('dblclick', function () {
-            updateOrder('updateOrder',tdata1.fnGetData(this).id);
-        });
+//        /* Click event handler */
+//        $('#tdata1 tbody tr').live('click', function () {
+//            var aData = tdata1.fnGetData(this);
+//            var id = aData.id;
+//
+//            if (jQuery.inArray(id, gaiSelected) == -1) {
+//                gaiSelected[gaiSelected.length++] = id;
+//            }
+//            else {
+//                gaiSelected = jQuery.grep(gaiSelected, function(value) {
+//                    return value != id;
+//                });
+//            }
+////            console.log(gaiSelected);
+//            $(this).toggleClass('row_selected');
+//        });
+//
+//
+//        $("#tdata1 tbody tr").live('dblclick', function () {
+//            updateOrder('updateOrder',tdata1.fnGetData(this).id);
+//        });
 
     });
     function showOrders(ind){
         status = ind;
-        $('#status').html(ind=='P'?"未发货":(ind=='S'?"已发货":"交易成功"));
+        $('#status').html(ind=='WAIT_SELLER_SEND_GOODS'?"未发货":(ind=='WAIT_BUYER_CONFIRM_GOODS'?"已发货":"交易成功"));
         tdata1.fnDraw();
     }
 
-    function confirmOrder(orderId){
-      if(confirm("即将确认收货, 确认手没抖吗?")){
-        var form = $("<form></form>");
-        form.attr('action', "<tbgt:constant name='ContextPath'/>/order/confirm.html?id=" + orderId);
-        form.attr('method', 'post');
-        form.appendTo("body");
-        form.css('display', 'none');
-        form.submit()
-      }
-    }
 </script>
