@@ -4,7 +4,7 @@
 
 <mapper namespace="tbgt.persistence.ExpressMapper">
 
-    <select id="getExpressByOrderId" resultType="Express" parameterType="int">
+    <select id="getExpressByOrderId" resultType="Express" parameterType="long">
       SELECT * FROM express WHERE orderid=#{id}
     </select>
 

@@ -11,59 +11,27 @@ import java.util.Date;
 import java.util.List;
 
 public class Order {
-    private int id;
-    private String orderNo;
-    private String detail;
-    private String address;
-    private String contactPerson;
-    private String phone;
+    private long id;
+    private String receiver_state ;
+    private String receiver_address;
+    private String buyer_msg;
     private Express express;
     private List<SoldBaobei> soldBaobeis;
     private BigDecimal actualPrice;
     @DateTimeFormat(pattern = DateUtil.DATE_FORMAT)
-    private Date soldTime;
+    private Date pay_time;
+    private BigDecimal giftFee;
     private BigDecimal agencyFee;
     private String status;
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    public String getDetail() {
-        return detail;
-    }
-
-    public void setDetail(String detail) {
-        this.detail = detail;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getContactPerson() {
-        return contactPerson;
-    }
-
-    public void setContactPerson(String contactPerson) {
-        this.contactPerson = contactPerson;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
 
     public Express getExpress() {
         return express;
@@ -74,19 +42,21 @@ public class Order {
     }
 
     public BigDecimal getActualPrice() {
-        return actualPrice==null?BigDecimal.ZERO:actualPrice;
+        return actualPrice == null ? BigDecimal.ZERO : actualPrice;
     }
 
     public void setActualPrice(BigDecimal actualPrice) {
         this.actualPrice = actualPrice;
     }
+
+
     @JsonSerialize(using = CustomJsonDateSerializer.class)
-    public Date getSoldTime() {
-        return soldTime;
+    public Date getPay_time() {
+        return pay_time;
     }
 
-    public void setSoldTime(Date soldTime) {
-        this.soldTime = soldTime;
+    public void setPay_time(Date pay_time) {
+        this.pay_time = pay_time;
     }
 
     public List<SoldBaobei> getSoldBaobeis() {
@@ -105,36 +75,29 @@ public class Order {
         this.soldBaobeis.add(soldBaobei);
     }
 
-    public String getOrderNo() {
-        return orderNo;
-    }
-
-    public void setOrderNo(String orderNo) {
-        this.orderNo = orderNo;
-    }
 
     public BigDecimal getAgencyFee() {
-        return agencyFee==null?BigDecimal.ZERO:agencyFee;
+        return agencyFee == null ? BigDecimal.ZERO : agencyFee;
     }
 
     public void setAgencyFee(BigDecimal agencyFee) {
         this.agencyFee = agencyFee;
     }
 
-    public BigDecimal getPurchasePrice(){
+    public BigDecimal getPurchasePrice() {
         BigDecimal totalPurchasePrice = BigDecimal.ZERO;
-        for(SoldBaobei soldBaobei : soldBaobeis){
+        for (SoldBaobei soldBaobei : soldBaobeis) {
             BigDecimal purchasePrice = soldBaobei.getPurchasePrice();
             purchasePrice = purchasePrice != null ? purchasePrice : BigDecimal.ZERO;
-            purchasePrice =  purchasePrice.multiply(new BigDecimal(soldBaobei.getQuantity()));
+            purchasePrice = purchasePrice.multiply(new BigDecimal(soldBaobei.getQuantity()));
             totalPurchasePrice = totalPurchasePrice.add(purchasePrice);
         }
         return totalPurchasePrice;
     }
 
-    public BigDecimal getProfit(){
+    public BigDecimal getProfit() {
         return actualPrice.subtract(getPurchasePrice())
-                .subtract(getExpress().getFee()).subtract(getAgencyFee());
+                .subtract(getExpress().getFee()).subtract(getAgencyFee()).subtract(getGiftFee());
     }
 
     public String getStatus() {
@@ -143,5 +106,37 @@ public class Order {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getReceiver_state() {
+        return receiver_state;
+    }
+
+    public void setReceiver_state(String receiver_state) {
+        this.receiver_state = receiver_state;
+    }
+
+    public String getReceiver_address() {
+        return receiver_address;
+    }
+
+    public void setReceiver_address(String receiver_address) {
+        this.receiver_address = receiver_address;
+    }
+
+    public String getBuyer_msg() {
+        return buyer_msg;
+    }
+
+    public void setBuyer_msg(String buyer_msg) {
+        this.buyer_msg = buyer_msg;
+    }
+
+    public BigDecimal getGiftFee() {
+        return giftFee;
+    }
+
+    public void setGiftFee(BigDecimal giftFee) {
+        this.giftFee = giftFee;
     }
 }

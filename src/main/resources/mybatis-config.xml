@@ -18,6 +18,7 @@
         <typeAlias alias="Order" type="tbgt.domain.Order"/>
         <typeAlias alias="SoldBaobei" type="tbgt.domain.SoldBaobei"/>
         <typeAlias alias="ExpressCode" type="tbgt.domain.ExpressCode"/>
+        <typeAlias alias="TopSessionKey" type="tbgt.domain.TopSessionKey"/>
     </typeAliases>
 
 

@@ -80,6 +80,8 @@
 
     <bean id="statService" class="tbgt.service.StatServiceImpl" autowire="byName"/>
 
+    <bean id="topSessionKeyService" class="tbgt.service.TopSessionKeyServiceImpl" autowire="byName"/>
+
     <bean id="expressCodeService" class="tbgt.service.ExpressCodeServiceImpl" autowire="byName"/>
     <bean id="applicationContextUtil" class="tbgt.util.ApplicationContextUtil" autowire="byName"/>
 

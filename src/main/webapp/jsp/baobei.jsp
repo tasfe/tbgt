@@ -92,7 +92,7 @@
             return;
         }
         if (confirm("即将同步所有宝贝吗，确认手没抖吗?")) {
-            window.location.href = "<fmt:bundle basename="tbgt"><fmt:message key="auth.url"/></fmt:bundle>";
+            window.location.href = "<tbgt:constant name="ContextPath"/>/top/getSessionKey.html?callbackUrl=<tbgt:constant name="ContextPath"/>/baobei/refresh.html";
         }
     }
 
