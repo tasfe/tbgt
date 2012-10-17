@@ -8,7 +8,7 @@ import java.util.Date;
 
 public class Express {
     private int id;
-    private int orderId;
+    private long orderId;
     private String expressNo;
     private BigDecimal fee;
     @DateTimeFormat(pattern = DateUtil.DATE_FORMAT)
@@ -22,11 +22,11 @@ public class Express {
         this.id = id;
     }
 
-    public int getOrderId() {
+    public long getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(int orderId) {
+    public void setOrderId(long orderId) {
         this.orderId = orderId;
     }
 

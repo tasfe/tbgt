@@ -6,12 +6,12 @@
 
     <resultMap id="resultBase" type="Order">
         <id property="id" column="id"/>
-        <result property="address" column="address"/>
-        <result property="orderNo" column="orderNo"/>
-        <result property="contactPerson" column="contactPerson"/>
-        <result property="phone" column="phone"/>
+        <result property="receiver_state" column="receiver_state"/>
+        <result property="receiver_address" column="receiver_address"/>
+        <result property="buyer_msg" column="buyer_msg"/>
         <result property="actualPrice" column="actualPrice"/>
-        <result property="soldTime" column="soldTime"/>
+        <result property="pay_time" column="pay_time"/>
+        <result property="giftFee" column="giftFee"/>
         <result property="agencyFee" column="agencyFee"/>
         <result property="status" column="status"/>
     </resultMap>
@@ -79,31 +79,23 @@
     </select>
 
     <insert id="saveOrder" parameterType="Order">
-		INSERT INTO orders (address,orderNo,contactPerson,phone,actualPrice,soldTime,agencyFee)
-    	VALUE (#{address},#{orderNo},#{contactPerson},#{phone},#{actualPrice},#{soldTime},#{agencyFee})
-        <selectKey keyProperty="id" resultType="int" order="AFTER">
-                   SELECT LAST_INSERT_ID();
-        </selectKey>
+		INSERT INTO orders (id,receiver_state,receiver_address,buyer_msg,actualPrice,pay_time,status)
+    	VALUE (#{id},#{receiver_state},#{receiver_address},#{buyer_msg},#{actualPrice},#{pay_time},#{status})
 
 	</insert>
 
     <update id="updateOrder" parameterType="Order">
   		UPDATE orders
   		SET
-  			address = #{address},
-			orderNo = #{orderNo},
-			contactPerson = #{contactPerson},
-			phone = #{phone},
-			actualPrice = #{actualPrice},
-			soldTime = #{soldTime},
+			giftFee = #{giftFee},
 			agencyFee =#{agencyFee}
   		where id = #{id}
 	</update>
-    <select id="getOrderById" resultMap="resultOrderById" parameterType="int">
+    <select id="getOrderById" resultMap="resultOrderById" parameterType="long">
 		SELECT * FROM orders where id=#{id};
 	</select>
 
-    <delete id="deleteOrder" parameterType="int">
+    <delete id="deleteOrder" parameterType="long">
 		DELETE FROM orders where id=#{id};
 	</delete>
 

@@ -77,4 +77,8 @@ public class BaoBeiServiceImpl implements BaoBeiService {
             baobeiSkuMapper.updateBaobeiCustomAttr(sku);
         }
     }
+
+    public BaobeiSku getSkuById(long sku_id){
+         return baobeiSkuMapper.getSkuById(sku_id);
+    }
 }

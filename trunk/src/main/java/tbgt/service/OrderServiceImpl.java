@@ -85,7 +85,6 @@ public class OrderServiceImpl implements OrderService {
         orderMapper.saveOrder(order);
         List<SoldBaobei> soldBaobeis = order.getSoldBaobeis();
         for (SoldBaobei soldBaobei : soldBaobeis) {
-            soldBaobei.setOrderId(order.getId());
             soldBaobeiMapper.saveSoldBaoBei(soldBaobei);
         }
     }
@@ -102,14 +101,12 @@ public class OrderServiceImpl implements OrderService {
     @Transactional
     public void insertExpress(Express express) {
         expressMapper.insertExpress(express);
-        updateStatus(express.getOrderId(),"S");
     }
 
     @Override
     @Transactional
     public void updateExpress(Express express) {
         expressMapper.updateExpress(express);
-        updateStatus(express.getOrderId(),"S");
     }
 
     @Override

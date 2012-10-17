@@ -10,7 +10,7 @@ public interface SoldBaobeiMapper {
 
     public List<SoldBaobei> getSoldBaobeiByOrderNo(String orderNo);
 
-    public void deleteSoldBaobei(int id);
+    public void deleteSoldBaobei(long id);
 
     public void updateSoldBaobei(SoldBaobei soldBaobei);
 }
