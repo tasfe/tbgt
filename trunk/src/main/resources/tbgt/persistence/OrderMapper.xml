@@ -50,27 +50,27 @@
 
 
 
-    <sql id="orderColumns"> ORDERS.id,receiver_address,receiver_state,buyer_msg,actualPrice,pay_time,agencyFee,status, modified,
+    <sql id="orderColumns"> orders.id,receiver_address,receiver_state,buyer_msg,actualPrice,pay_time,agencyFee,status, modified,
  express.id ,expressNo,
- fee,giftFee,sendTime,SoldBaobei.id,bbid,quantity,sku_id,sku_properties_name,
+ fee,giftFee,sendTime,soldbaobei.id,bbid,quantity,sku_id,sku_properties_name,
  title,weight,purchase_price,price </sql>
 
     <select id="getOrders" parameterType="java.util.Map" resultMap="resultOrders">
-      SELECT <include refid="orderColumns"/> FROM ORDERS
-        LEFT JOIN EXPRESS ON ORDERS.ID = EXPRESS.ORDERID
-        LEFT JOIN SOLDBAOBEI ON ORDERS.ID = SOLDBAOBEI.tid
+      select <include refid="orderColumns"/> from orders
+        left join express on orders.id = express.orderid
+        left join soldbaobei on orders.id = soldbaobei.tid
         <trim prefix="WHERE" prefixOverrides="AND|OR">
             <if test="name != null and name != ''">
-                SOLDBAOBEI.title like CONCAT(CONCAT('%', #{name}),'%') or ORDERS.receiver_address like CONCAT(CONCAT('%', #{name}),'%')
+                soldbaobei.title like CONCAT(CONCAT('%', #{name}),'%') or orders.receiver_address like CONCAT(CONCAT('%', #{name}),'%')
             </if>
             <if test="status != null and status != '' ">
-                and ORDERS.status = #{status}
+                and orders.status = #{status}
             </if>
             <if test="fromDate != null">
-                and ORDERS.pay_time &gt;= #{fromDate}
+                and orders.pay_time &gt;= #{fromDate}
             </if>
             <if test="toDate != null">
-                and ORDERS.pay_time &lt;= #{toDate}
+                and orders.pay_time &lt;= #{toDate}
             </if>
         </trim>
         <trim prefix="ORDER BY">
