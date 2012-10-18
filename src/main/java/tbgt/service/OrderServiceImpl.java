@@ -55,6 +55,10 @@ public class OrderServiceImpl implements OrderService {
         return orderMapper.getAllOrders();
     }
 
+    public List<Order> getAllNotClosedOrders() {
+        return orderMapper.getAllOrders();
+    }
+
     @Transactional
     public void deleteOrder(long id) {
         Order order = getOrderById(id);
@@ -149,7 +153,7 @@ public class OrderServiceImpl implements OrderService {
         req.setPageSize(100L);
         if(!refreshAll){
           req.setStatus("WAIT_SELLER_SEND_GOODS");
-          List<Order> orders = getAllOrders();
+          List<Order> orders = getAllNotClosedOrders();
             for (Order order: orders) {
                 updateOrder(top_session, client, order.getId());
             }

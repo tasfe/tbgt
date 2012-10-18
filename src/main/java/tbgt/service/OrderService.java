@@ -13,6 +13,8 @@ public interface OrderService {
 
     public List<Order> getAllOrders();
 
+    public List<Order> getAllNotClosedOrders();
+
     public void deleteOrder(long id);
 
     public Order getOrderById(long id);

@@ -106,6 +106,10 @@
 		SELECT * FROM orders;
 	</select>
 
+    <select id="getAllNotClosedOrders" resultMap="resultBase">
+		SELECT * FROM orders where status in ('WAIT_SELLER_SEND_GOODS','WAIT_BUYER_CONFIRM_GOODS');
+	</select>
+
     <delete id="deleteOrder" parameterType="long">
 		DELETE FROM orders where id=#{id};
 	</delete>

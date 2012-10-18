@@ -15,6 +15,8 @@ public interface OrderMapper {
 
     public List<Order> getAllOrders();
 
+    public List<Order> getAllNotClosedOrders();
+
     public Order getOrderById(long id);
    
 
