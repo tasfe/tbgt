@@ -100,8 +100,9 @@ public class Order {
 
     @JsonIgnore
     public BigDecimal getProfit() {
-        return actualPrice.subtract(getPurchasePrice())
-                .subtract(getExpress().getFee()).subtract(getAgencyFee()).subtract(getExpress().getGiftFee());
+//        return actualPrice.subtract(getPurchasePrice())
+//                .subtract(getExpress().getFee()).subtract(getAgencyFee()).subtract(getExpress().getGiftFee());
+        return new BigDecimal(8);
     }
 
     public String getStatus() {

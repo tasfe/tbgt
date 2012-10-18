@@ -104,6 +104,7 @@ public class OrderServiceImpl implements OrderService {
         orderMapper.updateStatus(param);
     }
 
+    @Transactional
     public void saveOrder(Order order) {
         orderMapper.saveOrder(order);
         List<SoldBaobei> soldBaobeis = order.getSoldBaobeis();
@@ -112,6 +113,7 @@ public class OrderServiceImpl implements OrderService {
         }
     }
 
+    @Transactional
     public void updateOrder(Order order) {
         orderMapper.updateOrder(order);
         List<SoldBaobei> soldBaobeis = order.getSoldBaobeis();
