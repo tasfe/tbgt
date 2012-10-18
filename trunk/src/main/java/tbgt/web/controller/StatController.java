@@ -64,7 +64,7 @@ public class StatController {
         OrderCriteria orderCriteria = new OrderCriteria();
         orderCriteria.setFromDate(fromDate);
         orderCriteria.setToDate(toDate);
-        orderCriteria.setStatus("C");
+        orderCriteria.setStatus("TRADE_FINISHED");
         List<Order> orders = orderService.getOrders(orderCriteria);
         Map<String, BigDecimal> chartDataMap = new HashMap<String, BigDecimal>();
         for (Order order : orders) {
