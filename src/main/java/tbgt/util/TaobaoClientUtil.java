@@ -17,6 +17,6 @@ public class TaobaoClientUtil {
             System.getProperties().put("proxyHost", TbgtResourceUtil.getInstance().getMessage("proxyHost"));
             System.getProperties().put("proxyPort", TbgtResourceUtil.getInstance().getMessage("proxyPort"));
         }
-        return new DefaultTaobaoClient(topServerUrl, appKey, appSecret);
+        return new SAETaobaoClient(topServerUrl, appKey, appSecret);
     }
 }

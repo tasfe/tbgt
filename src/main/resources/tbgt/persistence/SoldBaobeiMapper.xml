@@ -8,15 +8,15 @@
       SELECT * FROM soldbaobei WHERE tid=#{id}
     </select>
 
-    <insert id="saveSoldBaoBei" parameterType="soldBaobei">
-		INSERT INTO soldBaobei (id,tid,bbid,quantity,sku_id,sku_properties_name,title,purchase_price,price,weight)
+    <insert id="saveSoldBaoBei" parameterType="SoldBaobei">
+		INSERT INTO soldbaobei (id,tid,bbid,quantity,sku_id,sku_properties_name,title,purchase_price,price,weight)
     	VALUE (#{id},#{tid},#{bbid},#{quantity},#{sku_id},#{sku_properties_name},#{title},#{purchase_price},#{price},#{weight})
 	</insert>
 
     <delete id="deleteSoldBaobei" parameterType="long">
     	DELETE FROM soldbaobei WHERE id = #{id}
     </delete>
-    <update id="updateSoldBaobei" parameterType="soldBaobei">
+    <update id="updateSoldBaoBei" parameterType="SoldBaobei">
   		UPDATE soldbaobei
   		SET
   			tid = #{tid},
