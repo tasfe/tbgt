@@ -1,5 +1,7 @@
 package tbgt.service;
 
+import com.taobao.api.request.LogisticsOfflineSendRequest;
+import com.taobao.api.response.LogisticsOfflineSendResponse;
 import org.springframework.transaction.annotation.Transactional;
 import tbgt.domain.Express;
 import tbgt.domain.Order;
@@ -232,4 +234,21 @@ public class OrderServiceImpl implements OrderService {
 		}
 		return null;
 	}
+
+
+    public boolean send(String top_session) throws ApiException {
+        List<HashMap> orders = orderMapper.getPendingSendOrders();
+        for (HashMap order : orders) {
+            TaobaoClient client = TaobaoClientUtil.getTaobaoClient();
+            LogisticsOfflineSendRequest logisticsOfflineSendRequest = new LogisticsOfflineSendRequest();
+            String expressno = (String) order.get("expressno");
+//                YUNDA -- 韵达快运  EMS -- EMS
+            logisticsOfflineSendRequest.setCompanyCode(expressno.startsWith("EF") ? "EMS" : "YUNDA");
+            logisticsOfflineSendRequest.setOutSid(expressno);
+            logisticsOfflineSendRequest.setTid((Long) order.get("orderid"));
+            LogisticsOfflineSendResponse rsp = client.execute(logisticsOfflineSendRequest, top_session);
+            return rsp.getShipping().getIsSuccess();
+        }
+        return false;
+    }
 }

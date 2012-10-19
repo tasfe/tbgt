@@ -110,6 +110,14 @@
 		SELECT * FROM orders where status in ('WAIT_SELLER_SEND_GOODS','WAIT_BUYER_CONFIRM_GOODS');
 	</select>
 
+    <resultMap id="ordersForSend" type="java.util.HashMap">
+        <result property="orderid" column="orderid"/>
+        <result property="expressno" column="expressno"/>
+    </resultMap>
+    <select id="getPendingSendOrders" resultMap="ordersForSend">
+		SELECT orders.id as orderid, express.expressno as expressno FROM orders join  express on express.orderid = orders.id where orders.status in ('WAIT_SELLER_SEND_GOODS') and express.expressno is not null
+	</select>
+
     <delete id="deleteOrder" parameterType="long">
 		DELETE FROM orders where id=#{id};
 	</delete>

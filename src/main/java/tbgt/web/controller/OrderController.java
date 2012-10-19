@@ -163,6 +163,20 @@ public class OrderController {
         return mv;
     }
 
+    @RequestMapping(value = "/send", method = {RequestMethod.POST,RequestMethod.GET})
+    public ModelAndView send(@RequestParam String top_session) throws Exception {
+        ModelAndView mv = new ModelAndView("order");
+        boolean  result = orderService.send(top_session);
+        if(!result) {
+            mv.addObject("errormsg","发货失败");
+            mv.addObject("status","WAIT_SELLER_SEND_GOODS");
+        }else{
+            mv.addObject("status","WAIT_BUYER_CONFIRM_GOODS");
+        }
+
+        return mv;
+    }
+
     @ExceptionHandler(Exception.class)
     public String handleException(Exception ex, HttpServletRequest request) {
         ex.printStackTrace();

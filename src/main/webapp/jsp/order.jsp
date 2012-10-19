@@ -50,6 +50,7 @@
                     <li><a href="#" onclick="showOrders('TRADE_FINISHED');return false" class="edit">交易成功</a></li>
                     <li><a href="#" onclick="refresh();return false" class="refresh">增量同步订单</a></li>
                     <li><a href="#" onclick="refreshAll();return false" class="refresh">同步所有订单</a></li>
+                    <li><a href="#" onclick="send();return false" class="express">淘宝发货</a></li>
                 </ul>
             </div>
       </div>
@@ -100,6 +101,11 @@
      function refreshAll(){
         if (confirm("即将同步所有订单，确认手没抖吗?")) {
             window.location.href = "<tbgt:constant name="ContextPath"/>/top/getSessionKey.html?callbackUrl=<tbgt:constant name="ContextPath"/>/order/refreshAll.html";
+        }
+    }
+     function send(){
+        if (confirm("即将到淘宝对所有填了订单号但是没有发货的订单进行发货，确认手没抖吗?")) {
+            window.location.href = "<tbgt:constant name="ContextPath"/>/top/getSessionKey.html?callbackUrl=<tbgt:constant name="ContextPath"/>/order/send.html";
         }
     }
      
@@ -252,6 +258,32 @@
 //        $("#tdata1 tbody tr").live('dblclick', function () {
 //            updateOrder('updateOrder',tdata1.fnGetData(this).id);
 //        });
+        if('${errormsg}'!=null && '${errormsg}'!='')
+        {
+           jError(
+                        '${errormsg}',
+                        {
+                            autoHide : true, // added in v2.0
+                            clickOverlay : false, // added in v2.0
+                            MinWidth : 400,
+                            TimeShown : 10000,
+                            ShowTimeEffect : 200,
+                            HideTimeEffect : 200,
+                            LongTrip :20,
+                            HorizontalPosition : 'center',
+                            VerticalPosition : 'top',
+                            ShowOverlay : false,
+                            ColorOverlay : '#000',
+                            OpacityOverlay : 0.3,
+                            onClosed : function() { // added in v2.0
+
+                            },
+                            onCompleted : function() { // added in v2.0
+
+                            }
+                        });
+        }
+
 
     });
     function showOrders(ind){
