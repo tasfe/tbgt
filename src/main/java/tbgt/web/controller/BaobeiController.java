@@ -93,4 +93,11 @@ public class BaobeiController {
         return mv;
     }
 
+    @RequestMapping(value = "/refreshBaobei", method = {RequestMethod.POST,RequestMethod.GET})
+    public ModelAndView refreshBaobei(@RequestParam String top_session,@RequestParam long bbid) throws Exception {
+        ModelAndView mv = new ModelAndView("baobei");
+        baoBeiService.refreshOneBaobei(top_session,bbid);
+        return mv;
+    }
+
 }

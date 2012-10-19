@@ -88,7 +88,9 @@
 
     function refresh(baobeiid){
         if (baobeiid != null && baobeiid != "") {
-            alert("还没做好");
+            if (confirm("即将同步该宝贝，确认手没抖吗?")) {
+                window.location.href = "<tbgt:constant name="ContextPath"/>/top/getSessionKey.html?callbackUrl=<tbgt:constant name="ContextPath"/>/baobei/refreshBaobei.html?bbid="+baobeiid;
+            }
             return;
         }
         if (confirm("即将同步所有宝贝，确认手没抖吗?")) {

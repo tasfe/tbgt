@@ -147,11 +147,19 @@ public class OrderController {
     }
 
 
-    @RequestMapping(value = "/refresh", method = {RequestMethod.POST,RequestMethod.GET})
+    @RequestMapping(value = "/refreshOrder", method = {RequestMethod.POST,RequestMethod.GET})
+    public ModelAndView refreshOrder(@RequestParam long orderId,@RequestParam String status,@RequestParam String top_session) throws Exception {
+        ModelAndView mv = new ModelAndView("order");
+        orderService.refreshOneOrder(top_session,orderId);
+        mv.addObject("status",status);
+        return mv;
+    }
+
+    @RequestMapping(value = "/refresh", method = {RequestMethod.POST, RequestMethod.GET})
     public ModelAndView refresh(@RequestParam String top_session) throws Exception {
         ModelAndView mv = new ModelAndView("order");
-        orderService.refreshOrder(top_session,false);
-        mv.addObject("status","WAIT_SELLER_SEND_GOODS");
+        orderService.refreshOrder(top_session, false);
+        mv.addObject("status", "WAIT_SELLER_SEND_GOODS");
         return mv;
     }
 

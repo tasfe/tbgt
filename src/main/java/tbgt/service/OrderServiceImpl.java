@@ -178,6 +178,10 @@ public class OrderServiceImpl implements OrderService {
         } while ((!rsp.isSuccess() || rsp.getHasNext()));
     }
 
+    public  void refreshOneOrder(String top_session,long orderId) throws ApiException{
+         updateOrder(top_session, TaobaoClientUtil.getTaobaoClient(), orderId);
+    }
+
     private void updateOrder(String top_session, TaobaoClient client, long tid) throws ApiException {
         Trade trade = getTradeFullInfo(client, tid, top_session);
         Order order = getOrderById(trade.getTid());
@@ -238,6 +242,7 @@ public class OrderServiceImpl implements OrderService {
 
     public boolean send(String top_session) throws ApiException {
         List<HashMap> orders = orderMapper.getPendingSendOrders();
+        boolean success = false;
         for (HashMap order : orders) {
             TaobaoClient client = TaobaoClientUtil.getTaobaoClient();
             LogisticsOfflineSendRequest logisticsOfflineSendRequest = new LogisticsOfflineSendRequest();
@@ -245,10 +250,14 @@ public class OrderServiceImpl implements OrderService {
 //                YUNDA -- 韵达快运  EMS -- EMS
             logisticsOfflineSendRequest.setCompanyCode(expressno.startsWith("EF") ? "EMS" : "YUNDA");
             logisticsOfflineSendRequest.setOutSid(expressno);
-            logisticsOfflineSendRequest.setTid((Long) order.get("orderid"));
+            Long orderId = (Long) order.get("orderid");
+            logisticsOfflineSendRequest.setTid(orderId);
             LogisticsOfflineSendResponse rsp = client.execute(logisticsOfflineSendRequest, top_session);
-            return rsp.getShipping().getIsSuccess();
+            success = rsp.getShipping().getIsSuccess();
+            if(success){
+                updateStatus(orderId,"WAIT_BUYER_CONFIRM_GOODS");
+            }
         }
-        return false;
+        return success;
     }
 }
