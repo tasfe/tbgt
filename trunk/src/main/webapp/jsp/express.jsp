@@ -27,6 +27,9 @@
                 <label for="fee">费用 </label>
                 <form:input path="fee" id="fee"/>
                 <br/>
+                <label for="giftFee">小礼物费用 </label>
+                <form:input path="giftFee" id="giftFee"/>
+                <br/>
                 <label for="sendTime">时间 </label>
                 <form:input path="sendTime" id="sendTime" class="date"/>
                 <br/>

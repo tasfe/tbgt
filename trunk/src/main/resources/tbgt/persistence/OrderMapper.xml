@@ -18,7 +18,7 @@
 
     <resultMap id="resultOrders" type="Order" extends="resultBase">
         <association property="express" column="id" javaType="Express">
-            <id property="id" column="express.id"/>
+            <id property="id" column="express_id"/>
             <result property="orderId" column="id"/>
             <result property="expressNo" column="expressNo"/>
             <result property="fee" column="fee"/>
@@ -26,7 +26,7 @@
             <result property="sendTime" column="sendTime"/>
         </association>
         <collection property="soldBaobeis" column="id" javaType="java.util.ArrayList" ofType="SoldBaobei">
-            <id property="id" column="SoldBaobei.id"/>
+            <id property="id" column="soldbaobei_id"/>
             <result property="tid" column="id"/>
             <result property="bbid" column="bbid"/>
             <result property="quantity" column="quantity"/>
@@ -51,8 +51,8 @@
 
 
     <sql id="orderColumns"> orders.id,receiver_address,receiver_state,buyer_msg,actualPrice,pay_time,agencyFee,status, modified,
- express.id ,expressNo,
- fee,giftFee,sendTime,soldbaobei.id,bbid,quantity,sku_id,sku_properties_name,
+ express.id as express_id ,expressNo,
+ fee,giftFee,sendTime,soldbaobei.id as soldbaobei_id,bbid,quantity,sku_id,sku_properties_name,
  title,weight,purchase_price,price </sql>
 
     <select id="getOrders" parameterType="java.util.Map" resultMap="resultOrders">
