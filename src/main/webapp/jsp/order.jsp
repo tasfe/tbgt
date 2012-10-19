@@ -226,8 +226,7 @@
                         };
                          return detail;
                     });
-
-                   $('td:eq(5)', nRow).html(aData.express.fee==0?"":aData.express.fee);
+                   $('td:eq(5)', nRow).html(aData.express.id==0?"":aData.express.fee);
             }
 
         });

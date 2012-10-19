@@ -69,51 +69,55 @@
                             <th>
                                 <table>
                                     <tr>
-                                        <td><a href="#" onclick="popup('安徽')">安徽</a></td>
-                                        <td><a href="#" onclick="popup('澳门')">澳门</a></td>
                                         <td><a href="#" onclick="popup('北京')">北京</a></td>
-                                        <td><a href="#" onclick="popup('福建')">福建</a></td>
-                                        <td><a href="#" onclick="popup('甘肃')">甘肃</a></td>
-                                        <td><a href="#" onclick="popup('广东')">广东</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="#" onclick="popup('广西')">广西</a></td>
-                                        <td><a href="#" onclick="popup('贵州')">贵州</a></td>
-                                        <td><a href="#" onclick="popup('海南')">海南</a></td>
-                                        <td><a href="#" onclick="popup('河北')">河北</a></td>
-                                        <td><a href="#" onclick="popup('河南')">河南</a></td>
-                                        <td><a href="#" onclick="popup('黑龙江')">黑龙江</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="#" onclick="popup('湖北')">湖北</a></td>
-                                        <td><a href="#" onclick="popup('湖南')">湖南</a></td>
-                                        <td><a href="#" onclick="popup('吉林')">吉林</a></td>
-                                        <td><a href="#" onclick="popup('江苏')">江苏</a></td>
-                                        <td><a href="#" onclick="popup('江西')">江西</a></td>
-                                        <td><a href="#" onclick="popup('辽宁')">辽宁</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="#" onclick="popup('内蒙古')">内蒙古</a></td>
-                                        <td><a href="#" onclick="popup('宁夏')">宁夏</a></td>
-                                        <td><a href="#" onclick="popup('青海')">青海</a></td>
-                                        <td><a href="#" onclick="popup('山东')">山东</a></td>
-                                        <td><a href="#" onclick="popup('山西')">山西</a></td>
-                                        <td><a href="#" onclick="popup('陕西')">陕西</a></td>
+                                        <td><a href="#" onclick="popup('安徽省')">安徽省</a></td>
+                                        <td><a href="#" onclick="popup('福建省')">福建省</a></td>
+                                        <td><a href="#" onclick="popup('甘肃省')">甘肃省</a></td>
+                                        <td><a href="#" onclick="popup('内蒙古自治区')">内蒙古自治区</a></td>
+
+                                        <td><a href="#" onclick="popup('澳门特别行政区')">澳门特别行政区</a></td>
                                     </tr>
                                     <tr>
                                         <td><a href="#" onclick="popup('上海')">上海</a></td>
-                                        <td><a href="#" onclick="popup('四川')">四川</a></td>
-                                        <td><a href="#" onclick="popup('台湾')">台湾</a></td>
-                                        <td><a href="#" onclick="popup('天津')">天津</a></td>
-                                        <td><a href="#" onclick="popup('西藏')">西藏</a></td>
-                                        <td><a href="#" onclick="popup('香港')">香港</a></td>
+                                        <td><a href="#" onclick="popup('海南省')">海南省</a></td>
+                                        <td><a href="#" onclick="popup('河北省')">河北省</a></td>
+                                        <td><a href="#" onclick="popup('河南省')">河南省</a></td>
+                                        <td><a href="#" onclick="popup('黑龙江省')">黑龙江省</a></td>
+                                        <td><a href="#" onclick="popup('广西壮族自治区')">广西壮族自治区</a></td>
                                     </tr>
                                     <tr>
-                                        <td><a href="#" onclick="popup('新疆')">新疆</a></td>
-                                        <td><a href="#" onclick="popup('云南')">云南</a></td>
-                                        <td><a href="#" onclick="popup('浙江')">浙江</a></td>
-                                        <td><a href="#" onclick="popup('浙江舟山')">浙江舟山</a></td>
+                                        <td><a href="#" onclick="popup('天津')">天津</a></td>
+                                        <td><a href="#" onclick="popup('湖北省')">湖北省</a></td>
+                                        <td><a href="#" onclick="popup('湖南省')">湖南省</a></td>
+                                        <td><a href="#" onclick="popup('江西省')">江西省</a></td>
+                                        <td><a href="#" onclick="popup('辽宁省')">辽宁省</a></td>
+                                        <td><a href="#" onclick="popup('新疆维吾尔自治区')">新疆维吾尔自治区</a></td>
+                                    </tr>
+                                    <tr>
                                         <td><a href="#" onclick="popup('重庆')">重庆</a></td>
+
+                                        <td><a href="#" onclick="popup('青海省')">青海省</a></td>
+                                        <td><a href="#" onclick="popup('山东省')">山东省</a></td>
+                                        <td><a href="#" onclick="popup('山西省')">山西省</a></td>
+                                        <td><a href="#" onclick="popup('陕西省')">陕西省</a></td>
+                                        <td><a href="#" onclick="popup('宁夏回族自治区')">宁夏回族自治区</a></td>
+                                    </tr>
+                                    <tr>
+
+                                        <td><a href="#" onclick="popup('四川省')">四川省</a></td>
+                                        <td><a href="#" onclick="popup('台湾省')">台湾省</a></td>
+                                        <td><a href="#" onclick="popup('吉林省')">吉林省</a></td>
+                                        <td><a href="#" onclick="popup('贵州省')">贵州省</a></td>
+                                        <td><a href="#" onclick="popup('西藏自治区')">西藏自治区</a></td>
+                                        <td><a href="#" onclick="popup('香港特别行政区')">香港特别行政区</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td><a href="#" onclick="popup('江苏省')">江苏省</a></td>
+                                        <td><a href="#" onclick="popup('广东省')">广东省</a></td>
+                                        <td><a href="#" onclick="popup('云南省')">云南省</a></td>
+                                        <td><a href="#" onclick="popup('浙江省')">浙江省</a></td>
+                                        <td><a href="#" onclick="popup('浙江省舟山')">浙江省舟山</a></td>
+
                                     </tr>
                                 </table>
                             </th>
@@ -179,7 +183,7 @@
     </div>
     <div id="footer">
         <div id="credits">
-            版权所有 © 2012-2014, 易家生活坊, All Rights Reserved.
+            版权所有 ? 2012-2014, 易家生活坊, All Rights Reserved.
         </div>
     </div>
 </div>
@@ -191,136 +195,136 @@
 //        $("#tdata1 tr:even").addClass("even");
         var provinces = [
             {
-                value: "ah anhui 安徽",
-                desc: "安徽"
+                value: "ah anhui 安徽省",
+                desc: "安徽省"
             },
             {
-                value: "am aomen 澳门",
-                desc: "澳门"
+                value: "am aomen 澳门特别行政区",
+                desc: "澳门特别行政区"
             },
             {
-                value: "fj fujian 福建",
-                desc: "福建"
+                value: "fj fujian 福建省",
+                desc: "福建省"
             },
             {
-                value: "gs gansu 甘肃",
-                desc: "甘肃"
+                value: "gs gansu 甘肃省",
+                desc: "甘肃省"
             },
             {
-                value: "gd guangdong 广东",
-                desc: "广东"
+                value: "gd guangdong 广东省",
+                desc: "广东省"
             },
             {
-                value: "gx guangxi 广西",
-                desc: "广西"
+                value: "gx guangxi 广西壮族自治区",
+                desc: "广西壮族自治区"
             },
             {
-                value: "gz guizhou 贵州",
-                desc: "贵州"
+                value: "gz guizhou 贵州省",
+                desc: "贵州省"
             },
             {
-                value: "hn hainan 海南",
-                desc: "海南"
+                value: "hn hainan 海南省",
+                desc: "海南省"
             },
             {
-                value: "hb hebei 河北",
-                desc: "河北"
+                value: "hb hebei 河北省",
+                desc: "河北省"
             },
             {
-                value: "hn henan 河南",
-                desc: "河南"
+                value: "hn henan 河南省",
+                desc: "河南省"
             },
             {
-                value: "hlj heilongjiang 黑龙江",
-                desc: "黑龙江"
+                value: "hlj heilongjiang 黑龙江省",
+                desc: "黑龙江省"
             },
             {
-                value: "hb hubei 湖北",
-                desc: "湖北"
+                value: "hb hubei 湖北省",
+                desc: "湖北省"
             },
             {
-                value: "hn hunan 湖南",
-                desc: "湖南"
+                value: "hn hunan 湖南省",
+                desc: "湖南省"
             },
             {
-                value: "jl jilin 吉林",
-                desc: "吉林"
+                value: "jl jilin 吉林省",
+                desc: "吉林省"
             },
             {
-                value: "js jiangsu 江苏",
-                desc: "江苏"
+                value: "js jiangsu 江苏省",
+                desc: "江苏省"
             },
             {
-                value: "jx jiangxi 江西",
-                desc: "江西"
+                value: "jx jiangxi 江西省",
+                desc: "江西省"
             },
             {
-                value: "ln liaoning 辽宁",
-                desc: "辽宁"
+                value: "ln liaoning 辽宁省",
+                desc: "辽宁省"
             },
             {
-                value: "nmg neimenggu 内蒙古",
-                desc: "内蒙古"
+                value: "nmg neimenggu 内蒙古自治区",
+                desc: "内蒙古自治区"
             },
             {
-                value: "nx ningxia 宁夏",
-                desc: "宁夏"
+                value: "nx ningxia 宁夏回族自治区",
+                desc: "宁夏回族自治区"
             },
             {
-                value: "qh qinghai 青海",
-                desc: "青海"
+                value: "qh qinghai 青海省",
+                desc: "青海省"
             },
             {
-                value: "xz xizang 西藏",
-                desc: "西藏"
+                value: "xz xizang 西藏自治区",
+                desc: "西藏自治区"
             },
             {
-                value: "sd shandong 山东",
-                desc: "山东"
+                value: "sd shandong 山东省",
+                desc: "山东省"
             },
             {
-                value: "sx shanxi 山西",
-                desc: "山西"
+                value: "sx shanxi 山西省",
+                desc: "山西省"
             },
             {
-                value: "sx shanxi 陕西",
-                desc: "陕西"
+                value: "sx shanxi 陕西省",
+                desc: "陕西省"
             },
             {
-                value: "sc sichuan 四川",
-                desc: "四川"
+                value: "sc sichuan 四川省",
+                desc: "四川省"
             },
             {
-                value: "tw taiwan 台湾",
-                desc: "台湾"
+                value: "tw taiwan 台湾省",
+                desc: "台湾省"
             },
             {
                 value: "tj tianjin 天津",
                 desc: "天津"
             },
             {
-                value: "xg xianggang 香港",
-                desc: "香港"
+                value: "xg xianggang 香港特别行政区",
+                desc: "香港特别行政区"
             },
             {
-                value: "xj xinjiang 新疆",
-                desc: "新疆"
+                value: "xj xinjiang 新疆维吾尔自治区",
+                desc: "新疆维吾尔自治区"
             },
             {
-                value: "yn yunnan 云南",
-                desc: "云南"
+                value: "yn yunnan 云南省",
+                desc: "云南省"
             },
             {
-                value: "zj zhejiang 浙江",
-                desc: "浙江"
+                value: "zj zhejiang 浙江省",
+                desc: "浙江省"
             },
             {
                 value: "cq chongqing 重庆",
                 desc: "重庆"
             },
             {
-                value: "zs zhoushan 浙江舟山",
-                desc: "浙江舟山"
+                value: "zs zhoushan 浙江省舟山",
+                desc: "浙江省舟山"
             },
             {
                 value: "bj beijing 北京",

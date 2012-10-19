@@ -127,10 +127,9 @@ public class OrderController {
     }
 
     @RequestMapping(value = "/getExpressFee", method = RequestMethod.POST)
-    public @ResponseBody int getExpressFee(@RequestParam int orderId,@RequestParam String expressNo){
+    public @ResponseBody int getExpressFee(@RequestParam long orderId,@RequestParam String expressNo){
 
         Order order = orderService.getOrderById(orderId);
-        String address = order.getReceiver_address();
         BigDecimal weight = BigDecimal.ZERO;
         for(SoldBaobei soldBaobei : order.getSoldBaobeis()){
             String baobeiWeight = soldBaobei.getWeight();
