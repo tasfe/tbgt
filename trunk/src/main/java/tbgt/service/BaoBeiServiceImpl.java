@@ -103,36 +103,46 @@ public class BaoBeiServiceImpl implements BaoBeiService {
         List<Item> items = res.getItems();
         for (Item item : items) {
             long id = item.getNumIid();
-            ItemGetRequest itemGetRequest = new ItemGetRequest();
-            itemGetRequest.setNumIid(id);
-            itemGetRequest.setFields("num_iid,title,pic_url,detail_url,property_alias,sku,list_time");
-            ItemGetResponse itemGetResponse = client.execute(itemGetRequest, top_session);
-            item = itemGetResponse.getItem();
-            Baobei baobei = new Baobei();
-            baobei.setId(id);
-            baobei.setDetail_url(item.getDetailUrl());
-            baobei.setList_time(item.getListTime());
-            baobei.setPic_url(item.getPicUrl());
-            baobei.setProperty_alias(item.getPropertyAlias());
-            baobei.setTitle(item.getTitle());
-            List<Sku> skus = item.getSkus();
-            if(skus!=null){
+            updatebaobei(top_session, client, id);
+        }
+    }
+
+    @Override
+    @Transactional
+    public void refreshOneBaobei(String top_session,long bbid) throws ApiException {
+        updatebaobei(top_session, TaobaoClientUtil.getTaobaoClient(), bbid);
+    }
+
+    private void updatebaobei(String top_session, TaobaoClient client, long id) throws ApiException {
+        Item item;
+        ItemGetRequest itemGetRequest = new ItemGetRequest();
+        itemGetRequest.setNumIid(id);
+        itemGetRequest.setFields("num_iid,title,pic_url,detail_url,property_alias,sku,list_time");
+        ItemGetResponse itemGetResponse = client.execute(itemGetRequest, top_session);
+        item = itemGetResponse.getItem();
+        Baobei baobei = new Baobei();
+        baobei.setId(id);
+        baobei.setDetail_url(item.getDetailUrl());
+        baobei.setList_time(item.getListTime());
+        baobei.setPic_url(item.getPicUrl());
+        baobei.setProperty_alias(item.getPropertyAlias());
+        baobei.setTitle(item.getTitle());
+        List<Sku> skus = item.getSkus();
+        if(skus!=null){
                 for(Sku sku : skus){
-                    BaobeiSku baobeiSku = new BaobeiSku();
-                    baobeiSku.setBbid(id);
-                    baobeiSku.setPrice(new BigDecimal(sku.getPrice()));
-                    baobeiSku.setProperties_name(sku.getPropertiesName());
-                    baobeiSku.setQuantity(sku.getQuantity());
-                    baobeiSku.setSku_id(sku.getSkuId());
-                    baobei.addSku(baobeiSku);
-                }
+                BaobeiSku baobeiSku = new BaobeiSku();
+                baobeiSku.setBbid(id);
+                baobeiSku.setPrice(new BigDecimal(sku.getPrice()));
+                baobeiSku.setProperties_name(sku.getPropertiesName());
+                baobeiSku.setQuantity(sku.getQuantity());
+                baobeiSku.setSku_id(sku.getSkuId());
+                baobei.addSku(baobeiSku);
             }
-            if(getBaobeiById(baobei.getId())!=null){
+        }
+        if(getBaobeiById(baobei.getId())!=null){
                updateBaobei(baobei);
             }else{
                insertBaobei(baobei);
             }
-
-        }
     }
 }

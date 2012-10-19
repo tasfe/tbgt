@@ -17,6 +17,13 @@ public class TaobaoClientUtil {
             System.getProperties().put("proxyHost", TbgtResourceUtil.getInstance().getMessage("proxyHost"));
             System.getProperties().put("proxyPort", TbgtResourceUtil.getInstance().getMessage("proxyPort"));
         }
-        return new SAETaobaoClient(topServerUrl, appKey, appSecret);
+        TaobaoClient taobaoClient = null;
+        String taobaoclient_class = TbgtResourceUtil.getInstance().getMessage("tabao.client.class");
+        try {
+            taobaoClient = (TaobaoClient)Class.forName(taobaoclient_class).getConstructor(String.class,String.class,String.class).newInstance(topServerUrl, appKey, appSecret);
+        } catch (Exception e) {
+           taobaoClient = new DefaultTaobaoClient(topServerUrl, appKey, appSecret); 
+        }
+        return taobaoClient;
     }
 }

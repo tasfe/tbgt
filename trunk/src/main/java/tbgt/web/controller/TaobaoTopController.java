@@ -49,7 +49,8 @@ public class TaobaoTopController {
         String callbackUrl = topSessionKey.getCallback_url();
         topSessionKey.setSessionkey(top_session);
         topSessionKeyService.updateTopSessionKey(topSessionKey);
-        res.sendRedirect(callbackUrl + "?top_session=" + top_session);
+        String url = callbackUrl + (callbackUrl.indexOf("?")>0?"&":"?")+"top_session=" + top_session;
+        res.sendRedirect(url);
     }
 
 

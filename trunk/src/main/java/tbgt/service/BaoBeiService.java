@@ -25,4 +25,6 @@ public interface BaoBeiService {
     public BaobeiSku getSkuById(long sku_id);
 
     public  void refreshBaobei(String top_session) throws ApiException;
+    
+    public void refreshOneBaobei(String top_session,long bbid) throws ApiException;
 }

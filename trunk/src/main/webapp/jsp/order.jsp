@@ -89,9 +89,12 @@
 </html>
 
 <script type="text/javascript">
+     var status='${status}';
      function refresh(orderId){
         if (orderId != null && orderId != "") {
-            alert("还没做好");
+            if (confirm("即将同步该笔订单，确认手没抖吗?")) {
+                window.location.href = "<tbgt:constant name="ContextPath"/>/top/getSessionKey.html?callbackUrl=<tbgt:constant name="ContextPath"/>/order/refreshOrder.html?orderId="+orderId+"%26status="+status;
+            }
             return;
         }
         if (confirm("即将增量同步订单，确认手没抖吗?")) {
@@ -165,7 +168,7 @@
     }
 
     var tdata1;
-    var status='${status}';
+
     $('#status').html(status=='WAIT_SELLER_SEND_GOODS'?"未发货":(status=='WAIT_BUYER_CONFIRM_GOODS'?"已发货":"交易成功"));
     var gaiSelected = [];
     $(document).ready(function() {
