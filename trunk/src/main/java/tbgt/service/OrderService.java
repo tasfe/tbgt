@@ -36,4 +36,6 @@ public interface OrderService {
     public void updateStatus(long orderId,String status);
 
     public  void refreshOrder(String top_session,boolean refreshAll) throws ApiException;
+
+    public  boolean send(String top_session) throws ApiException;
 }

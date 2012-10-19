@@ -2,6 +2,7 @@ package tbgt.persistence;
 
 import tbgt.domain.Order;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -23,4 +24,6 @@ public interface OrderMapper {
     public List<Order> getOrders(Map criteria);
 
     public void updateStatus(Map param);
+
+    public List<HashMap> getPendingSendOrders();
 }
