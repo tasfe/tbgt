@@ -14,4 +14,6 @@ public interface SoldBaobeiMapper {
 
     public void deleteSoldBaobei(long id);
 
+    public void updateSoldBaoBeiForDummyOrder(long orderid);
+
 }

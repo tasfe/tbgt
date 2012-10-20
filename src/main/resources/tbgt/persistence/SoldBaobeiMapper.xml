@@ -30,4 +30,12 @@
 			price = #{price}
   		where id = #{id}
 	</update>
+
+    <update id="updateSoldBaoBeiForDummyOrder" parameterType="long">
+  		UPDATE soldbaobei
+  		SET
+			purchase_price = 0,
+			price = 0
+  		where tid = #{orderid}
+	</update>
 </mapper>

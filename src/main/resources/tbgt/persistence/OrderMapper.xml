@@ -11,7 +11,6 @@
         <result property="buyer_msg" column="buyer_msg"/>
         <result property="actualPrice" column="actualPrice"/>
         <result property="pay_time" column="pay_time"/>
-        <result property="agencyFee" column="agencyFee"/>
         <result property="status" column="status"/>
         <result property="modified" column="modified"/>
     </resultMap>
@@ -24,6 +23,7 @@
             <result property="fee" column="fee"/>
             <result property="giftFee" column="giftFee"/>
             <result property="sendTime" column="sendTime"/>
+            <result property="agencyFee" column="agencyFee"/>
         </association>
         <collection property="soldBaobeis" column="id" javaType="java.util.ArrayList" ofType="SoldBaobei">
             <id property="id" column="soldbaobei_id"/>

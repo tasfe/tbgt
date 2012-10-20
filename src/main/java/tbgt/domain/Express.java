@@ -10,10 +10,12 @@ public class Express {
     private int id;
     private long orderId;
     private String expressNo;
+    private String dummy;
     private BigDecimal fee;
     private BigDecimal giftFee;
     @DateTimeFormat(pattern = DateUtil.DATE_FORMAT)
     private Date sendTime;
+    private BigDecimal agencyFee;
 
     public int getId() {
         return id;
@@ -62,5 +64,22 @@ public class Express {
 
     public void setGiftFee(BigDecimal giftFee) {
         this.giftFee = giftFee;
+    }
+
+    public String getDummy() {
+        return dummy;
+    }
+
+    public void setDummy(String dummy) {
+        this.dummy = dummy;
+    }
+
+
+    public BigDecimal getAgencyFee() {
+        return agencyFee == null ? BigDecimal.ZERO : agencyFee;
+    }
+
+    public void setAgencyFee(BigDecimal agencyFee) {
+        this.agencyFee = agencyFee;
     }
 }
