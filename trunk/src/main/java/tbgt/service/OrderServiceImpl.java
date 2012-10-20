@@ -132,12 +132,20 @@ public class OrderServiceImpl implements OrderService {
     @Transactional
     public void insertExpress(Express express) {
         expressMapper.insertExpress(express);
+        updateSoldBaoBeiForDummyOrder(express);
     }
 
     @Override
     @Transactional
     public void updateExpress(Express express) {
         expressMapper.updateExpress(express);
+        updateSoldBaoBeiForDummyOrder(express);
+    }
+
+    public void updateSoldBaoBeiForDummyOrder(Express express){
+        if("Y".equals(express.getDummy())){
+            soldBaobeiMapper.updateSoldBaoBeiForDummyOrder(express.getOrderId());
+        }
     }
 
     @Override

@@ -27,11 +27,17 @@
                 <label for="fee">费用 </label>
                 <form:input path="fee" id="fee"/>
                 <br/>
+                <label for="agencyFee">代理費 </label>
+                <form:input path="agencyFee" id="agencyFee"/>
+                <br/>
                 <label for="giftFee">小礼物费用 </label>
                 <form:input path="giftFee" id="giftFee"/>
                 <br/>
                 <label for="sendTime">时间 </label>
                 <form:input path="sendTime" id="sendTime" class="date"/>
+                <br/>
+                <label for="dummy">刷淘宝专用?</label>
+                <form:checkbox path="dummy" id="dummy" value="Y" onchange="setAgencyFee(this)"/>
                 <br/>
             </fieldset>
             <div align="center">
@@ -47,8 +53,24 @@
 <script type="text/javascript">
     $(function() {
         $(".date").datepicker({ dateFormat: "yy-mm-dd"});
-        $(".date").datepicker("setDate", new Date());
+        if($("#expressNo").val()==null  || $("#expressNo").val()=='' ){
+           $(".date").datepicker("setDate", new Date());
+           $("#agencyFee").val("5.00");
+        }
+
+
     });
+
+    function setAgencyFee(checkbox){
+        if(checkbox.checked){
+          $("#agencyFee").val("0");
+          $("#fee").val("0");
+        }else{
+          $("#agencyFee").val("5.00");
+          $("#fee").val("5.00");
+        }
+
+    }
     function getExpressFee(expressNo){
         if($("#fee").val()=="" || $("#fee").val()=="0"){
             $.ajax({

@@ -22,7 +22,6 @@ public class Order {
     private BigDecimal actualPrice;
     @DateTimeFormat(pattern = DateUtil.DATE_FORMAT)
     private Date pay_time;
-    private BigDecimal agencyFee;
     private String status;
     private Timestamp modified;
 
@@ -77,15 +76,6 @@ public class Order {
         this.soldBaobeis.add(soldBaobei);
     }
 
-
-    public BigDecimal getAgencyFee() {
-        return agencyFee == null ? BigDecimal.ZERO : agencyFee;
-    }
-
-    public void setAgencyFee(BigDecimal agencyFee) {
-        this.agencyFee = agencyFee;
-    }
-
     @JsonIgnore
     public BigDecimal getPurchasePrice() {
         BigDecimal totalPurchasePrice = BigDecimal.ZERO;
@@ -101,7 +91,7 @@ public class Order {
     @JsonIgnore
     public BigDecimal getProfit() {
         return actualPrice.subtract(getPurchasePrice())
-                .subtract(getExpress().getFee()).subtract(getAgencyFee()).subtract(getExpress().getGiftFee());
+                .subtract(getExpress().getFee()).subtract(getExpress().getAgencyFee()).subtract(getExpress().getGiftFee());
     }
 
     public String getStatus() {

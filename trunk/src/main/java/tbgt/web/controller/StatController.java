@@ -110,8 +110,9 @@ public class StatController {
             totalPurchase = totalPurchase.add(order.getPurchasePrice());
             Express express = order.getExpress();
             BigDecimal expressFee = express != null   ? express.getFee() : BigDecimal.ZERO;
+            BigDecimal agencyFee = express != null   ? express.getAgencyFee() : BigDecimal.ZERO;
             totalExpress = totalExpress.add(expressFee);
-            totalAgencyFee = totalAgencyFee.add(order.getAgencyFee());
+            totalAgencyFee = totalAgencyFee.add(agencyFee);
             totalProfit = totalProfit.add(order.getProfit());
         }
         totalPaid = totalPurchase.add(totalExpress);
