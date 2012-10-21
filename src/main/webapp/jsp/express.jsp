@@ -56,6 +56,7 @@
         if($("#expressNo").val()==null  || $("#expressNo").val()=='' ){
            $(".date").datepicker("setDate", new Date());
            $("#agencyFee").val("5.00");
+           $("#giftFee").val("0.00");
         }
 
 

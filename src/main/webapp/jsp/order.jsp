@@ -115,7 +115,7 @@
     function express(orderId) {
         var dialog = $('<div style="display:none"></div>').appendTo('body');
         // load remote content
-        var url = "<tbgt:constant name='ContextPath'/>/order/express.html?orderId="+orderId;
+        var url = "<tbgt:constant name='ContextPath'/>/order/express.html?orderId="+orderId+"&status="+status;
         dialog.load(
                 url,
                 function (responseText, textStatus, XMLHttpRequest) {

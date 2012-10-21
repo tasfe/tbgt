@@ -34,7 +34,7 @@
                         </table>
                         </fieldset>
 
-
+                        <button id="fastUpdateBtn">批量更新</button>
                         <table width="100%">
                             <thead>
                             <tr>
@@ -51,7 +51,7 @@
                                         ${sku.properties_name}
                                     </td>
                                     <td class="a-right">
-                                        ${sku.price}
+                                        <form:hidden path="skus[${index.index}].price" cssClass="price"/>${sku.price}
                                     </td>
                                     <td><form:input path="skus[${index.index}].weight"/></td>
                                     <td><form:input path="skus[${index.index}].purchase_price"/></td>
@@ -68,11 +68,70 @@
                       <input id="resetBtn" type="reset" value="重置"/>
                       </div>
                     </form:form>
-
+                        <div id="fastUpdate" title="批量更新">
+                        </div>
                 </div>
             </div>
 </body>
 </html>
 <script type="text/javascript">
+    var priceArray={};
+    $(function() {
+
+        $(".price").each(function(index,ele){
+          if(!priceArray[ele.value])
+             priceArray[ele.value] = {};
+          priceArray[ele.value][ele.id]=ele.id;
+        }
+        );
+//        console.log(priceArray);
+        $.each(priceArray,function(index,ele){
+//            console.log(index);
+//            console.log(ele);
+            var label = $("<label for='"+index+"'>售价 "+index+" 采购价 :  </label>&nbsp;&nbsp");
+            var input = $("<input name='"+index+"' id='"+index+"'/> 重量 ： <input name='"+index+"_weight' id='"+index+"_weight'/>");
+            $("#fastUpdate").append(label);
+            $("#fastUpdate").append(input);
+            $("#fastUpdate").append($("<br/>"));
+        });
+//        $("#fastUpdatePrice").append($("<input type='button' value='更新采购价' onclick='updatePrice()'/>"));
+
+         $( "#fastUpdate" ).dialog({
+            autoOpen: false,
+            height: 400,
+            width: 600,
+            modal: true,
+            buttons: {
+                "批量更新": function() {
+                    $.each(priceArray, function(index, ele) {
+                        //jquery not support this ele whose id has .
+                        //               var value = $("#"+index).val();
+                        var p_price_value = document.getElementById(index).value;
+                        var weight_value = document.getElementById(index + "_weight").value;
+                        $.each(priceArray[index], function(index, ele) {
+                            var p_price = index.replace("price", "purchase_price");
+                            var weight = index.replace("price", "weight");
+                            document.getElementById(p_price).value = p_price_value;
+                            document.getElementById(weight).value = weight_value;
+                        });
+
+                    });
+                    $( this ).dialog( "close" );
+                }
+            },
+            close: function() {
+            }
+        });
+
+       $( "#fastUpdateBtn" )
+            .button()
+            .click(function() {
+                $( "#fastUpdate" ).dialog( "open" );
+            });
+    });
+    
+    function updatePrice(){
+
+        }
 
 </script>
