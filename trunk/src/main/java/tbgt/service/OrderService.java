@@ -8,6 +8,7 @@ import tbgt.web.criteria.OrderCriteria;
 import java.util.List;
 
 import com.taobao.api.ApiException;
+import com.taobao.api.domain.TransitStepInfo;
 
 public interface OrderService {
 
@@ -40,4 +41,6 @@ public interface OrderService {
     public  void refreshOneOrder(String top_session,long orderId) throws ApiException;
 
     public  boolean send(String top_session) throws ApiException;
+
+    public  List<TransitStepInfo> viewExpressStatus(long orderid) throws ApiException;
 }

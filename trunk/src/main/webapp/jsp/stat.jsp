@@ -129,7 +129,7 @@
                     <tr>
                         <th width="70px">订单号</th>
                         <th>订单详情</th>
-                        <th width="100px">成交时间</th>
+                        <th width="100px">交易成功时间</th>
                         <th width="60px">成交价</th>
                         <th width="60px">成本</th>
                         <th width="80px">快递费用</th>
@@ -148,7 +148,7 @@
                                     ${soldBaobei.quantity} 个 ${soldBaobei.title} <br/>
                                 </c:forEach>
                             </td>
-                            <td class="a-center"><fmt:formatDate value="${order.pay_time}" type="date"
+                            <td class="a-center"><fmt:formatDate value="${order.end_time}" type="date"
                                                                  pattern="yyyy-MM-dd"/></td>
                             <td class="a-right">${order.actualPrice}</td>
                             <td class="a-right">${order.purchasePrice}</td>

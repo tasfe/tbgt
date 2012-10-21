@@ -32,10 +32,11 @@
 	</update>
 
     <update id="updateSoldBaoBeiForDummyOrder" parameterType="long">
-  		UPDATE soldbaobei
+  		UPDATE soldbaobei,orders
   		SET
-			purchase_price = 0,
-			price = 0
-  		where tid = #{orderid}
+			soldbaobei.purchase_price = 0,
+			soldbaobei.price = 0,
+            orders.actualprice=0
+  		where soldbaobei.tid=orders.id and soldbaobei.tid = #{orderid}
 	</update>
 </mapper>

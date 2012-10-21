@@ -22,6 +22,7 @@ public class Order {
     private BigDecimal actualPrice;
     @DateTimeFormat(pattern = DateUtil.DATE_FORMAT)
     private Date pay_time;
+    private Date end_time ;
     private String status;
     private Timestamp modified;
 
@@ -132,5 +133,13 @@ public class Order {
 
     public void setModified(Timestamp modified) {
         this.modified = modified;
+    }
+
+    public Date getEnd_time() {
+        return end_time;
+    }
+
+    public void setEnd_time(Date end_time) {
+        this.end_time = end_time;
     }
 }

@@ -186,6 +186,14 @@ public class OrderController {
         return mv;
     }
 
+    @RequestMapping(value = "/viewExpressStatus", method = {RequestMethod.POST,RequestMethod.GET})
+    public ModelAndView viewExpressStatus(@RequestParam long orderid) throws Exception {
+        ModelAndView mv = new ModelAndView("expressStatus");
+        List<TransitStepInfo> transitStepInfos = orderService.viewExpressStatus(orderid);
+        mv.addObject("expSttsLst",transitStepInfos);
+        return mv;
+    }
+
     @ExceptionHandler(Exception.class)
     public String handleException(Exception ex, HttpServletRequest request) {
         ex.printStackTrace();
