@@ -26,10 +26,13 @@ import java.sql.Timestamp;
 import com.taobao.api.ApiException;
 import com.taobao.api.TaobaoClient;
 import com.taobao.api.domain.Trade;
+import com.taobao.api.domain.TransitStepInfo;
 import com.taobao.api.response.TradesSoldGetResponse;
 import com.taobao.api.response.TradeFullinfoGetResponse;
+import com.taobao.api.response.LogisticsTraceSearchResponse;
 import com.taobao.api.request.TradesSoldGetRequest;
 import com.taobao.api.request.TradeFullinfoGetRequest;
+import com.taobao.api.request.LogisticsTraceSearchRequest;
 
 public class OrderServiceImpl implements OrderService {
     private OrderMapper orderMapper;
@@ -206,6 +209,7 @@ public class OrderServiceImpl implements OrderService {
         order.setReceiver_state(trade.getReceiverState());
         order.setActualPrice(new BigDecimal(trade.getPayment()));
         order.setPay_time(trade.getPayTime());
+        order.setEnd_time(trade.getEndTime());
         order.setStatus(trade.getStatus());
         order.setBuyer_msg(trade.getBuyerMessage());
 
@@ -238,7 +242,7 @@ public class OrderServiceImpl implements OrderService {
     private Trade getTradeFullInfo(TaobaoClient client,Long tid, String sessionKey) throws ApiException {
 		TradeFullinfoGetRequest req = new TradeFullinfoGetRequest();
         //currently, only get buyer_message
-		req.setFields("buyer_message,status,tid,modified,orders,receiver_name, receiver_state, receiver_city, receiver_district, receiver_address, receiver_zip, receiver_mobile, receiver_phone,payment,pay_time");
+		req.setFields("buyer_message,status,tid,modified,orders,receiver_name, receiver_state, receiver_city, receiver_district, receiver_address, receiver_zip, receiver_mobile, receiver_phone,payment,pay_time,end_time");
 		req.setTid(tid);
 		TradeFullinfoGetResponse rsp = client.execute(req, sessionKey);
 		if (rsp.isSuccess()) {
@@ -267,5 +271,14 @@ public class OrderServiceImpl implements OrderService {
             }
         }
         return success;
+    }
+
+    public List<TransitStepInfo> viewExpressStatus(long orderid) throws ApiException {
+        TaobaoClient client = TaobaoClientUtil.getTaobaoClient();
+        LogisticsTraceSearchRequest req = new LogisticsTraceSearchRequest();
+        req.setTid(orderid);
+        req.setSellerNick("紫翎绵绵");
+        LogisticsTraceSearchResponse response = client.execute(req);
+        return response.getTraceList();
     }
 }

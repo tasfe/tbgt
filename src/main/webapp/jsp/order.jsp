@@ -133,6 +133,27 @@
         //prevent the browser to follow the link
         return false;
     }
+     function viewExpressStatus(orderId) {
+        var dialog = $('<div style="display:none"></div>').appendTo('body');
+        // load remote content
+        var url = "<tbgt:constant name='ContextPath'/>/order/viewExpressStatus.html?orderid="+orderId;
+        dialog.load(
+                url,
+                function (responseText, textStatus, XMLHttpRequest) {
+                    dialog.dialog({
+                        title: "物流详情",
+                        modal: true,
+                        width: 1000,
+                        height: 600,
+                        close: function(event, ui) {
+                            dialog.remove();
+                        }
+                    });
+                }
+        );
+        //prevent the browser to follow the link
+        return false;
+    }
     <%--var orderDialog;--%>
     <%--function updateOrder(action,id) {--%>
         <%--orderDialog = $('<div style="display:none"></div>').appendTo('body');--%>
@@ -235,6 +256,7 @@
                         };
                          return detail;
                     });
+                   $('td:eq(4)', nRow).html(aData.express.id==0?"":(aData.express.expressNo+'<br/><a href="#" onclick="viewExpressStatus(\''+aData.id+'\');return false" title="物流信息">物流信息</a>'));
                    $('td:eq(5)', nRow).html(aData.express.id==0?"":aData.express.fee);
             }
 

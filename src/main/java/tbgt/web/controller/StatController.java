@@ -68,7 +68,7 @@ public class StatController {
         List<Order> orders = orderService.getOrders(orderCriteria);
         Map<String, BigDecimal> chartDataMap = new HashMap<String, BigDecimal>();
         for (Order order : orders) {
-            String soldDate = new DateTime(order.getPay_time()).toString(DateUtil.DATE_FORMAT);
+            String soldDate = new DateTime(order.getEnd_time()).toString(DateUtil.DATE_FORMAT);
             BigDecimal profit = chartDataMap.get(soldDate);
             if (profit != null) {
                 profit = profit.add(order.getProfit());
