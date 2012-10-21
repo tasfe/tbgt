@@ -122,7 +122,8 @@ public class OrderController {
             }
         }
 //        mv.addObject("orders", orderService.getAllOrders());
-        mv.addObject("orders", new ArrayList());
+//        mv.addObject("orders", new ArrayList());
+        mv.addObject("status","WAIT_SELLER_SEND_GOODS");
         return mv;
     }
 
