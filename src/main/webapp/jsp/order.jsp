@@ -56,7 +56,7 @@
       </div>
         <div id="wrapper">
             <div id="content">
-                    <h3>订单列表（<span id='status'>未发货</span>）</h3>
+                    <h3>订单列表（<span id='status'>未发货</span>）<span id="export" style="display:none"><a  href='<tbgt:constant name='ContextPath'/>/order/exportWordForPendingSendingOrder.html'>&nbsp;下载</a></span></h3>
                 	<table id="tdata1" class="display" cellspacing="0" cellpadding="0" border="0" width="100%">
                         <thead>
 							<tr>
@@ -191,6 +191,12 @@
     var tdata1;
 
     $('#status').html(status=='WAIT_SELLER_SEND_GOODS'?"未发货":(status=='WAIT_BUYER_CONFIRM_GOODS'?"已发货":"交易成功"));
+     if (status == 'WAIT_SELLER_SEND_GOODS') {
+         $('#export').show();
+     } else {
+         $('#export').hide();
+     }
+
     var gaiSelected = [];
     $(document).ready(function() {
         tdata1 = $('#tdata1').dataTable({
@@ -314,6 +320,11 @@
     function showOrders(ind){
         status = ind;
         $('#status').html(ind=='WAIT_SELLER_SEND_GOODS'?"未发货":(ind=='WAIT_BUYER_CONFIRM_GOODS'?"已发货":"交易成功"));
+        if (status == 'WAIT_SELLER_SEND_GOODS') {
+            $('#export').show();
+        } else {
+            $('#export').hide();
+        }
         tdata1.fnDraw();
     }
 

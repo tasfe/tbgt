@@ -92,5 +92,6 @@
 
     <bean id="expressCodeService" class="tbgt.service.ExpressCodeServiceImpl" autowire="byName"/>
     <bean id="applicationContextUtil" class="tbgt.util.ApplicationContextUtil" autowire="byName"/>
+    <bean id="freemarkerConfiguration" class="tbgt.freemarker.ConfigurationFactory" autowire="byName"/>
 
 </beans>       		

@@ -1,13 +1,10 @@
 package tbgt.web.controller;
 
 
-import com.taobao.api.ApiException;
-import com.taobao.api.TaobaoClient;
 import com.taobao.api.domain.*;
-import com.taobao.api.request.TradeFullinfoGetRequest;
-import com.taobao.api.request.TradesSoldGetRequest;
-import com.taobao.api.response.TradeFullinfoGetResponse;
-import com.taobao.api.response.TradesSoldGetResponse;
+import freemarker.template.Configuration;
+import freemarker.template.Template;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -15,21 +12,22 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import tbgt.domain.*;
 import tbgt.domain.Order;
+import tbgt.freemarker.PendingSendingOrder;
 import tbgt.service.BaoBeiService;
 import tbgt.service.ExpressCodeService;
 import tbgt.service.OrderService;
-import tbgt.util.TaobaoClientUtil;
+import tbgt.util.DateUtil;
 import tbgt.web.criteria.OrderCriteria;
 import tbgt.web.paging.PaginationTO;
 import tbgt.web.paging.PagingContextHolder;
 import tbgt.web.paging.PagingEnabler;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.sql.Timestamp;
+import java.net.URLEncoder;
+import java.util.*;
 
 @Controller
 @RequestMapping(value = "/order")
@@ -37,6 +35,7 @@ public class OrderController {
     private BaoBeiService baoBeiService;
     private OrderService orderService;
     private ExpressCodeService expressCodeService;
+    private Configuration freemarkerConfiguration;
 
     @Autowired
     public void setBaoBeiService(BaoBeiService baoBeiService) {
@@ -50,6 +49,11 @@ public class OrderController {
     @Autowired
     public void setExpressCodeService(ExpressCodeService expressCodeService) {
         this.expressCodeService = expressCodeService;
+    }
+
+    @Autowired
+    public void setFreemarkerConfiguration(Configuration freemarkerConfiguration) {
+        this.freemarkerConfiguration = freemarkerConfiguration;
     }
 
     @RequestMapping(value = "/view", method = RequestMethod.GET)
@@ -192,6 +196,51 @@ public class OrderController {
         List<TransitStepInfo> transitStepInfos = orderService.viewExpressStatus(orderid);
         mv.addObject("expSttsLst",transitStepInfos);
         return mv;
+    }
+
+    @RequestMapping(value = "/exportWordForPendingSendingOrder", method = {RequestMethod.POST,RequestMethod.GET})
+    public ModelAndView exportWordForPendingSendingOrder(HttpServletRequest request,HttpServletResponse response) throws Exception{
+        OrderCriteria orderCriteria = new OrderCriteria();
+        orderCriteria.setStatus("WAIT_SELLER_SEND_GOODS");
+        List<Order> orders = orderService.getOrders(orderCriteria);
+        Template temp = freemarkerConfiguration.getTemplate("ftl/pending_send_list.ftl");
+        temp.setEncoding("utf-8");
+
+        List<PendingSendingOrder> pendingSendingOrders = new ArrayList<PendingSendingOrder>();
+        int i = 0;
+        for (Order order : orders) {
+            PendingSendingOrder pendingSendingOrder = new PendingSendingOrder();
+            pendingSendingOrder.setAddress(order.getReceiver_address());
+
+            for (SoldBaobei soldBaobei : order.getSoldBaobeis()) {
+                StringBuffer buf = new StringBuffer();
+                buf.append(soldBaobei.getTitle()).append(",  ").append("数量 : ").append(soldBaobei.getQuantity())
+                        .append(",  ").append(soldBaobei.getSku_properties_name());
+                pendingSendingOrder.addDetail(buf.toString());
+            }
+
+            pendingSendingOrder.setMemo("");
+            pendingSendingOrder.setBuyer_message(order.getBuyer_msg());
+            pendingSendingOrder.setNo(String.valueOf((++i)));
+            pendingSendingOrders.add(pendingSendingOrder);
+        }
+        Map<String, Object> root = new HashMap<String, Object>();
+        root.put("lst", pendingSendingOrders);
+        root.put("pay_date", new DateTime().toString(DateUtil.DATE_FORMAT));
+        response.setContentType("application/x-msdownload;");
+        String filename = new String("发货单".getBytes("utf-8"), "ISO8859-1");
+        if (request.getHeader("User-Agent").toUpperCase().indexOf("MSIE") > 0) {
+            filename = URLEncoder.encode("发货单", "UTF-8");//IE浏览器
+        }
+        response.setHeader("Content-disposition", "attachment; filename="+ filename +".doc");
+        BufferedOutputStream bos = null;
+        try {
+            bos = new BufferedOutputStream(response.getOutputStream());
+            temp.process(root, new BufferedWriter(new OutputStreamWriter(bos)));
+        } finally {
+            if (bos != null) bos.close();
+        }
+        return null;
     }
 
     @ExceptionHandler(Exception.class)
