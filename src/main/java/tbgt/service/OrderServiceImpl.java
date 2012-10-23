@@ -260,7 +260,7 @@ public class OrderServiceImpl implements OrderService {
             LogisticsOfflineSendRequest logisticsOfflineSendRequest = new LogisticsOfflineSendRequest();
             String expressno = (String) order.get("expressno");
 //                YUNDA -- 韵达快运  EMS -- EMS
-            logisticsOfflineSendRequest.setCompanyCode(expressno.startsWith("EF") ? "EMS" : "YUNDA");
+            logisticsOfflineSendRequest.setCompanyCode(expressno.startsWith("E") ? "EMS" : "YUNDA");
             logisticsOfflineSendRequest.setOutSid(expressno);
             Long orderId = (Long) order.get("orderid");
             logisticsOfflineSendRequest.setTid(orderId);
