@@ -58,21 +58,14 @@
                                 <w:b/>
                             </w:rPr>
                         </w:pPr>
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                                <w:b/>
-                                <w:highlight w:val="cyan"/>
-                            </w:rPr>
-                            <w:t>${pay_date}</w:t>
-                        </w:r>
+
                         <w:r w:rsidRPr="00CA0F45">
                             <w:rPr>
                                 <w:rFonts w:hint="eastAsia"/>
                                 <w:b/>
-                                <w:highlight w:val="cyan"/>
+                                <w:highlight w:val="green"/>
                             </w:rPr>
-                            <w:t>待发货清单</w:t>
+                            <w:t>${pay_date} 待发货清单</w:t>
                         </w:r>
                     </w:p>
                     <w:tbl>
@@ -91,7 +84,7 @@
                         <w:tr w:rsidR="005C2877" w:rsidTr="00D05A3B">
                             <w:tc>
                                 <w:tcPr>
-                                    <w:tcW w:w="2093" w:type="dxa"/>
+                                    <w:tcW w:w="600" w:type="dxa"/>
                                 </w:tcPr>
                                 <w:p w:rsidR="005C2877" w:rsidRDefault="008415AD" w:rsidP="00D05A3B">
                                     <w:r>
@@ -104,11 +97,67 @@
                             </w:tc>
                             <w:tc>
                                 <w:tcPr>
-                                    <w:tcW w:w="6429" w:type="dxa"/>
+                                    <w:tcW w:w="7922" w:type="dxa"/>
                                 </w:tcPr>
-                                <w:p w:rsidR="005C2877" w:rsidRDefault="00C32512" w:rsidP="00D05A3B">
-                                    <w:r>
-                                        <w:t>${item.detail}</w:t>
+                                <#--<w:p w:rsidR="005C2877" w:rsidRPr="00DB5D2E" w:rsidRDefault="00355FE7"-->
+                                     <#--w:rsidP="00D05A3B">-->
+                                    <#--<w:r w:rsidRPr="00937F90">-->
+                                        <#--<w:rPr>-->
+                                            <#--<w:rFonts w:hint="eastAsia"/>-->
+                                            <#--&lt;#&ndash;<w:highlight w:val="green"/>&ndash;&gt;-->
+                                        <#--</w:rPr>-->
+                                        <#--<w:t>商品: ${item.name}</w:t>-->
+                                    <#--</w:r>-->
+                                <#--</w:p>-->
+                                <#list item.details as detail>
+                                <w:p w:rsidR="009E3DEC" w:rsidRPr="00DB5D2E" w:rsidRDefault="00BE4AA7"
+                                     w:rsidP="00D05A3B">
+                                    <w:r w:rsidRPr="00EC0494">
+                                        <w:rPr>
+                                            <w:rFonts w:hint="eastAsia"/>
+                                            <w:highlight w:val="cyan"/>
+                                        </w:rPr>
+                                        <w:t> 商品: ${detail}</w:t>
+                                    </w:r>
+                                </w:p>
+                                </#list>
+                                <#--<w:p w:rsidR="009E3DEC" w:rsidRPr="00DB5D2E" w:rsidRDefault="009E3DEC"-->
+                                     <#--w:rsidP="00D05A3B">-->
+                                    <#--<w:r w:rsidRPr="00EC0494">-->
+                                        <#--<w:rPr>-->
+                                            <#--<w:rFonts w:hint="eastAsia"/>-->
+                                            <#--&lt;#&ndash;<w:highlight w:val="yellow"/>&ndash;&gt;-->
+                                        <#--</w:rPr>-->
+                                        <#--<w:t>数量: ${item.num}</w:t>-->
+                                    <#--</w:r>-->
+                                <#--</w:p>-->
+                                <w:p w:rsidR="00BE4AA7" w:rsidRPr="00DB5D2E" w:rsidRDefault="00BE4AA7"
+                                     w:rsidP="00D05A3B">
+                                    <w:r w:rsidRPr="00EC0494">
+                                        <w:rPr>
+                                            <w:rFonts w:hint="eastAsia"/>
+                                            <w:highlight w:val="yellow"/>
+                                        </w:rPr>
+                                        <w:t>地址: ${item.address}</w:t>
+                                    </w:r>
+                                </w:p>
+                                <w:p w:rsidR="00BE4AA7" w:rsidRPr="00DB5D2E" w:rsidRDefault="00BE4AA7"
+                                     w:rsidP="00D05A3B">
+                                    <w:r w:rsidRPr="00D9741D">
+                                        <w:rPr>
+                                            <w:rFonts w:hint="eastAsia"/>
+                                            <#--<w:highlight w:val="cyan"/>-->
+                                        </w:rPr>
+                                        <w:t><#if item.buyer_message??>买家留言: ${item.buyer_message}</#if></w:t>
+                                    </w:r>
+                                </w:p>
+                                <w:p w:rsidR="00BE4AA7" w:rsidRDefault="00BE4AA7" w:rsidP="00BE4AA7">
+                                    <w:r w:rsidRPr="00D9741D">
+                                        <w:rPr>
+                                            <w:rFonts w:hint="eastAsia"/>
+                                            <#--<w:highlight w:val="cyan"/>-->
+                                        </w:rPr>
+                                        <w:t><#if item.memo?? && item.memo!="">备注: ${item.memo}</#if></w:t>
                                     </w:r>
                                 </w:p>
                             </w:tc>
@@ -452,22 +501,32 @@
                     <w:rsid w:val="005C2877"/>
                     <w:rsid w:val="005E1C0B"/>
                     <w:rsid w:val="006329A8"/>
+                    <w:rsid w:val="006D67B7"/>
                     <w:rsid w:val="0073611F"/>
                     <w:rsid w:val="00743C86"/>
                     <w:rsid w:val="007C50E2"/>
+                    <w:rsid w:val="007D6240"/>
                     <w:rsid w:val="007F1C39"/>
                     <w:rsid w:val="00810720"/>
                     <w:rsid w:val="008415AD"/>
                     <w:rsid w:val="00861125"/>
+                    <w:rsid w:val="008B589F"/>
                     <w:rsid w:val="00953C90"/>
+                    <w:rsid w:val="00972924"/>
+                    <w:rsid w:val="009A7FC6"/>
                     <w:rsid w:val="009E2092"/>
+                    <w:rsid w:val="009E3DEC"/>
+                    <w:rsid w:val="00A05673"/>
                     <w:rsid w:val="00A110AD"/>
                     <w:rsid w:val="00A1125A"/>
                     <w:rsid w:val="00A17C0D"/>
+                    <w:rsid w:val="00A21369"/>
+                    <w:rsid w:val="00AB2F08"/>
                     <w:rsid w:val="00AD79BA"/>
                     <w:rsid w:val="00B54408"/>
                     <w:rsid w:val="00B934B0"/>
                     <w:rsid w:val="00B94E64"/>
+                    <w:rsid w:val="00BE4AA7"/>
                     <w:rsid w:val="00C32512"/>
                     <w:rsid w:val="00CA0F45"/>
                     <w:rsid w:val="00CA1AE3"/>
@@ -498,7 +557,7 @@
                                     w:accent6="accent6" w:hyperlink="hyperlink"
                                     w:followedHyperlink="followedHyperlink"/>
                 <w:shapeDefaults>
-                    <o:shapedefaults v:ext="edit" spidmax="10242"/>
+                    <o:shapedefaults v:ext="edit" spidmax="13314"/>
                     <o:shapelayout v:ext="edit">
                         <o:idmap v:ext="edit" data="1"/>
                     </o:shapelayout>
@@ -564,10 +623,10 @@
             <Properties xmlns="http://schemas.openxmlformats.org/officeDocument/2006/extended-properties"
                         xmlns:vt="http://schemas.openxmlformats.org/officeDocument/2006/docPropsVTypes">
                 <Template>Normal.dotm</Template>
-                <TotalTime>68</TotalTime>
+                <TotalTime>71</TotalTime>
                 <Pages>1</Pages>
-                <Words>4</Words>
-                <Characters>25</Characters>
+                <Words>22</Words>
+                <Characters>128</Characters>
                 <Application>Microsoft Office Word</Application>
                 <DocSecurity>0</DocSecurity>
                 <Lines>1</Lines>
@@ -575,7 +634,7 @@
                 <ScaleCrop>false</ScaleCrop>
                 <Company/>
                 <LinksUpToDate>false</LinksUpToDate>
-                <CharactersWithSpaces>28</CharactersWithSpaces>
+                <CharactersWithSpaces>149</CharactersWithSpaces>
                 <SharedDoc>false</SharedDoc>
                 <HyperlinksChanged>false</HyperlinksChanged>
                 <AppVersion>12.0000</AppVersion>
@@ -595,9 +654,9 @@
                 <cp:keywords/>
                 <dc:description/>
                 <cp:lastModifiedBy>huangwei</cp:lastModifiedBy>
-                <cp:revision>60</cp:revision>
+                <cp:revision>91</cp:revision>
                 <dcterms:created xsi:type="dcterms:W3CDTF">2012-10-22T04:47:00Z</dcterms:created>
-                <dcterms:modified xsi:type="dcterms:W3CDTF">2012-10-22T09:52:00Z</dcterms:modified>
+                <dcterms:modified xsi:type="dcterms:W3CDTF">2012-10-23T01:26:00Z</dcterms:modified>
             </cp:coreProperties>
         </pkg:xmlData>
     </pkg:part>
