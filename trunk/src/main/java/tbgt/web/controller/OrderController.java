@@ -226,11 +226,13 @@ public class OrderController {
         }
         Map<String, Object> root = new HashMap<String, Object>();
         root.put("lst", pendingSendingOrders);
-        root.put("pay_date", new DateTime().toString(DateUtil.DATE_FORMAT));
+        String today = new DateTime().toString(DateUtil.DATE_FORMAT);
+        root.put("pay_date", today);
         response.setContentType("application/x-msdownload;");
-        String filename = new String("发货单".getBytes("utf-8"), "ISO8859-1");
+        String filenameWithoutext = "发货单"+today;
+        String filename = new String(filenameWithoutext.getBytes("utf-8"), "ISO8859-1");
         if (request.getHeader("User-Agent").toUpperCase().indexOf("MSIE") > 0) {
-            filename = URLEncoder.encode("发货单", "UTF-8");//IE浏览器
+            filename = URLEncoder.encode(filenameWithoutext, "UTF-8");//IE浏览器
         }
         response.setHeader("Content-disposition", "attachment; filename="+ filename +".doc");
         BufferedOutputStream bos = null;
