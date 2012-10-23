@@ -229,6 +229,7 @@ public class OrderController {
         String today = new DateTime().toString(DateUtil.DATE_FORMAT);
         root.put("pay_date", today);
         response.setContentType("application/x-msdownload;");
+        response.setCharacterEncoding("UTF-8");
         String filenameWithoutext = "发货单"+today;
         String filename = new String(filenameWithoutext.getBytes("utf-8"), "ISO8859-1");
         if (request.getHeader("User-Agent").toUpperCase().indexOf("MSIE") > 0) {
