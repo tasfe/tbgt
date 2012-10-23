@@ -6,18 +6,15 @@ import freemarker.template.Template;
 import org.springframework.beans.factory.FactoryBean;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class ConfigurationFactory implements FactoryBean {
 
     @Override
     public Configuration getObject() throws Exception {
         Configuration cfg = new Configuration();
-        cfg.setDefaultEncoding("utf-8");
-        cfg.setClassForTemplateLoading(ConfigurationFactory.class,"/");
+        cfg.setEncoding(Locale.CHINA,"utf-8");
+        cfg.setClassForTemplateLoading(ConfigurationFactory.class, "/");
         cfg.setObjectWrapper(ObjectWrapper.DEFAULT_WRAPPER);
         return cfg;
     }
