@@ -143,7 +143,7 @@ public class OrderController {
         }
         String province = order.getReceiver_state();
         String type = "韵达";
-        if(expressNo.startsWith("EF")){
+        if(expressNo.startsWith("E")){
             type = "E邮宝";
         }
         ExpressCode expressCode = expressCodeService.getExpressCode(province,type);
