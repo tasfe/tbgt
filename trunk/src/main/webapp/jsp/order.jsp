@@ -260,6 +260,9 @@
                         if(aData.buyer_msg!=null){
                          detail = detail + "<br/><br/><span class='title'>买家留言 : </span>" + aData.buyer_msg;
                         };
+                        if(aData.seller_memo!=null){
+                         detail = detail + "<br/><br/><span class='title'>备注 : </span>" + aData.seller_memo;
+                        };
                          return detail;
                     });
                    $('td:eq(4)', nRow).html(aData.express.id==0?"":(aData.express.expressNo+'<br/><a href="#" onclick="viewExpressStatus(\''+aData.id+'\');return false" title="物流信息">物流信息</a>'));
@@ -272,7 +275,7 @@
 //        $('#tdata1 tbody tr').live('click', function () {
 //            var aData = tdata1.fnGetData(this);
 //            var id = aData.id;
-//
+//             or
 //            if (jQuery.inArray(id, gaiSelected) == -1) {
 //                gaiSelected[gaiSelected.length++] = id;
 //            }

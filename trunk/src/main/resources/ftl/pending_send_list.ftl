@@ -155,7 +155,7 @@
                                     <w:r w:rsidRPr="00D9741D">
                                         <w:rPr>
                                             <w:rFonts w:hint="eastAsia"/>
-                                            <#--<w:highlight w:val="cyan"/>-->
+                                            <w:highlight w:val="red"/>
                                         </w:rPr>
                                         <w:t><#if item.memo?? && item.memo!="">备注: ${item.memo}</#if></w:t>
                                     </w:r>

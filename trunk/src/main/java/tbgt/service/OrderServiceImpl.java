@@ -212,6 +212,7 @@ public class OrderServiceImpl implements OrderService {
         order.setEnd_time(trade.getEndTime());
         order.setStatus(trade.getStatus());
         order.setBuyer_msg(trade.getBuyerMessage());
+        order.setSeller_memo(trade.getSellerMemo());
 
         for (com.taobao.api.domain.Order tborder : trade.getOrders()) {
             SoldBaobei soldBaobei = new SoldBaobei();
@@ -242,7 +243,7 @@ public class OrderServiceImpl implements OrderService {
     private Trade getTradeFullInfo(TaobaoClient client,Long tid, String sessionKey) throws ApiException {
 		TradeFullinfoGetRequest req = new TradeFullinfoGetRequest();
         //currently, only get buyer_message
-		req.setFields("buyer_message,status,tid,modified,orders,receiver_name, receiver_state, receiver_city, receiver_district, receiver_address, receiver_zip, receiver_mobile, receiver_phone,payment,pay_time,end_time");
+		req.setFields("buyer_message,status,tid,modified,orders,receiver_name, receiver_state, receiver_city, receiver_district, receiver_address, receiver_zip, receiver_mobile, receiver_phone,payment,pay_time,end_time,seller_memo");
 		req.setTid(tid);
 		TradeFullinfoGetResponse rsp = client.execute(req, sessionKey);
 		if (rsp.isSuccess()) {

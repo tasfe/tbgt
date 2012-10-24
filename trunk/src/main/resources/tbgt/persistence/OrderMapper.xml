@@ -14,6 +14,7 @@
         <result property="end_time" column="end_time"/>
         <result property="status" column="status"/>
         <result property="modified" column="modified"/>
+        <result property="seller_memo" column="seller_memo"/>
     </resultMap>
 
     <resultMap id="resultOrders" type="Order" extends="resultBase">
@@ -51,7 +52,7 @@
 
 
 
-    <sql id="orderColumns"> orders.id,receiver_address,receiver_state,buyer_msg,actualPrice,pay_time,end_time,agencyFee,status, modified,
+    <sql id="orderColumns"> orders.id,receiver_address,receiver_state,buyer_msg,actualPrice,pay_time,end_time,agencyFee,status, modified,seller_memo,
  express.id as express_id ,expressNo,
  fee,giftFee,sendTime,soldbaobei.id as soldbaobei_id,bbid,quantity,sku_id,sku_properties_name,
  title,weight,purchase_price,price </sql>
@@ -62,7 +63,7 @@
         left join soldbaobei on orders.id = soldbaobei.tid
         <trim prefix="WHERE" prefixOverrides="AND|OR">
             <if test="name != null and name != ''">
-                soldbaobei.title like CONCAT(CONCAT('%', #{name}),'%') or orders.receiver_address like CONCAT(CONCAT('%', #{name}),'%')
+                soldbaobei.title like CONCAT(CONCAT('%', #{name}),'%') or orders.receiver_address like CONCAT(CONCAT('%', #{name}),'%')  or orders.id like CONCAT(CONCAT('%', #{name}),'%')
             </if>
             <if test="status != null and status != '' ">
                 and orders.status = #{status}
@@ -82,8 +83,8 @@
     </select>
 
     <insert id="saveOrder" parameterType="Order">
-		INSERT INTO orders (id,receiver_state,receiver_address,buyer_msg,actualPrice,pay_time,end_time,status,modified)
-    	VALUE (#{id},#{receiver_state},#{receiver_address},#{buyer_msg},#{actualPrice},#{pay_time},#{end_time},#{status},#{modified})
+		INSERT INTO orders (id,receiver_state,receiver_address,buyer_msg,seller_memo,actualPrice,pay_time,end_time,status,modified)
+    	VALUE (#{id},#{receiver_state},#{receiver_address},#{buyer_msg},#{seller_memo},#{actualPrice},#{pay_time},#{end_time},#{status},#{modified})
 
 	</insert>
 
@@ -97,6 +98,7 @@
 			pay_time =#{pay_time},
 			end_time =#{end_time},
 			modified =#{modified},
+			seller_memo =#{seller_memo},
 			status =#{status}
   		where id = #{id}
 	</update>
