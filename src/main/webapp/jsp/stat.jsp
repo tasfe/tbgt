@@ -148,7 +148,7 @@
                                     ${soldBaobei.quantity} 个 ${soldBaobei.title} <br/>
                                 </c:forEach>
                             </td>
-                            <td class="a-center"><fmt:formatDate value="${order.end_time}" type="date"
+                            <td class="a-center"><fmt:formatDate value="${order.pay_time}" type="date"
                                                                  pattern="yyyy-MM-dd"/></td>
                             <td class="a-right">${order.actualPrice}</td>
                             <td class="a-right">${order.purchasePrice}</td>

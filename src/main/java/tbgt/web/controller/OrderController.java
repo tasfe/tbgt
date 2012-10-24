@@ -67,7 +67,7 @@ public class OrderController {
     public @ResponseBody PaginationTO list(@RequestParam String status) {
         OrderCriteria orderCriteria = new OrderCriteria();
         orderCriteria.setName( PagingContextHolder.get().getsSearch());
-        orderCriteria.setStatus(status);
+        orderCriteria.addStatus(status);
         List<Order> orders = orderService.getOrders(orderCriteria);
         return PagingEnabler.enablePaging(orders);
     }
@@ -201,7 +201,7 @@ public class OrderController {
     @RequestMapping(value = "/exportWordForPendingSendingOrder", method = {RequestMethod.POST,RequestMethod.GET})
     public ModelAndView exportWordForPendingSendingOrder(HttpServletRequest request,HttpServletResponse response) throws Exception{
         OrderCriteria orderCriteria = new OrderCriteria();
-        orderCriteria.setStatus("WAIT_SELLER_SEND_GOODS");
+        orderCriteria.addStatus("WAIT_SELLER_SEND_GOODS");
         List<Order> orders = orderService.getOrders(orderCriteria);
         Template temp = freemarkerConfiguration.getTemplate("ftl/pending_send_list.ftl");
         temp.setEncoding("utf-8");

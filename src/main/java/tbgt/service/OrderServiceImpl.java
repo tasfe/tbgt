@@ -97,7 +97,7 @@ public class OrderServiceImpl implements OrderService {
           paraMap.put("fromDate",orderCriteria.getFromDate());
           paraMap.put("toDate",orderCriteria.getToDate());
           paraMap.put("name",orderCriteria.getName());
-          paraMap.put("status",orderCriteria.getStatus());
+          paraMap.put("statuses",orderCriteria.getStatuses());
         }
         return orderMapper.getOrders(paraMap);
     }
