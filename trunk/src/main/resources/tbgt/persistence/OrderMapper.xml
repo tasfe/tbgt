@@ -65,14 +65,17 @@
             <if test="name != null and name != ''">
                 soldbaobei.title like CONCAT(CONCAT('%', #{name}),'%') or orders.receiver_address like CONCAT(CONCAT('%', #{name}),'%')  or orders.id like CONCAT(CONCAT('%', #{name}),'%')
             </if>
-            <if test="status != null and status != '' ">
-                and orders.status = #{status}
+            <if test="statuses != null ">
+                and orders.status in
+                <foreach item="item" index="index" collection="statuses" open="(" separator="," close=")">
+                      #{item}
+                </foreach>
             </if>
             <if test="fromDate != null">
-                and orders.end_time &gt;= #{fromDate}
+                and orders.pay_time &gt;= #{fromDate}
             </if>
             <if test="toDate != null">
-                and orders.end_time &lt;= #{toDate}
+                and orders.pay_time &lt;= #{toDate}
             </if>
         </trim>
         <trim prefix="ORDER BY">

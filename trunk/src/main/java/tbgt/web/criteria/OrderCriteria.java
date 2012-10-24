@@ -4,6 +4,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 import tbgt.util.DateUtil;
 
 import java.util.Date;
+import java.util.List;
+import java.util.ArrayList;
 
 public class OrderCriteria {
     @DateTimeFormat(pattern = DateUtil.DATE_FORMAT)
@@ -11,7 +13,7 @@ public class OrderCriteria {
     @DateTimeFormat(pattern = DateUtil.DATE_FORMAT)
     private Date toDate;
     private String name;
-    private String status;
+    private List<String> statuses = null;
 
     public Date getFromDate() {
         return fromDate;
@@ -37,11 +39,16 @@ public class OrderCriteria {
         this.name = name;
     }
 
-    public String getStatus() {
-        return status;
+    public List<String> getStatuses() {
+        return statuses;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setStatuses(List<String> statuses) {
+        this.statuses = statuses;
+    }
+
+    public void addStatus(String status) {
+        if(statuses == null) statuses = new ArrayList<String>();
+        this.statuses.add(status);
     }
 }
