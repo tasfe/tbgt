@@ -219,7 +219,7 @@ public class OrderController {
                 pendingSendingOrder.addDetail(buf.toString());
             }
 
-            pendingSendingOrder.setMemo("");
+            pendingSendingOrder.setMemo(order.getSeller_memo());
             pendingSendingOrder.setBuyer_message(order.getBuyer_msg());
             pendingSendingOrder.setNo(String.valueOf((++i)));
             pendingSendingOrders.add(pendingSendingOrder);
@@ -228,7 +228,7 @@ public class OrderController {
         root.put("lst", pendingSendingOrders);
         String today = new DateTime().toString(DateUtil.DATE_FORMAT);
         root.put("pay_date", today);
-        response.setContentType("application/x-msdownload;");
+        response.setContentType("application/x-msdownload;charset=UTF-8");
         response.setCharacterEncoding("UTF-8");
         String filenameWithoutext = "发货单"+today;
         String filename = new String(filenameWithoutext.getBytes("utf-8"), "ISO8859-1");

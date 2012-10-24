@@ -24,6 +24,7 @@ public class Order {
     private Date pay_time;
     private Date end_time ;
     private String status;
+    private String seller_memo;
     private Timestamp modified;
 
     public long getId() {
@@ -141,5 +142,13 @@ public class Order {
 
     public void setEnd_time(Date end_time) {
         this.end_time = end_time;
+    }
+
+    public String getSeller_memo() {
+        return seller_memo;
+    }
+
+    public void setSeller_memo(String seller_memo) {
+        this.seller_memo = seller_memo;
     }
 }
