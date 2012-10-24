@@ -68,8 +68,7 @@
                       <input id="resetBtn" type="reset" value="重置"/>
                       </div>
                     </form:form>
-                        <div id="fastUpdate" title="批量更新">
-                        </div>
+
                 </div>
             </div>
 </body>
@@ -77,26 +76,23 @@
 <script type="text/javascript">
     var priceArray={};
     $(function() {
-
+        var fastUpdate = $("<div id=\"fastUpdate\" title=\"批量更新\"></div>").appendTo($("#box"));
         $(".price").each(function(index,ele){
           if(!priceArray[ele.value])
              priceArray[ele.value] = {};
           priceArray[ele.value][ele.id]=ele.id;
         }
         );
-//        console.log(priceArray);
         $.each(priceArray,function(index,ele){
-//            console.log(index);
-//            console.log(ele);
             var label = $("<label for='"+index+"'>售价 "+index+" 采购价 :  </label>&nbsp;&nbsp");
             var input = $("<input name='"+index+"' id='"+index+"'/> 重量 ： <input name='"+index+"_weight' id='"+index+"_weight'/>");
-            $("#fastUpdate").append(label);
-            $("#fastUpdate").append(input);
-            $("#fastUpdate").append($("<br/>"));
+            fastUpdate.append(label);
+            fastUpdate.append(input);
+            fastUpdate.append($("<br/>"));
         });
 //        $("#fastUpdatePrice").append($("<input type='button' value='更新采购价' onclick='updatePrice()'/>"));
 
-         $( "#fastUpdate" ).dialog({
+         fastUpdate.dialog({
             autoOpen: false,
             height: 400,
             width: 600,
@@ -120,18 +116,14 @@
                 }
             },
             close: function() {
+                fastUpdate.remove();
             }
         });
 
-       $( "#fastUpdateBtn" )
-            .button()
-            .click(function() {
-                $( "#fastUpdate" ).dialog( "open" );
+       $("#fastUpdateBtn").button().click(function() {
+                fastUpdate.dialog( "open" );
             });
     });
-    
-    function updatePrice(){
 
-        }
 
 </script>
