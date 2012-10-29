@@ -139,7 +139,8 @@ public class OrderController {
         for(SoldBaobei soldBaobei : order.getSoldBaobeis()){
             String baobeiWeight = soldBaobei.getWeight();
             if(baobeiWeight==null) return 0;
-            weight = weight.add(new BigDecimal(baobeiWeight));
+            BigDecimal wght = new BigDecimal(baobeiWeight).multiply(new BigDecimal(soldBaobei.getQuantity()));
+            weight = weight.add(wght);
         }
         String province = order.getReceiver_state();
         String type = "韵达";

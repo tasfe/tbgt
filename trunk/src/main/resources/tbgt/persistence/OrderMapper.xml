@@ -63,7 +63,7 @@
         left join soldbaobei on orders.id = soldbaobei.tid
         <trim prefix="WHERE" prefixOverrides="AND|OR">
             <if test="name != null and name != ''">
-                soldbaobei.title like CONCAT(CONCAT('%', #{name}),'%') or orders.receiver_address like CONCAT(CONCAT('%', #{name}),'%')  or orders.id like CONCAT(CONCAT('%', #{name}),'%')
+                (soldbaobei.title like CONCAT(CONCAT('%', #{name}),'%') or orders.receiver_address like CONCAT(CONCAT('%', #{name}),'%'))  or orders.id like CONCAT(CONCAT('%', #{name}),'%')
             </if>
             <if test="statuses != null ">
                 and orders.status in
