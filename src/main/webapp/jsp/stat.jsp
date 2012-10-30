@@ -129,7 +129,7 @@
                     <tr>
                         <th width="70px">订单号</th>
                         <th>订单详情</th>
-                        <th width="100px">交易成功时间</th>
+                        <th width="100px">成交时间</th>
                         <th width="60px">成交价</th>
                         <th width="60px">成本</th>
                         <th width="80px">快递费用</th>
