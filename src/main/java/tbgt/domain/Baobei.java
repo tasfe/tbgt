@@ -17,6 +17,7 @@ public class Baobei {
     @DateTimeFormat(pattern = DateUtil.DATE_FORMAT)
     private Date list_time;
     public List<BaobeiSku> skus = new ArrayList<BaobeiSku>();
+    private Map<String,Set<String>> skus_props = new HashMap<String,Set<String>>();
 
     public long getId() {
         return id;
@@ -83,12 +84,25 @@ public class Baobei {
                     if (propAlias != null) {
                         vname = propAlias;
                     }
-                    newProps.append(pname).append(" : ").append(vname).append(", ");
+                    newProps.append(pname).append(": ").append(vname).append(", ");
+                    Set<String> vnameSet = skus_props.get(pname);
+                    if (vnameSet == null) {
+                        vnameSet = new HashSet<String>();
+                    }
+                    vnameSet.add(vname);
+                    skus_props.put(pname, vnameSet);
+
                 }
                 sku.setProperties_name(newProps.substring(0, newProps.length() - 2));
 
             }
         }
+        Collections.sort(skus, new Comparator<BaobeiSku>(){
+            @Override
+            public int compare(BaobeiSku o1, BaobeiSku o2) {
+                return o1.getProperties_name().compareTo(o2.getProperties_name());
+            }
+        });
         return skus;
     }
 
@@ -113,5 +127,13 @@ public class Baobei {
             }
         }
         return propAliasMap;
+    }
+
+    public Map<String, Set<String>> getSkus_props() {
+        return skus_props;
+    }
+
+    public void setSkus_props(Map<String, Set<String>> skus_props) {
+        this.skus_props = skus_props;
     }
 }
